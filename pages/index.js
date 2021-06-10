@@ -22,8 +22,10 @@ export default function Home() {
           <a href="https://developer.spotify.com/documentation/web-api/">official API</a>
         </p>
 
-        <div className={styles.grid}> 
+        <div className={styles.grid}>
+          <Link href="/api/server">
         <a href="#" className={styles.btn}>Get Started</a>
+        </Link>
         </div>
       </main>
       {/* Main content */}
