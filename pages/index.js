@@ -1,9 +1,19 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import { useSession, signIn, signOut } from 'next-auth/client'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
-  return (
+
+  const [ session, loading ] = useSession()
+  if(session) {
+    return <>
+      Signed in as {session.user.email} <br/>
+      <button onClick={() => signOut()}>Sign out</button>
+    </>
+  }
+  return <>
+   
     <div className={styles.container}>
       <Head>
         <title>OctoPlay</title>
@@ -23,9 +33,7 @@ export default function Home() {
         </p>
 
         <div className={styles.grid}>
-          <Link href="/api/server">
-        <a href="#" className={styles.btn}>Get Started</a>
-        </Link>
+        <button onClick={() => signIn()} className={styles.btn}>Get Started</button>
         </div>
       </main>
       {/* Main content */}
@@ -36,5 +44,7 @@ export default function Home() {
       
       </footer>
     </div>
-  )
+    
+  </>
+   
 }

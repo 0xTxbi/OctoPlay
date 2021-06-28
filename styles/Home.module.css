@@ -125,8 +125,13 @@
   padding: 0 3.5rem;
   height: 2.81rem;
   line-height: 2.8rem;
+  border: none;
   border-radius: 7px;
   background-color: #0070f3;
   box-shadow: 0 4px 14px 0 rgba(0,118,255,0.39);
   color: white;
+}
+
+.btn:hover {
+  cursor: pointer;
 }
