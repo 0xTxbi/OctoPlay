@@ -5,15 +5,41 @@ import styles from '../styles/Home.module.css'
 
 export default function Home() {
 
-  const [ session, loading ] = useSession()
-  if(session) {
+  const [session, loading] = useSession()
+  if (session) {
     return <>
-      Signed in as {session.user.email} <br/>
-      <button onClick={() => signOut()}>Sign out</button>
+      <div className={styles.container}>
+        {/* Main content */}
+        <main className={styles.main}>
+          <h1 className={styles.title}>
+            Welcome to <a href="https://github.com/TechieJossy/OctoPlay">OctoPlay</a> 🎧🚀
+          </h1>
+
+          <p className={styles.description}>
+            You've successfully signed in. View your profile as soon as you're ready.
+          </p>
+
+          <div className={styles.grid}>
+            <Link href='/profile'>
+              <a className={styles.btn} style={{marginRight: '1rem'}}>View Profile</a>
+            </Link>
+
+            or
+
+            <button onClick={() => signOut()} className={styles.btn} style={{marginLeft: '1rem'}}>Log out</button>
+          </div>
+        </main>
+        {/* Main content */}
+
+        <footer className={styles.footer}>
+          <a href="https://github.com/TechieJossy">Built with NextJS by TechieJossy</a>
+        </footer>
+      </div>
+
     </>
   }
   return <>
-   
+
     <div className={styles.container}>
       <Head>
         <title>OctoPlay</title>
@@ -24,7 +50,7 @@ export default function Home() {
       {/* Main content */}
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://github.com/TechieJossy/OctoPlay">OctoPlay</a> 🎧🚀
+          This is <a href="https://github.com/TechieJossy/OctoPlay">OctoPlay</a> 🎧🚀
         </h1>
 
         <p className={styles.description}>
@@ -33,18 +59,18 @@ export default function Home() {
         </p>
 
         <div className={styles.grid}>
-        <button onClick={() => signIn()} className={styles.btn}>Get Started</button>
+          <button onClick={() => signIn()} className={styles.btn}>Get Started</button>
         </div>
       </main>
       {/* Main content */}
 
       <footer className={styles.footer}>
-       
-      <a href="https://github.com/TechieJossy">Built with NextJS by TechieJossy</a>
-      
+
+        <a href="https://github.com/TechieJossy">Built with NextJS by TechieJossy</a>
+
       </footer>
     </div>
-    
+
   </>
-   
+
 }
