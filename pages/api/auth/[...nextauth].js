@@ -13,6 +13,19 @@ export default NextAuth({
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET
     })
 
-  ]
+  ],
+  callbacks: {
+    async jwt(token, _, account) {
+      if (account) {
+        token.id = account.id
+        token.accessToken = account.accessToken
+      }
+      return token
+    },
+    async session(session, user) {
+      session.user = user
+      return session
+    }
+  }
 
 })

@@ -6,8 +6,10 @@ import styles from '../styles/Home.module.css'
 export default function Home() {
 
   const [session, loading] = useSession()
+
   if (session) {
     return <>
+
       <div className={styles.container}>
         {/* Main content */}
         <main className={styles.main}>
@@ -21,12 +23,12 @@ export default function Home() {
 
           <div className={styles.grid}>
             <Link href='/profile'>
-              <a className={styles.btn} style={{marginRight: '1rem'}}>View Profile</a>
+              <a className={styles.btn} style={{ marginRight: '1rem' }}>View Profile</a>
             </Link>
 
             or
 
-            <button onClick={() => signOut()} className={styles.btn} style={{marginLeft: '1rem'}}>Log out</button>
+            <button onClick={() => signOut()} className={styles.btn} style={{ marginLeft: '1rem' }}>Log out</button>
           </div>
         </main>
         {/* Main content */}
@@ -59,7 +61,7 @@ export default function Home() {
         </p>
 
         <div className={styles.grid}>
-          <button onClick={() => signIn()} className={styles.btn}>Get Started</button>
+          <button onClick={() => signIn("spotify")} className={styles.btn}>Get Started</button>
         </div>
       </main>
       {/* Main content */}
