@@ -1,17 +1,22 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Button } from 'antd'
 import Link from 'next/link'
 import { useSession, getSession } from 'next-auth/client'
+import 'antd/dist/antd.css';
 
 export default function Profile({ data }) {
 
   const [session, loading] = useSession()
 
   return <>
-  {console.log(data)}
+
     <h1>Hey {session.user.name}</h1>
     <p>Your username is {data.display_name}</p>
     <Link href="/">
-      <button>Go back</button>
+      <Button type="primary">Go back</Button>
     </Link>
+    
   </>
 
 }

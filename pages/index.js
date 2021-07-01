@@ -1,7 +1,11 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Button, Avatar } from 'antd'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useSession, signIn, signOut } from 'next-auth/client'
 import styles from '../styles/Home.module.css'
+import 'antd/dist/antd.css';
 
 export default function Home() {
 
@@ -12,7 +16,12 @@ export default function Home() {
 
       <div className={styles.container}>
         {/* Main content */}
+        {console.log(session)}
         <main className={styles.main}>
+
+
+          <Avatar src={session.user.picture} size={250} style={{marginBottom: "2rem"}} draggable="false" alt="User's profile picture" />
+
           <h1 className={styles.title}>
             Welcome to <a href="https://github.com/TechieJossy/OctoPlay">OctoPlay</a> 🎧🚀
           </h1>
@@ -23,12 +32,13 @@ export default function Home() {
 
           <div className={styles.grid}>
             <Link href='/profile'>
-              <a className={styles.btn} style={{ marginRight: '1rem' }}>View Profile</a>
+              <Button style={{ marginRight: '1rem' }} type="primary">View Profile
+              </Button>
             </Link>
 
             or
 
-            <button onClick={() => signOut()} className={styles.btn} style={{ marginLeft: '1rem' }}>Log out</button>
+            <Button onClick={() => signOut()} type="primary" style={{ marginLeft: '1rem' }}>Log out</Button>
           </div>
         </main>
         {/* Main content */}
@@ -61,7 +71,7 @@ export default function Home() {
         </p>
 
         <div className={styles.grid}>
-          <button onClick={() => signIn("spotify")} className={styles.btn}>Get Started</button>
+        <Button onClick={() => signIn('spotify')} type="primary" style={{ marginLeft: '1rem' }}>Get Started</Button>
         </div>
       </main>
       {/* Main content */}
