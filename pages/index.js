@@ -16,7 +16,6 @@ export default function Home() {
 
       <div className={styles.container}>
         {/* Main content */}
-        {console.log(session)}
         <main className={styles.main}>
 
 

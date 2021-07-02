@@ -1,22 +1,37 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import { Button } from 'antd'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import { Layout, Button, Menu, Avatar } from 'antd'
 import Link from 'next/link'
 import { useSession, getSession } from 'next-auth/client'
 import 'antd/dist/antd.css';
+import styles from '../styles/Profile.module.css'
 
 export default function Profile({ data }) {
+
+  // Layout components
+  const { Content } = Layout
 
   const [session, loading] = useSession()
 
   return <>
+    {console.log(data)}
+    <Layout style={{ height: "100vh" }}>
 
-    <h1>Hey {session.user.name}</h1>
-    <p>Your username is {data.display_name}</p>
-    <Link href="/">
-      <Button type="primary">Go back</Button>
-    </Link>
-    
+      <Header />
+
+      <Content style={{ display: "flex", flexDirection: "column", alignItems: 'center', height: "100%", justifyContent: "center" }}>
+        <h1>Hey {session.user.name}</h1>
+        <p>Your username is {data.display_name}</p>
+        <Link href="/">
+          <Button type="primary">Go back</Button>
+        </Link>
+      </Content>
+
+      <Footer />
+
+    </Layout>
+
   </>
 
 }
