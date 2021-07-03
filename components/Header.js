@@ -30,6 +30,11 @@ const Header = () => {
                     </Link>
                 </Menu.Item>
                 <Menu.Item key='3'>
+                    <Link href='/yp'>
+                        Recent Playlists
+                    </Link>
+                </Menu.Item>
+                <Menu.Item key='4'>
                     <Avatar src={session.user.picture} style={{ marginRight: "0.5rem" }} draggable="false" alt="User's profile picture" />
                     {session.user.name}
                 </Menu.Item>
