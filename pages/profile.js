@@ -15,14 +15,13 @@ export default function Profile({ data }) {
   const [session, loading] = useSession()
 
   return <>
-    {console.log(data)}
+
     <Layout style={{ height: "100vh" }}>
 
       <Header />
 
       <Content style={{ display: "flex", flexDirection: "column", alignItems: 'center', height: "100%", justifyContent: "center" }}>
-        <h1>Hey {session.user.name}</h1>
-        <p>Your username is {data.display_name}</p>
+        <h1>Hi, {data.display_name}</h1>
         <Link href="/">
           <Button type="primary">Go back</Button>
         </Link>

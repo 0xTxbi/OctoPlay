@@ -6,7 +6,7 @@ import Footer from '../components/Footer'
 
 export default function YourPlaylists({ data }) {
 
-    const [session, loaidng] = useSession()
+    const [session, loading] = useSession()
     const { Content } = Layout
     const { Meta } = Card
 
@@ -31,7 +31,8 @@ export default function YourPlaylists({ data }) {
                                 actions={[<p>Owner: <a href={playlist.owner.external_urls.spotify}><span style={{ fontWeight: 'bold' }}>{playlist.owner.display_name}</span></a></p>]}>
 
                                 <Meta
-                                    title={<a href={playlist.external_urls.spotify} target="_blank">{playlist.name}</a>} style={{ textAlign: 'center' }} />
+                                    title={<a href={playlist.external_urls.spotify} target="_blank">{playlist.name}</a>}
+                                    style={{ textAlign: 'center' }} />
 
                                 <hr />
                                 {playlist.description.length === 0 ? <p>No description provided</p> : <p>{playlist.description}</p>}
