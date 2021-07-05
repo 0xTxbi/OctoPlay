@@ -13,8 +13,7 @@ export default function Profile({ data }) {
   const { Content } = Layout
 
   const [session, loading] = useSession()
-  console.log(data)
-
+  
   return <>
 
     <Layout style={{ height: "100vh" }}>

@@ -26,8 +26,8 @@ export default function YourPlaylists({ data }) {
                         <Col>
                             <Card
                                 key={playlist.id}
-                                cover={<img src={playlist.images[0].url} style={{ height: 250, width: 250 }} />}
-                                style={{ width: 250 }}
+                                cover={<img src={playlist.images[0].url} style={{ height: 300, width: 300 }} />}
+                                style={{ width: 300 }}
                                 actions={[<p>Owner: <a href={playlist.owner.external_urls.spotify}><span style={{ fontWeight: 'bold' }}>{playlist.owner.display_name}</span></a></p>]}>
 
                                 <Meta
