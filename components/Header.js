@@ -40,8 +40,9 @@ const Header = () => {
                     </Link>
                 </Menu.Item>
                 <Menu.Item key='5'>
-                    <Avatar src={session.user.picture} style={{ marginRight: "0.5rem" }} draggable="false" alt="User's profile picture" />
-                    {session.user.name}
+                    <Link href='/profile'>
+                        <Avatar src={session.user.picture} style={{ marginRight: "0.5rem" }} draggable="false" alt="User's profile picture" />
+                    </Link>
                 </Menu.Item>
             </Menu>
         </Header>

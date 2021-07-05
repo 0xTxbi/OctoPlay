@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { Layout, Button, Menu, Avatar } from 'antd'
+import { Layout, Button, Menu, Avatar, Row, Col } from 'antd'
 import Link from 'next/link'
 import { useSession, getSession } from 'next-auth/client'
 import 'antd/dist/antd.css';
@@ -13,6 +13,7 @@ export default function Profile({ data }) {
   const { Content } = Layout
 
   const [session, loading] = useSession()
+  console.log(data)
 
   return <>
 
@@ -21,10 +22,17 @@ export default function Profile({ data }) {
       <Header />
 
       <Content style={{ display: "flex", flexDirection: "column", alignItems: 'center', height: "100%", justifyContent: "center" }}>
-        <h1>Hi, {data.display_name}</h1>
-        <Link href="/">
-          <Button type="primary">Go back</Button>
-        </Link>
+        <h1>Hi, {data.display_name} <img src={`https://www.countryflags.io/${data.country}/flat/32.png`} /></h1>
+
+        <Row>
+          <a href={data.uri}>
+            <Button type="primary" style={{marginRight: '1rem'}}>Open in App</Button>
+          </a>
+          <Link href="/">
+            <Button type="primary">Go back</Button>
+          </Link>
+        </Row>
+
       </Content>
 
       <Footer />

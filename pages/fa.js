@@ -12,8 +12,6 @@ export default function followingArtists({ data }) {
     const { Content } = Layout
     const { Meta } = Card
 
-    console.log(data)
-
     return <>
 
         <Layout>
