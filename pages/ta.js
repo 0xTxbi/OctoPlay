@@ -32,7 +32,7 @@ export default function topArtists({ data }) {
                                 actions={[<p>Genre: <span style={{ fontWeight: 'bold' }}>{artist.genres[0]}</span></p>]}>
 
                                 <Meta
-                                    title={<a href={artist.external_urls.spotify} target="_blank">{artist.name}</a>} style={{ textAlign: 'center' }} />
+                                    title={<a href={artist.uri} target="_blank">{artist.name}</a>} style={{ textAlign: 'center' }} />
                             </Card>
                         </Col>
 

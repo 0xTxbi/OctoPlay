@@ -28,10 +28,10 @@ export default function YourPlaylists({ data }) {
                                 key={playlist.id}
                                 cover={<img src={playlist.images[0].url} style={{ height: 300, width: 300 }} />}
                                 style={{ width: 300 }}
-                                actions={[<p>Owner: <a href={playlist.owner.external_urls.spotify}><span style={{ fontWeight: 'bold' }}>{playlist.owner.display_name}</span></a></p>]}>
+                                actions={[<p>Owner: <a href={playlist.owner.uri}><span style={{ fontWeight: 'bold' }}>{playlist.owner.display_name}</span></a></p>]}>
 
                                 <Meta
-                                    title={<a href={playlist.external_urls.spotify} target="_blank">{playlist.name}</a>}
+                                    title={<a href={playlist.uri} target="_blank">{playlist.name}</a>}
                                     style={{ textAlign: 'center' }} />
 
                                 <hr />

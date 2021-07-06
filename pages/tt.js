@@ -8,14 +8,9 @@ import { Meta } from 'antd/lib/list/Item'
 export default function topTracks({ data }) {
 
     const { Content } = Layout
-    const favTracks = data.items
-    const favTracksClean = favTracks.map(track => {
-        console.log(track.name, track.album.name)
-    })
-    { console.log(favTracks) }
 
     return <>
-
+    
         <Layout style={{ height: '100vh' }}>
 
             <Header />
@@ -32,10 +27,10 @@ export default function topTracks({ data }) {
                                 key={track.id}
                                 cover={<img alt={`${track.name}'s picture`} src={track.album.images[0].url} style={{ height: 300, width: 300 }} />}
                                 style={{ width: 300 }}
-                                actions={[<p style={{ fontWeight: 'bold' }}><a href={track.album.external_urls.spotify} target="_blank">{track.album.name}</a></p>]}>
+                                actions={[<p style={{ fontWeight: 'bold' }}><a href={track.album.uri} target="_blank">{track.album.name}</a></p>]}>
 
                                 <Meta
-                                    title={<a href={track.external_urls.spotify} target="_blank">{track.name}</a>} style={{ textAlign: 'center' }} />
+                                    title={<a href={track.uri} target="_blank">{track.name}</a>} style={{ textAlign: 'center' }} />
                             </Card>
                         </Col>
 
