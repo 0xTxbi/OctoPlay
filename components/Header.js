@@ -17,7 +17,7 @@ const Header = () => {
             <Link href="/">
                 <div className={styles.logo} style={{ cursor: 'pointer' }}>OctoPlay</div>
             </Link>
-            {/* <img src={`https://www.countryflags.io/${data.country}/shiny/64.png`} /> */}
+            
             <Menu theme="dark" mode="horizontal">
                 <Menu.Item key='1'>
                     <Link href='/ta'>

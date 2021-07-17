@@ -24,9 +24,10 @@ export default function YourPlaylists({ data }) {
                     {data.items.map(playlist => (
 
                         <Col>
+
                             <Card
                                 key={playlist.id}
-                                cover={<img src={playlist.images[0].url} style={{ height: 300, width: 300 }} />}
+                                // cover={<img src={(playlist.images[0].url === undefined) ? 'https://images.pexels.com/photos/3671091/pexels-photo-3671091.jpeg' : playlist.images[0].url} style={{ height: 300, width: 300 }} />}
                                 style={{ width: 300 }}
                                 actions={[<p>Owner: <a href={playlist.owner.uri}><span style={{ fontWeight: 'bold' }}>{playlist.owner.display_name}</span></a></p>]}>
 
@@ -36,7 +37,7 @@ export default function YourPlaylists({ data }) {
 
                                 <hr />
                                 {playlist.description.length === 0 ? <p>No description provided</p> : <p>{playlist.description}</p>}
-                                
+
                             </Card>
                         </Col>
 
