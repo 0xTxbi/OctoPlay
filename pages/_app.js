@@ -2,7 +2,6 @@ import NProgress from 'nprogress'
 import "nprogress/nprogress.css";
 import Router from 'next/dist/next-server/lib/router/router';
 import { Provider } from 'next-auth/client'
-import '../styles/globals.css'
 
 NProgress.configure({
   minimum: 0.3,
