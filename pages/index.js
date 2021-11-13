@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useSession, signIn, signOut } from 'next-auth/client'
-import Footer from '../components/Footer'
 
 export default function Home() {
 
@@ -81,7 +80,11 @@ export default function Home() {
       </main>
       {/* Main content */}
 
-      <Footer />
+      <footer>
+
+        <a href="https://github.com/TechieJossy">Built with NextJS by TechieJossy</a>
+
+      </footer>
 
     </div>
 

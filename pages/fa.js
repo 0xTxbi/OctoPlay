@@ -1,51 +1,36 @@
 import React from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { Layout, Button, Menu, Avatar, Row, Col, Card } from 'antd'
 import { useSession, getSession } from 'next-auth/client'
-import 'antd/dist/antd.css';
 
 export default function followingArtists({ data }) {
 
+    console.log(data)
+
     const [session, loading] = useSession()
-    const { Content } = Layout
-    const { Meta } = Card
 
     return <>
 
-        <Layout>
-            <Header />
 
-            <Content style={{ display: "flex", flexDirection: "column", alignItems: 'center', justifyContent: "center", overflow: "scroll", marginTop: '1rem' }}>
+        <Header />
 
-                <h1>Artists You Follow</h1>
 
-                <Row gutter={50} style={{margin: 0}}>
+        <h1>Artists You Follow</h1>
 
-                    {data.artists.items.map(artist => (
+        {/* {data.artists.items.map(artist => (
 
-                        <Col style={{marginBottom: '2rem'}}>
-                            <Card
-                                key={artist.id}
-                                cover={<img src={artist.images[0].url} style={{ height: 300, width: 300 }} />}
-                                style={{ width: 300 }}
-                                actions={[<p>Genre: <span style={{ fontWeight: 'bold' }}>{artist.genres[0]}</span></p>]}>
+                    <Card
+                        key={artist.id}
+                        cover={<img src={artist.images[0].url} style={{ height: 300, width: 300 }} />}
+                        style={{ width: 300 }}
+                        actions={[<p>Genre: <span style={{ fontWeight: 'bold' }}>{artist.genres[0]}</span></p>]}>
 
-                                <Meta
-                                    title={<a href={artist.uri} target="_blank">{artist.name}</a>}
-                                    style={{ textAlign: 'center' }} />
+                        <Meta
+                            title={<a href={artist.uri} target="_blank">{artist.name}</a>}
+                            style={{ textAlign: 'center' }} />
 
-                            </Card>
-                        </Col>
+            ))} */}
 
-                    ))}
-
-                </Row>
-
-            </Content>
-
-            <Footer />
-        </Layout>
 
     </>
 }
