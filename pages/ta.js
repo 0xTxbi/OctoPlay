@@ -1,49 +1,19 @@
 import React from 'react'
 import { useSession, getSession } from 'next-auth/client'
-import { Layout, Card, Col, Row } from 'antd'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { Meta } from 'antd/lib/list/Item'
 
 export default function topArtists({ data }) {
 
     const [session, loading] = useSession()
-    const { Content } = Layout
+
+    console.log(data)
 
     return <>
 
-        <Layout style={{ height: '100vh' }}>
-            <Header />
+        <Header />
 
-            {console.log(data)}
-            <Content style={{ display: "flex", flexDirection: "column", alignItems: 'center', height: "100%", justifyContent: "center", overflow: "scroll" }}>
-
-                <h1>Your Top Artists</h1>
-
-                <Row gutter={50}>
-
-                    {data.items.map(artist => (
-
-                        <Col>
-                            <Card
-                                key={artist.id}
-                                cover={<img alt={`${artist.name}'s picture`} src={artist.images[0].url} style={{ height: 300, width: 300 }} />}
-                                style={{ width: 300 }}
-                                actions={[<p>Genre: <span style={{ fontWeight: 'bold' }}>{artist.genres[0]}</span></p>]}>
-
-                                <Meta
-                                    title={<a href={artist.uri} target="_blank">{artist.name}</a>} style={{ textAlign: 'center' }} />
-                            </Card>
-                        </Col>
-
-                    ))}
-
-                </Row>
-
-            </Content>
-
-            <Footer />
-        </Layout>
+        <h1>Your Top Artists</h1>
 
     </>
 }
