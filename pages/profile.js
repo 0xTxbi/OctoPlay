@@ -14,8 +14,7 @@ export default function Profile({ data }) {
 
     <Header />
 
-
-    <h1>Hi, {data.display_name} <img src={`https://www.countryflags.io/${data.country}/flat/32.png`} /></h1>
+    <h1>Hi, {data.display_name}</h1>
 
 
     <a href={data.uri}>
@@ -26,7 +25,7 @@ export default function Profile({ data }) {
     </Link>
 
 
-    <Footer />
+    {/* <Footer /> */}
 
   </>
 
