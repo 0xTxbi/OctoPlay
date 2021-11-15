@@ -1,47 +1,17 @@
 import React from 'react'
 import { useSession, getSession } from 'next-auth/client'
-import { Layout, Card, Col, Row } from 'antd'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { Meta } from 'antd/lib/list/Item'
 
 export default function topTracks({ data }) {
 
-    const { Content } = Layout
+    console.log(data)
 
     return <>
-    
-        <Layout style={{ height: '100vh' }}>
 
-            <Header />
-            <Content style={{ display: "flex", flexDirection: "column", alignItems: 'center', height: "100%", justifyContent: "center", overflow: "scroll" }}>
+        <Header />
 
-                <h1>Top Tracks</h1>
-
-                <Row gutter={50}>
-
-                    {data.items.map(track => (
-
-                        <Col>
-                            <Card
-                                key={track.id}
-                                cover={<img alt={`${track.name}'s picture`} src={track.album.images[0].url} style={{ height: 300, width: 300 }} />}
-                                style={{ width: 300 }}
-                                actions={[<p style={{ fontWeight: 'bold' }}><a href={track.album.uri} target="_blank">{track.album.name}</a></p>]}>
-
-                                <Meta
-                                    title={<a href={track.uri} target="_blank">{track.name}</a>} style={{ textAlign: 'center' }} />
-                            </Card>
-                        </Col>
-
-                    ))}
-
-                </Row>
-
-            </Content>
-            <Footer />
-
-        </Layout>
+        <h1>Top Tracks</h1>
 
     </>
 }
