@@ -42,8 +42,8 @@ export default function Home() {
               fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
               lineHeight={'110%'}>
               This is <br />
-              <Text as={'span'} color={'green.400'}>
-                OctoPlay 🚀
+              <Text as={'span'}>
+                Octo<span style={{ color: "#48bb78" }}>Play</span>. 🚀
               </Text>
             </Heading>
             <Text color={'gray.500'}>

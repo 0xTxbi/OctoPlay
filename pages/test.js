@@ -1,69 +1,90 @@
-import Head from 'next/head';
+import Link from "next/link"
 import {
     Box,
-    Heading,
-    Container,
-    Text,
+    Flex,
+    Avatar,
+    HStack,
+    IconButton,
     Button,
-    Stack,
-    Icon,
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem,
+    MenuDivider,
+    useDisclosure,
     useColorModeValue,
-    createIcon,
+    Stack
 } from '@chakra-ui/react';
-import { BsSpotify } from "react-icons/bs"
+import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 
-export default function CallToActionWithAnnotation() {
+
+export default function NavBar() {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
     return (
         <>
-            <Head>
-                <link
-                    href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap"
-                    rel="stylesheet"
-                />
-            </Head>
+            <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
+                <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+                    <IconButton
+                        size={'md'}
+                        icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+                        aria-label={'Open Menu'}
+                        display={{ md: 'none' }}
+                        onClick={isOpen ? onClose : onOpen}
+                    />
 
-            <Container maxW={'3xl'}>
-                <Stack
-                    as={Box}
-                    textAlign={'center'}
-                    spacing={{ base: 8, md: 14 }}
-                    py={{ base: 20, md: 36 }}>
-                    <Heading
-                        fontWeight={600}
-                        fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
-                        lineHeight={'110%'}>
-                        This is <br />
-                        <Text as={'span'} color={'green.400'}>
-                            OctoPlay 🚀
-                        </Text>
-                    </Heading>
-                    <Text color={'gray.500'}>
-                        The essential Spotify analytics tool built on its{' '}
-                        <a href="https://developer.spotify.com/documentation/web-api/">official API</a>
-                    </Text>
-                    <Stack
-                        direction={'column'}
-                        spacing={3}
-                        align={'center'}
-                        alignSelf={'center'}
-                        position={'relative'}>
-                        <Button
-                            colorScheme={'green'}
-                            leftIcon={<Icon as={BsSpotify} />}
-                            bg={'green.400'}
-                            rounded={'full'}
-                            px={6}
-                            _hover={{
-                                bg: 'green.500',
-                            }}>
-                            Sign In With Your Spotify Account
-                        </Button>
-                        <Button variant={'link'} colorScheme={'blue'} size={'sm'}>
-                            Learn more
-                        </Button>
-                    </Stack>
-                </Stack>
-            </Container>
+                    {/* Logo */}
+                    <Box fontSize="1.2rem" cursor="pointer"><Link href="/"><strong>OctoPlay.</strong></Link></Box>
+                    <HStack spacing={8} alignItems={'center'}>
+
+                        {/* Navigation Links */}
+                        <HStack
+                            as={'nav'}
+                            spacing={4}
+                            display={{ base: 'none', md: 'flex' }}>
+
+                            <Link href='/tt'>Top Tracks</Link>
+                            <Link href='/ta'>Top Artists</Link>
+                            <Link href='/yp'>Recent Playlists</Link>
+
+                        </HStack>
+                        {/* Navigation Links */}
+
+                    </HStack>
+                    <Flex alignItems={'center'}>
+                        <Menu>
+                            <MenuButton
+                                as={Button}
+                                rounded={'full'}
+                                variant={'link'}
+                                cursor={'pointer'}
+                                minW={0}>
+                                <Avatar
+                                    size={'sm'}
+                                    src={
+                                        'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
+                                    }
+                                />
+                            </MenuButton>
+                            <MenuList>
+                                <MenuItem>View Profile in App</MenuItem>
+                                <MenuDivider />
+                                <MenuItem><Button onClick={() => signOut()}>Log Out</Button></MenuItem>
+                            </MenuList>
+                        </Menu>
+                    </Flex>
+                </Flex>
+
+                {isOpen ? (
+                    <Box pb={4} display={{ md: 'none' }}>
+                        <Stack as={'nav'} spacing={4}>
+                            {Links.map((link) => (
+                                <NavLink key={link}>{link}</NavLink>
+                            ))}
+                        </Stack>
+                    </Box>
+                ) : null}
+            </Box>
         </>
     );
 }
