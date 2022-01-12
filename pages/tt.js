@@ -3,12 +3,14 @@ import { useSession, getSession } from 'next-auth/client'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Link from 'next/link'
-import { Container, Stack, Heading, Text, Box, Button, Icon, Center, VStack, useColorModeValue, Image, Flex, Avatar } from '@chakra-ui/react'
+import { Container, Stack, Heading, Text, Box } from '@chakra-ui/react'
 import TopAlbumsCard from '../components/TopAlbumsCard'
 
 export default function topTracks({ data }) {
 
     let faveTracksData = data.items
+
+    console.log(faveTracksData[0].album)
 
     return <>
 
@@ -26,7 +28,7 @@ export default function topTracks({ data }) {
                     lineHeight={'110%'}>
                     Your Top Tracks/Albums
                 </Heading>
-                <Text>Here are your top tracks/albums.</Text>
+                <Text>Here are your top tracks/albums   </Text>
 
 
                 <Stack
