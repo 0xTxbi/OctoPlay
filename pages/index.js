@@ -23,8 +23,6 @@ export default function Home() {
   const [session, loading] = useSession()
   const toast = useToast()
 
-  console.log(loading)
-
   if (session) {
 
 
@@ -84,6 +82,7 @@ export default function Home() {
           status: 'success',
           duration: 5000,
           isClosable: true,
+          colorScheme: 'green.400'
         }) : null}
 
       </>

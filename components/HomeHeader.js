@@ -19,14 +19,14 @@ import {
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useSession } from 'next-auth/client'
 
-const Header = () => {
+const HomeHeader = () => {
 
     const [session, loading] = useSession()
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
         <>
-            <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
+            <Box style={{ backgroundColor: "transparent" }} px={4} py={2}>
                 <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
                     <IconButton
                         size={'md'}
@@ -37,21 +37,8 @@ const Header = () => {
                     />
 
                     {/* Logo */}
-                    <Box fontSize="1.2rem" cursor="pointer"><Link href="/"><strong>Octo<span style={{ color: "#48bb78" }}>Play</span>.</strong></Link></Box>
+                    <Box fontSize="1.5rem" cursor="pointer"><Link href="/"><strong>Octo<span style={{ color: "#48bb78" }}>Play</span>.</strong></Link></Box>
                     <HStack spacing={8} alignItems={'center'}>
-
-                        {/* Navigation Links */}
-                        <HStack
-                            as={'nav'}
-                            spacing={4}
-                            display={{ base: 'none', md: 'flex' }}>
-
-                            <Link href='/tt'>Top Tracks</Link>
-                            <Link href='/ta'>Top Artists</Link>
-                            <Link href='/yp'>Recent Playlists</Link>
-
-                        </HStack>
-                        {/* Navigation Links */}
 
                     </HStack>
                     <Flex alignItems={'center'}>
@@ -63,14 +50,14 @@ const Header = () => {
                                 cursor={'pointer'}
                                 minW={0}>
                                 <Avatar
-                                    size={'sm'}
+                                    size={'md'}
                                     src={
                                         'https://i.scdn.co/image/ab6775700000ee85070323da04b5aefe5902278e'
                                     }
                                 />
                             </MenuButton>
                             <MenuList>
-                                <MenuItem>View Profile in App</MenuItem>
+                                <Link href='/'><MenuItem>Home</MenuItem></Link>
                                 <MenuDivider />
                                 <MenuItem><Button onClick={() => signOut()}>Log Out</Button></MenuItem>
                             </MenuList>
@@ -94,7 +81,7 @@ const Header = () => {
 
 }
 
-export default Header
+export default HomeHeader
 
 
 export async function getServerSideProps(ctx) {
