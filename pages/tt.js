@@ -10,8 +10,6 @@ export default function topTracks({ data }) {
 
     let faveTracksData = data.items
 
-    console.log(faveTracksData[0].album)
-
     return <>
 
         <Header />
