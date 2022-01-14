@@ -5,9 +5,7 @@ import numeral from 'numeral'
 
 function TopArtistsCard({ artisteData }) {
 
-    console.log(artisteData)
     let artisteTopGenre = artisteData.genres.slice(0, 1)
-    console.log(artisteTopGenre)
 
     return (
 

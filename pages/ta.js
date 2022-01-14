@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSession, getSession } from 'next-auth/client'
+import { useSession, getSession } from 'next-auth/react'
 import Header from '../components/Header'
 import { Container, Stack, Heading, Text, Box } from '@chakra-ui/react'
 import TopArtistsCard from '../components/TopArtistsCard'
@@ -9,10 +9,6 @@ export default function topArtists({ data }) {
     const [session, loading] = useSession()
 
     let artistesData = data.items
-
-    artistesData.map(artisteData => (
-        console.log(artisteData.name)
-    ))
 
     return <>
 

@@ -17,11 +17,11 @@ import {
     Stack
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
-import { useSession } from 'next-auth/client'
+import { useSession } from 'next-auth/react'
 
 const HomeHeader = () => {
 
-    const [session, loading] = useSession()
+    const { data: session } = useSession()
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (

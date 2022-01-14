@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { useSession, getSession } from 'next-auth/client'
+import { useSession, getSession } from 'next-auth/react'
 
 export default function followingArtists({ data }) {
 

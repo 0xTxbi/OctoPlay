@@ -1,19 +1,35 @@
 import React from 'react'
-import { useSession, getSession } from 'next-auth/client'
+import { useSession, getSession, signIn } from 'next-auth/react'
 import Header from '../components/Header'
-import Footer from '../components/Footer'
-import Link from 'next/link'
-import { Container, Stack, Heading, Text, Box } from '@chakra-ui/react'
+import {
+    Container, Icon, Button, Stack, Heading, Text, Box, AlertDialog,
+    AlertDialogBody,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogContent,
+    AlertDialogCloseButton,
+    AlertDialogOverlay, useDisclosure, Link
+} from '@chakra-ui/react'
+import { useEffect } from 'react'
+import { BsSpotify } from 'react-icons/bs';
 import TopAlbumsCard from '../components/TopAlbumsCard'
 
 export default function topTracks({ data }) {
 
+    const { data: session } = useSession()
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const cancelRef = React.useRef()
     let faveTracksData = data.items
+
+    useEffect(() => {
+        if (data.error.message) {
+            onOpen()
+        }
+    }, [data.error])
 
     return <>
 
         <Header />
-
         <Container maxW={'3xl'}>
             <Stack
                 as={Box}
@@ -36,16 +52,50 @@ export default function topTracks({ data }) {
                     spacing={5}
                     align={'center'}
                     alignSelf={'center'}>
-                    {faveTracksData.map(faveTrack => (
+                    {/* {faveTracksData.map(faveTrack => (
 
                         <TopAlbumsCard trackData={faveTrack.album} />
 
-                    ))}
+                    ))} */}
                 </Stack>
 
 
             </Stack>
         </Container>
+
+
+        {/* Alert dialog */}
+        {data.error.message ? onOpen : ''}
+        <AlertDialog AlertDialog
+            motionPreset='slideInBottom'
+            leastDestructiveRef={cancelRef}
+            isOpen={isOpen}
+            isCentered
+        >
+            <AlertDialogOverlay />
+
+            <AlertDialogContent>
+                <AlertDialogHeader>Session Expired 💀</AlertDialogHeader>
+                <AlertDialogBody>
+                    Oops. Your session on OctoPlay just expired. Please sign in again.
+                </AlertDialogBody>
+                <AlertDialogFooter>
+                    <Button ref={cancelRef}>
+                        <Link href='/'>
+                            Exit
+                        </Link>
+                    </Button>
+                    <Button
+                        onClick={() => signIn('spotify')}
+                        leftIcon={<Icon as={BsSpotify} />}
+                        bg={'green.400'}
+                        ml={5}
+                        _hover={{ bg: 'green.400' }}>
+                        Sign In Again
+                    </Button>
+                </AlertDialogFooter>
+            </AlertDialogContent>
+        </AlertDialog>
 
     </>
 }
@@ -60,12 +110,14 @@ export async function getServerSideProps(ctx) {
     const res = await fetch(`https://api.spotify.com/v1/me/top/${type}?time_range=${range}&limit=${limit}`, {
         headers: {
             Accept: "application/json",
-            Authorization: `Bearer ${session.user.accessToken}`,
+            Authorization: `Bearer ${session.accessToken}`,
             "Content-Type": "application/json"
         }
 
     })
+
     const data = await res.json()
+
 
     return {
         props: {

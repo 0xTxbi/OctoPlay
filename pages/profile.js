@@ -3,16 +3,13 @@ import HomeHeader from '../components/HomeHeader'
 import Footer from '../components/Footer'
 import Link from 'next/link'
 import { Container, Stack, Heading, Text, Box, Button, Icon, Center, VStack } from '@chakra-ui/react'
-import { useSession, getSession } from 'next-auth/client'
+import { useSession, getSession } from 'next-auth/react'
 
 
 export default function Profile({ data }) {
 
 
-  const [session, loading] = useSession()
-
-  console.log(session)
-  console.log(data)
+  const { data: session } = useSession()
 
   return <>
 
@@ -30,7 +27,7 @@ export default function Profile({ data }) {
             fontWeight={600}
             fontSize={{ base: 'xl', sm: '2xl', md: '4xl' }}
             lineHeight={'110%'}>
-            Welcome, {session.user.name}
+            Welcome {session.user.name}
           </Heading>
           <Text>Select any of the buttons to proceed 👇🏽</Text>
           <Stack
@@ -88,7 +85,7 @@ export async function getServerSideProps(ctx) {
   const res = await fetch('https://api.spotify.com/v1/me', {
     headers: {
       Accept: "application/json",
-      Authorization: `Bearer ${session.user.accessToken}`,
+      Authorization: `Bearer ${session.accessToken}`,
       "Content-Type": "application/json"
     }
 

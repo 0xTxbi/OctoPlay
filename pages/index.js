@@ -6,25 +6,26 @@ import {
   Text,
   Button,
   Stack,
-  Icon,
-  useColorModeValue,
-  createIcon,
+  Icon
 } from '@chakra-ui/react';
 import Link from 'next/link'
 import { useToast } from '@chakra-ui/react'
 import { GiRocketThruster } from "react-icons/gi"
 import { BsSpotify } from 'react-icons/bs';
 import Head from 'next/head'
-import { useSession, signIn, signOut } from 'next-auth/client'
+import { useSession, signIn, signOut } from 'next-auth/react'
 
 export default function Home() {
 
 
-  const [session, loading] = useSession()
+  const { data: session, status } = useSession()
   const toast = useToast()
 
-  if (session) {
+  console.log(status)
+  console.log(session)
 
+
+  if (status === 'authenticated') {
 
     return (
 
@@ -76,14 +77,14 @@ export default function Home() {
 
 
         {/* Display toast component on successful sign in */}
-        {!loading ? toast({
+        {status === 'authenticated' ? toast({
           title: 'You\'ve successfully signed in with your Spotify account.',
           description: "Click the 'Get Started' button to proceed.",
           status: 'success',
           duration: 5000,
           isClosable: true,
           colorScheme: 'green.400'
-        }) : null}
+        }) : ''}
 
       </>
     )

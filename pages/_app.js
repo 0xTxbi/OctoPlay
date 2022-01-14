@@ -1,7 +1,7 @@
 import NProgress from 'nprogress'
 import "nprogress/nprogress.css";
 import Router from 'next/dist/next-server/lib/router/router';
-import { Provider } from 'next-auth/client'
+import { SessionProvider } from 'next-auth/react'
 import { ChakraProvider } from '@chakra-ui/react';
 import theme from '../styles/theme';
 
@@ -18,14 +18,19 @@ Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps: {
+  session,
+  ...pageProps
+} }) {
 
   return (
-    <ChakraProvider theme={theme}>
-      <Provider session={pageProps.session}>
+
+    <SessionProvider session={session}>
+      <ChakraProvider theme={theme}>
         <Component {...pageProps} />
-      </Provider>
-    </ChakraProvider>
+      </ChakraProvider>
+    </SessionProvider>
+
   )
 
 }
