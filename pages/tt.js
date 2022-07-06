@@ -13,19 +13,22 @@ import {
 import { useEffect } from 'react'
 import { BsSpotify } from 'react-icons/bs';
 import TopAlbumsCard from '../components/TopAlbumsCard'
+import axios from 'axios'
 
-export default function topTracks({ data }) {
+export default function topTracks({ spotifyData }) {
 
     const { data: session } = useSession()
     const { isOpen, onOpen, onClose } = useDisclosure()
     const cancelRef = React.useRef()
-    let faveTracksData = data.items
+    let faveTracksData = spotifyData.items
 
-    useEffect(() => {
-        if (data.error.message) {
-            onOpen()
-        }
-    }, [data.error])
+    console.log(spotifyData)
+
+    // useEffect(() => {
+    //     if (data.error.message) {
+    //         onOpen()
+    //     }
+    // }, [data.error])
 
     return <>
 
@@ -107,21 +110,18 @@ export async function getServerSideProps(ctx) {
     const type = 'tracks'
     const limit = 5
     const range = 'short_term'
-    const res = await fetch(`https://api.spotify.com/v1/me/top/${type}?time_range=${range}&limit=${limit}`, {
+    const { spotifyData } = await axios.get(`https://api.spotify.com/v1/me/top/${type}?time_range=${range}&limit=${limit}`, {
         headers: {
             Accept: "application/json",
             Authorization: `Bearer ${session.accessToken}`,
             "Content-Type": "application/json"
         }
-
     })
-
-    const data = await res.json()
 
 
     return {
         props: {
-            data,
+            spotifyData,
             session
         }
     }
