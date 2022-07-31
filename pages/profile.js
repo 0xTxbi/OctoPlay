@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import HomeHeader from "../components/HomeHeader";
 import Link from "next/link";
 import {
@@ -11,7 +10,7 @@ import {
   Button,
   Center,
 } from "@chakra-ui/react";
-import { useSession, getSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 export default function Profile({}) {
   const { data: session } = useSession();
