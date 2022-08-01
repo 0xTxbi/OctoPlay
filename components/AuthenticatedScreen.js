@@ -49,7 +49,7 @@ function AuthenticatedScreen() {
         >
           This is <br />
           <Text as={"span"}>
-            Octo<span style={{ color: "#48bb78" }}>Play</span>. 🚀
+            Octo<span style={{ color: "#48bb78" }}>Play</span>.
           </Text>
         </Heading>
         <Text color={"gray.500"}>

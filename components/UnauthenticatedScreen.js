@@ -7,21 +7,22 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { signIn } from "next-auth/react";
-import Head from "next/head";
-import React from "react";
+import { signIn, useSession } from "next-auth/react";
+import React, { useEffect } from "react";
 import { BsSpotify } from "react-icons/bs";
 
 function UnauthenticatedScreen() {
+  const { data: session, status } = useSession();
+  console.log(session);
+  useEffect(() => {
+    // Force sign in if an error was encountered while refreshing access token
+    if (session?.error === "RefreshAccessTokenError") {
+      signIn();
+    }
+  }, [session]);
+
   return (
     <>
-      <Head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
-
       <Container maxW={"3xl"}>
         <Stack
           as={Box}
@@ -35,8 +36,8 @@ function UnauthenticatedScreen() {
             lineHeight={"110%"}
           >
             This is <br />
-            <Text as={"span"} color={"green.400"}>
-              OctoPlay 🚀
+            <Text as={"span"}>
+              Octo<span style={{ color: "#48bb78" }}>Play</span>.
             </Text>
           </Heading>
           <Text color={"gray.500"}>
