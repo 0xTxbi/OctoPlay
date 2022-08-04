@@ -9,12 +9,18 @@ import {
   Box,
   Button,
   Center,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
 import axios from "axios";
+import OverviewPageModal from "../components/OverviewPageModal";
+import { useState } from "react";
 
 export default function Profile() {
-  const { status, data: session } = useSession();
+  const { data: session } = useSession();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalContent, setModalContent] = useState("");
 
   console.log(session);
 
@@ -30,21 +36,7 @@ export default function Profile() {
       console.log(data);
     };
 
-    const fetchTAData = async () => {
-      const data = await axios.get(
-        `https://api.spotify.com/v1/me/top/artists`,
-        {
-          headers: {
-            Accept: "application/json",
-            Authorization: `Bearer ${session?.accessToken}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log(data);
-    };
-
-    fetchTAData();
+    fetchData();
   }, []);
 
   return (
@@ -74,44 +66,64 @@ export default function Profile() {
               alignSelf={"center"}
               position={"relative"}
             >
-              <Link href="/tt">
-                <Button
-                  colorScheme={"green"}
-                  bg={"green.400"}
-                  rounded={"full"}
-                  px={6}
-                  _hover={{
-                    bg: "green.500",
-                  }}
-                >
-                  Top Tracks
-                </Button>
-              </Link>
-              <Link href="/ta">
-                <Button
-                  colorScheme={"green"}
-                  variant={"outline"}
-                  rounded={"full"}
-                  px={6}
-                >
-                  Top Artists
-                </Button>
-              </Link>
-              <Link href="/yp">
-                <Button
-                  colorScheme={"green"}
-                  bg={"green.400"}
-                  rounded={"full"}
-                  px={6}
-                  _hover={{
-                    bg: "green.500",
-                  }}
-                >
-                  Recent Playlists
-                </Button>
-              </Link>
+              <Button
+                colorScheme={"green"}
+                onClick={() => {
+                  setModalTitle("Top Tracks");
+                  setModalContent("TT");
+                  onOpen();
+                }}
+                bg={"green.400"}
+                rounded={"full"}
+                px={6}
+                _hover={{
+                  bg: "green.500",
+                }}
+              >
+                Top Tracks
+              </Button>
+
+              <Button
+                colorScheme={"green"}
+                onClick={() => {
+                  setModalTitle("Top Artists");
+                  setModalContent("TA");
+                  onOpen();
+                }}
+                variant={"outline"}
+                rounded={"full"}
+                px={6}
+              >
+                Top Artists
+              </Button>
+
+              <Button
+                colorScheme={"green"}
+                onClick={() => {
+                  setModalTitle("Your Playlists");
+                  setModalContent("PL");
+                  onOpen();
+                }}
+                bg={"green.400"}
+                rounded={"full"}
+                px={6}
+                _hover={{
+                  bg: "green.500",
+                }}
+              >
+                Your Playlists
+              </Button>
             </Stack>
           </Stack>
+
+          {/* Modals */}
+          <OverviewPageModal
+            content={modalContent}
+            title={modalTitle}
+            isOpen={isOpen}
+            onOpen={onOpen}
+            onClose={onClose}
+          />
         </Container>
       </Center>
     </>
