@@ -1,10 +1,10 @@
 import axios from "axios";
 
-export const topArtistsReq = async (userSesh) => {
-  await axios.get(`https://api.spotify.com/v1/me/top/artists`, {
+export const topArtistsReq = async (token) => {
+  await axios.get(`https://api.spotify.com/v1/me`, {
     headers: {
       Accept: "application/json",
-      Authorization: `Bearer ${userSesh?.accessToken}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
   });

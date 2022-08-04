@@ -1,28 +1,26 @@
-import dotenv from 'dotenv'
-import querystring from 'query-string'
+// import dotenv from 'dotenv'
+// import querystring from 'query-string'
 
-dotenv.config();
+// dotenv.config();
 
+// // Random string
+// let state = '4C#KYQq.hY"}93CM';
 
-// Random string
-let state = '4C#KYQq.hY"}93CM';
+// // Redirect URI
+// const redirectUri = 'http://localhost:3000/profile'
 
-// Redirect URI
-const redirectUri = 'http://localhost:3000/profile'
+// export default (req, res) => {
 
+//   // Authorisation scope
+//   let scope = 'user-read-private user-read-email';
 
-export default (req, res) => {
+//   res.redirect('https://accounts.spotify.com/authorize?' +
+//     querystring.stringify({
+//       response_type: 'code',
+//       client_id: process.env.CLIENT_ID,
+//       scope: scope,
+//       redirect_uri: redirectUri,
+//       state: state
+//     }));
 
-  // Authorisation scope
-  let scope = 'user-read-private user-read-email';
-
-  res.redirect('https://accounts.spotify.com/authorize?' +
-    querystring.stringify({
-      response_type: 'code',
-      client_id: process.env.CLIENT_ID,
-      scope: scope,
-      redirect_uri: redirectUri,
-      state: state
-    }));
-
-}
+// }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import HomeHeader from "../components/HomeHeader";
 import Link from "next/link";
 import {
@@ -11,11 +11,41 @@ import {
   Center,
 } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
+import axios from "axios";
 
-export default function Profile({}) {
-  const { data: session } = useSession();
+export default function Profile() {
+  const { status, data: session } = useSession();
 
   console.log(session);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await axios.get(`https://api.spotify.com/v1/me`, {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${session?.accessToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(data);
+    };
+
+    const fetchTAData = async () => {
+      const data = await axios.get(
+        `https://api.spotify.com/v1/me/top/artists`,
+        {
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${session?.accessToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(data);
+    };
+
+    fetchTAData();
+  }, []);
 
   return (
     <>
@@ -84,9 +114,6 @@ export default function Profile({}) {
           </Stack>
         </Container>
       </Center>
-
-      {/* Footer */}
-      {/* <Footer /> */}
     </>
   );
 }

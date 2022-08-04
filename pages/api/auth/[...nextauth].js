@@ -1,11 +1,10 @@
 import moment from "moment";
 import NextAuth from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
-import { convertTime } from "../../../utils/utils";
 
 // Spotify permission scopes
 const scopes =
-  "user-read-recently-played user-top-read user-read-playback-position user-read-playback-state user-modify-playback-state user-read-currently-playing app-remote-control streaming playlist-modify-public playlist-modify-private playlist-read-private playlist-read-collaborative user-follow-modify user-follow-read user-library-modify user-library-read user-read-email user-read-private";
+  "user-top-read user-library-read user-read-email user-read-private";
 
 async function refreshAccessToken(token) {
   try {
@@ -49,18 +48,20 @@ async function refreshAccessToken(token) {
 export default NextAuth({
   providers: [
     SpotifyProvider({
+      authorization: `https://accounts.spotify.com/authorize?scope=${scopes}`,
       clientId: process.env.SPOTIFY_CLIENT_ID,
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-      scope: scopes,
     }),
   ],
   callbacks: {
-    async jwt({ token, account, user }) {
+    async jwt({ token, account }) {
       if (account) {
+        console.log(account);
         token.id = account?.id;
         token.accessToken = account?.access_token;
-        (token.accessTokenExpires = Date.now() + account?.expires_at * 1000),
-          (token.refreshToken = account?.refresh_token);
+        token.accessTokenExpires = Date.now() + account?.expires_at * 1000;
+        token.refreshToken = account?.refresh_token;
+        console.log(token);
       }
 
       // Return previous token if the access token has not expired yet

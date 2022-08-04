@@ -10,12 +10,14 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { signOut, useSession } from "next-auth/react";
-import React from "react";
+import React, { useEffect } from "react";
 import NextLink from "next/link";
 import { GiRocketThruster } from "react-icons/gi";
+import { topArtistsReq } from "../requests/topArtistsReq";
+import axios from "axios";
 
 function AuthenticatedScreen() {
-  const { status } = useSession();
+  const { status, data: session } = useSession();
   const toast = useToast();
   const id = "auth-toast";
 
@@ -25,14 +27,29 @@ function AuthenticatedScreen() {
       ? toast({
           id,
           title: "You're signed in with your Spotify account.",
-          description: "click 'Get Started' button to proceed.",
+          description: "click 'Get Started' to proceed.",
           status: "success",
-          duration: 3000,
+          duration: 1000,
           isClosable: true,
           colorScheme: "green.400",
         })
       : "";
   }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await axios.get(`https://api.spotify.com/v1/me`, {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${session?.accessToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(data);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <Container maxW={"3xl"}>
@@ -81,7 +98,11 @@ function AuthenticatedScreen() {
           </NextLink>
           <Text>or</Text>
           <Button
-            onClick={() => signOut()}
+            onClick={() =>
+              signOut({
+                redirect: "false",
+              })
+            }
             variant={"link"}
             colorScheme={"blue"}
             size={"sm"}
