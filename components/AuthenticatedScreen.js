@@ -45,7 +45,6 @@ function AuthenticatedScreen() {
           "Content-Type": "application/json",
         },
       });
-      console.log(data);
     };
 
     fetchData();

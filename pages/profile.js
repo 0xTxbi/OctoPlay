@@ -22,8 +22,6 @@ export default function Profile() {
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState("");
 
-  console.log(session);
-
   useEffect(() => {
     const fetchData = async () => {
       const data = await axios.get(`https://api.spotify.com/v1/me`, {
@@ -33,7 +31,6 @@ export default function Profile() {
           "Content-Type": "application/json",
         },
       });
-      console.log(data);
     };
 
     fetchData();

@@ -56,12 +56,10 @@ export default NextAuth({
   callbacks: {
     async jwt({ token, account }) {
       if (account) {
-        console.log(account);
         token.id = account?.id;
         token.accessToken = account?.access_token;
         token.accessTokenExpires = Date.now() + account?.expires_at * 1000;
         token.refreshToken = account?.refresh_token;
-        console.log(token);
       }
 
       // Return previous token if the access token has not expired yet
