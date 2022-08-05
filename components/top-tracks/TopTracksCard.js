@@ -85,7 +85,7 @@ function TopTracksCard({
             >
               {title}
             </Heading>
-            <Text color={"gray.500"} fontSize="xs">
+            <Text color={"gray.500"} fontSize="xs" noOfLines={1}>
               {album}
             </Text>
           </Stack>

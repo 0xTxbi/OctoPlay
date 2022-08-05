@@ -1,5 +1,6 @@
 import {
   Button,
+  Heading,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -14,14 +15,22 @@ import TopArtists from "./top-artists/TopArtists";
 import TopTracks from "./top-tracks/TopTracks";
 
 function OverviewPageModal({ isOpen, onClose, title, content }) {
-  console.log(content);
   return (
-    <Modal onClose={onClose} isOpen={isOpen} isCentered>
+    <Modal
+      onClose={onClose}
+      isOpen={isOpen}
+      isCentered
+      motionPreset="slideInBottom"
+    >
       <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>{title}</ModalHeader>
+      <ModalContent maxW="80vw">
+        <ModalHeader>
+          <Heading as="h2" textAlign="center">
+            {title}
+          </Heading>
+        </ModalHeader>
         <ModalCloseButton />
-        <ModalBody>
+        <ModalBody w={"90%"}>
           {content === "TA" ? (
             <TopArtists />
           ) : content === "TT" ? (
@@ -31,7 +40,9 @@ function OverviewPageModal({ isOpen, onClose, title, content }) {
           ) : null}
         </ModalBody>
         <ModalFooter>
-          <Button onClick={onClose}>Close</Button>
+          <Button onClick={onClose} bg="green.500" _hover={{ bg: "green.600" }}>
+            Close
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

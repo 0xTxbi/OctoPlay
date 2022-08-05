@@ -1,7 +1,9 @@
+import { Button, ButtonGroup } from "@chakra-ui/react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import React, { useEffect } from "react";
 import { useState } from "react";
+import Carousel from "../Carousel";
 import TopTracksCard from "./TopTracksCard";
 
 function TopTracks() {
@@ -30,8 +32,7 @@ function TopTracks() {
   }, []);
 
   return (
-    <>
-      <h1>Top Tracks</h1>
+    <Carousel>
       {topTracksData?.map((topTrack) => (
         <>
           <TopTracksCard
@@ -45,7 +46,7 @@ function TopTracks() {
           />
         </>
       ))}
-    </>
+    </Carousel>
   );
 }
 
