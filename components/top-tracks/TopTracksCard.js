@@ -49,7 +49,7 @@ function TopTracksCard({
     };
 
     fetchArtistData();
-  }, []);
+  }, [artistID]);
 
   return (
     <Center py={6}>

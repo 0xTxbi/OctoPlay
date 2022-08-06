@@ -9,8 +9,7 @@ function Carousel({ children }) {
 
   const carouselSettings = {
     arrows: false,
-    // centerMode: true,
-    centerPadding: "160px",
+    centerMode: true,
     slidesToShow: 3,
     slidesToScroll: 2,
     responsive: [
