@@ -32,9 +32,7 @@ function TopArtists() {
           },
         }
       );
-      console.log(data);
       setTopArtistsData(data?.data?.items);
-      console.log(topArtistsData);
 
       return { data };
     };
@@ -44,7 +42,6 @@ function TopArtists() {
 
   return (
     <>
-      {console.log(topArtistsData)}
       <Flex justifyContent={"flex-end"}>
         <Menu>
           <MenuButton

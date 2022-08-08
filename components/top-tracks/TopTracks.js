@@ -86,18 +86,16 @@ function TopTracks() {
       </Flex>
       <Carousel>
         {topTracksData?.map((topTrack) => (
-          <>
-            <TopTracksCard
-              key={topTrack?.id}
-              title={topTrack?.name}
-              album={topTrack?.album?.name}
-              albumCover={topTrack?.album?.images[0]?.url}
-              artistID={topTrack?.artists[0]?.id}
-              duration={topTrack?.duration_ms}
-              releaseDate={topTrack?.album?.release_date}
-              uri={topTrack?.uri}
-            />
-          </>
+          <TopTracksCard
+            key={topTrack?.id}
+            title={topTrack?.name}
+            album={topTrack?.album?.name}
+            albumCover={topTrack?.album?.images[0]?.url}
+            artistID={topTrack?.artists[0]?.id}
+            duration={topTrack?.duration_ms}
+            releaseDate={topTrack?.album?.release_date}
+            uri={topTrack?.uri}
+          />
         ))}
       </Carousel>
     </>
