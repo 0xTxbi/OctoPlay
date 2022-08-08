@@ -19,10 +19,9 @@ function TopTracks() {
   const { data: session } = useSession();
   const [topTracksData, setTopTracksData] = useState(null);
   const [dataRange, setDataRange] = useState("medium_term");
-  const [filterTitle, setFilterTitle] = useState("Filter");
+  const [filterTitle, setFilterTitle] = useState("Past 6 months");
 
   useEffect(() => {
-    console.log(dataRange);
     const fetchTTData = async () => {
       const limit = 10;
       const data = await axios.get(
@@ -35,7 +34,6 @@ function TopTracks() {
           },
         }
       );
-      console.log(topTracksData);
       setTopTracksData(data?.data?.items);
 
       return { data };
@@ -43,7 +41,7 @@ function TopTracks() {
 
     fetchTTData();
   }, [dataRange]);
-  console.log(dataRange);
+
   return (
     <>
       <Flex justifyContent={"flex-end"}>
@@ -57,6 +55,7 @@ function TopTracks() {
           </MenuButton>
           <MenuList>
             <MenuItem
+              isDisabled={filterTitle === "All time" && true}
               onClick={() => {
                 setDataRange("long_term");
                 setFilterTitle("All time");
@@ -65,6 +64,7 @@ function TopTracks() {
               All time
             </MenuItem>
             <MenuItem
+              isDisabled={filterTitle === "Past 6 months" && true}
               onClick={() => {
                 setDataRange("medium_term");
                 setFilterTitle("Past 6 months");
@@ -73,6 +73,7 @@ function TopTracks() {
               Last 6 months
             </MenuItem>
             <MenuItem
+              isDisabled={filterTitle === "Past month" ? true : false}
               onClick={() => {
                 setDataRange("short_term");
                 setFilterTitle("Past month");
@@ -87,6 +88,7 @@ function TopTracks() {
         {topTracksData?.map((topTrack) => (
           <>
             <TopTracksCard
+              key={topTrack?.id}
               title={topTrack?.name}
               album={topTrack?.album?.name}
               albumCover={topTrack?.album?.images[0]?.url}

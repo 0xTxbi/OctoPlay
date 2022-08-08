@@ -12,6 +12,8 @@ function Carousel({ children }) {
     centerMode: true,
     slidesToShow: 3,
     slidesToScroll: 2,
+    autoplay: true,
+    autoplaySpeed: 2000,
     responsive: [
       {
         breakpoint: 768,
