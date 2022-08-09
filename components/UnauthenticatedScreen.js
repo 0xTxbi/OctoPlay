@@ -13,7 +13,6 @@ import { BsSpotify } from "react-icons/bs";
 
 function UnauthenticatedScreen() {
   const { data: session, status } = useSession();
-  console.log(session);
   useEffect(() => {
     // Force sign in if an error was encountered while refreshing access token
     if (session?.error === "RefreshAccessTokenError") {

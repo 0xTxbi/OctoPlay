@@ -4,12 +4,11 @@ import React, { useState } from "react";
 import Slider from "react-slick";
 import { Button, ButtonGroup, Center } from "@chakra-ui/react";
 
-function Carousel({ children }) {
+function Carousel({ children, variant }) {
   const [carouselBtnRef, setCarouselBtnRef] = useState(null);
 
-  const carouselSettings = {
+  const multipleItemsCarouselSettings = {
     arrows: false,
-    centerMode: true,
     slidesToShow: 3,
     slidesToScroll: 2,
     autoplay: true,
@@ -36,30 +35,68 @@ function Carousel({ children }) {
     ],
   };
 
-  return (
-    <>
-      <Slider ref={setCarouselBtnRef} {...carouselSettings}>
-        {children}
-      </Slider>
-      <Center mt={5}>
-        <ButtonGroup spacing={5}>
-          <Button
-            onClick={carouselBtnRef?.slickPrev}
-            bg="green.500"
-            _hover={{ bg: "green.600" }}
-          >
-            Previous
-          </Button>
-          <Button
-            onClick={carouselBtnRef?.slickNext}
-            _hover={{ bg: "green.500" }}
-          >
-            Next
-          </Button>
-        </ButtonGroup>
-      </Center>
-    </>
-  );
+  const singleItemCarouselSettings = {
+    arrows: false,
+    slidesToShow: 1,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          centerPadding: "40px",
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          centerPadding: "40px",
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
+
+  if (variant === "single") {
+    return (
+      <>
+        <Slider ref={setCarouselBtnRef} {...singleItemCarouselSettings}>
+          {children}
+        </Slider>
+      </>
+    );
+  }
+  if (variant === "multiple") {
+    return (
+      <>
+        <Slider ref={setCarouselBtnRef} {...multipleItemsCarouselSettings}>
+          {children}
+        </Slider>
+        <Center mt={5}>
+          <ButtonGroup spacing={5}>
+            <Button
+              onClick={carouselBtnRef?.slickPrev}
+              bg="green.500"
+              _hover={{ bg: "green.600" }}
+            >
+              Previous
+            </Button>
+            <Button
+              onClick={carouselBtnRef?.slickNext}
+              _hover={{ bg: "green.500" }}
+            >
+              Next
+            </Button>
+          </ButtonGroup>
+        </Center>
+      </>
+    );
+  } else {
+    return null;
+  }
 }
 
 export default Carousel;

@@ -53,6 +53,9 @@ export default NextAuth({
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
     }),
   ],
+  session: {
+    maxAge: 30 * 24 * 60 * 60,
+  },
   callbacks: {
     async jwt({ token, account }) {
       if (account) {

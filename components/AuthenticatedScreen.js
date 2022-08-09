@@ -48,7 +48,7 @@ function AuthenticatedScreen() {
     };
 
     fetchData();
-  }, []);
+  }, [session]);
 
   return (
     <Container maxW={"3xl"}>

@@ -82,7 +82,7 @@ function TopArtists() {
           </MenuList>
         </Menu>
       </Flex>
-      <Carousel>
+      <Carousel variant={topArtistsData?.length === 1 ? "single" : "multiple"}>
         {topArtistsData?.map((topArtist) => (
           <>
             <TopArtistsCard

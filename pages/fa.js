@@ -1,23 +1,18 @@
-import React from 'react'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import { useSession, getSession } from 'next-auth/react'
+import React from "react";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import { useSession, getSession } from "next-auth/react";
 
 export default function followingArtists({ data }) {
+  const [session, loading] = useSession();
 
-    console.log(data)
+  return (
+    <>
+      <Header />
 
-    const [session, loading] = useSession()
+      <h1>Artists You Follow</h1>
 
-    return <>
-
-
-        <Header />
-
-
-        <h1>Artists You Follow</h1>
-
-        {/* {data.artists.items.map(artist => (
+      {/* {data.artists.items.map(artist => (
 
                     <Card
                         key={artist.id}
@@ -30,31 +25,30 @@ export default function followingArtists({ data }) {
                             style={{ textAlign: 'center' }} />
 
             ))} */}
-
-
     </>
+  );
 }
 
 export async function getServerSideProps(ctx) {
-
-    const session = await getSession(ctx)
-    const type = 'artist'
-    const limit = 50
-    const res = await fetch(`https://api.spotify.com/v1/me/following?type=${type}&limit=${limit}`, {
-        headers: {
-            Accept: "application/json",
-            Authorization: `Bearer ${session.user.accessToken}`,
-            "Content-Type": "application/json"
-        }
-
-    })
-    const data = await res.json()
-
-    return {
-        props: {
-            data,
-            session
-        }
+  const session = await getSession(ctx);
+  const type = "artist";
+  const limit = 50;
+  const res = await fetch(
+    `https://api.spotify.com/v1/me/following?type=${type}&limit=${limit}`,
+    {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${session.user.accessToken}`,
+        "Content-Type": "application/json",
+      },
     }
+  );
+  const data = await res.json();
 
+  return {
+    props: {
+      data,
+      session,
+    },
+  };
 }

@@ -6,7 +6,6 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
-  Stack,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
@@ -84,7 +83,7 @@ function TopTracks() {
           </MenuList>
         </Menu>
       </Flex>
-      <Carousel>
+      <Carousel variant={topTracksData?.length === 1 ? "single" : "multiple"}>
         {topTracksData?.map((topTrack) => (
           <TopTracksCard
             key={topTrack?.id}

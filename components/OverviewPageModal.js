@@ -29,7 +29,7 @@ function OverviewPageModal({ isOpen, onClose, title, content }) {
             {title}
           </Heading>
         </ModalHeader>
-        <ModalCloseButton />
+
         <ModalBody mx={10}>
           {content === "TA" ? (
             <TopArtists />
