@@ -7,38 +7,27 @@ import {
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
-import axios from "axios";
-import { useSession } from "next-auth/react";
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { getUsersTopTracks } from "../../requests";
 import Carousel from "../Carousel";
 import TopTracksCard from "./TopTracksCard";
 
 function TopTracks() {
-  const { data: session } = useSession();
   const [topTracksData, setTopTracksData] = useState(null);
   const [dataRange, setDataRange] = useState("medium_term");
   const [filterTitle, setFilterTitle] = useState("Past 6 months");
 
   useEffect(() => {
-    const fetchTTData = async () => {
+    const fetchTopTracks = async () => {
       const limit = 10;
-      const data = await axios.get(
-        `https://api.spotify.com/v1/me/top/tracks?time_range=${dataRange}&limit=${limit}`,
-        {
-          headers: {
-            Accept: "application/json",
-            Authorization: `Bearer ${session?.accessToken}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const data = await getUsersTopTracks(limit, dataRange);
       setTopTracksData(data?.data?.items);
 
       return { data };
     };
 
-    fetchTTData();
+    fetchTopTracks();
   }, [dataRange]);
 
   return (

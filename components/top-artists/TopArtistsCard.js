@@ -17,6 +17,7 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import { FaSpotify } from "react-icons/fa";
+import { getArtist } from "../../requests";
 import { formatFigure } from "../../utils/utils";
 
 function TopArtistsCard({
@@ -28,21 +29,11 @@ function TopArtistsCard({
   followers,
   uri,
 }) {
-  const { data: session } = useSession();
   const [artistData, setArtistData] = useState(null);
 
   useEffect(() => {
     const fetchArtistData = async () => {
-      const data = await axios.get(
-        `https://api.spotify.com/v1/artists/${artistID}`,
-        {
-          headers: {
-            Accept: "application/json",
-            Authorization: `Bearer ${session?.accessToken}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const data = await getArtist(artistID);
       setArtistData(data?.data);
 
       return { data };

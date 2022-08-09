@@ -11,12 +11,11 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import axios from "axios";
-import { useSession } from "next-auth/react";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { FaSpotify } from "react-icons/fa";
+import { getArtist } from "../../requests";
 import { convertDuration, convertReleaseDate } from "../../utils/utils";
 
 function TopTracksCard({
@@ -28,23 +27,12 @@ function TopTracksCard({
   releaseDate,
   uri,
 }) {
-  const { data: session } = useSession();
   const [artistData, setArtistData] = useState(null);
 
   useEffect(() => {
     const fetchArtistData = async () => {
-      const data = await axios.get(
-        `https://api.spotify.com/v1/artists/${artistID}`,
-        {
-          headers: {
-            Accept: "application/json",
-            Authorization: `Bearer ${session?.accessToken}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const data = await getArtist(artistID);
       setArtistData(data?.data);
-
       return { data };
     };
 

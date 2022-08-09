@@ -11,10 +11,10 @@ import {
   Center,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useSession } from "next-auth/react";
-import axios from "axios";
+import { getSession, useSession } from "next-auth/react";
 import OverviewPageModal from "../components/OverviewPageModal";
 import { useState } from "react";
+import { getUsersProfile } from "../requests";
 
 export default function Profile() {
   const { data: session } = useSession();
@@ -24,15 +24,15 @@ export default function Profile() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await axios.get(`https://api.spotify.com/v1/me`, {
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${session?.accessToken}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const data = await getUsersProfile();
     };
 
+    const getSesh = async () => {
+      const session = await getSession();
+      console.log(session);
+    };
+
+    getSesh();
     fetchData();
   }, []);
 

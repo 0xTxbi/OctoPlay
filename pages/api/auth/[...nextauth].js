@@ -24,6 +24,7 @@ async function refreshAccessToken(token) {
     });
 
     const refreshedTokens = await response.json();
+    localStorage.setItem("userToken", refreshedTokens?.access_token);
 
     if (!response.ok) {
       throw refreshedTokens;
@@ -31,9 +32,9 @@ async function refreshAccessToken(token) {
 
     return {
       ...token,
-      accessToken: refreshedTokens.access_token,
-      accessTokenExpires: Date.now() + refreshedTokens.expires_at * 1000,
-      refreshToken: refreshedTokens.refresh_token ?? token.refreshToken, // Fall back to old refresh token
+      accessToken: refreshedTokens?.access_token,
+      accessTokenExpires: Date.now() + refreshedTokens?.expires_at * 1000,
+      refreshToken: refreshedTokens?.refresh_token ?? token?.refreshToken, // Fall back to old refresh token
     };
   } catch (error) {
     console.log(error);

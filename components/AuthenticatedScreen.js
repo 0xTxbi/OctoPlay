@@ -13,7 +13,6 @@ import { signOut, useSession } from "next-auth/react";
 import React, { useEffect } from "react";
 import NextLink from "next/link";
 import { GiRocketThruster } from "react-icons/gi";
-import { topArtistsReq } from "../requests/topArtistsReq";
 import axios from "axios";
 
 function AuthenticatedScreen() {
@@ -37,17 +36,7 @@ function AuthenticatedScreen() {
   }
 
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await axios.get(`https://api.spotify.com/v1/me`, {
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${session?.accessToken}`,
-          "Content-Type": "application/json",
-        },
-      });
-    };
-
-    fetchData();
+    sessionStorage?.setItem("userToken", session?.accessToken);
   }, [session]);
 
   return (
@@ -97,11 +86,12 @@ function AuthenticatedScreen() {
           </NextLink>
           <Text>or</Text>
           <Button
-            onClick={() =>
+            onClick={() => {
+              sessionStorage.removeItem("userToken");
               signOut({
                 redirect: "false",
-              })
-            }
+              });
+            }}
             variant={"link"}
             colorScheme={"blue"}
             size={"sm"}
