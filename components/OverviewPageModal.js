@@ -3,7 +3,6 @@ import {
   Heading,
   Modal,
   ModalBody,
-  ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
@@ -16,36 +15,42 @@ import TopTracks from "./top-tracks/TopTracks";
 
 function OverviewPageModal({ isOpen, onClose, title, content }) {
   return (
-    <Modal
-      onClose={onClose}
-      isOpen={isOpen}
-      isCentered
-      motionPreset="slideInBottom"
-    >
-      <ModalOverlay />
-      <ModalContent maxW="80vw">
-        <ModalHeader>
-          <Heading as="h2" textAlign="center">
-            {title}
-          </Heading>
-        </ModalHeader>
+    <>
+      <Modal
+        onClose={onClose}
+        isOpen={isOpen}
+        isCentered
+        motionPreset="slideInBottom"
+      >
+        <ModalOverlay />
+        <ModalContent maxW="80vw">
+          <ModalHeader>
+            <Heading as="h2" textAlign="center">
+              {title}
+            </Heading>
+          </ModalHeader>
 
-        <ModalBody mx={10}>
-          {content === "TA" ? (
-            <TopArtists />
-          ) : content === "TT" ? (
-            <TopTracks />
-          ) : content === "PL" ? (
-            <Playlists />
-          ) : null}
-        </ModalBody>
-        <ModalFooter>
-          <Button onClick={onClose} bg="green.500" _hover={{ bg: "green.600" }}>
-            Close
-          </Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+          <ModalBody mx={10}>
+            {content === "TA" ? (
+              <TopArtists />
+            ) : content === "TT" ? (
+              <TopTracks />
+            ) : content === "PL" ? (
+              <Playlists />
+            ) : null}
+          </ModalBody>
+          <ModalFooter>
+            <Button
+              onClick={onClose}
+              bg="green.500"
+              _hover={{ bg: "green.600" }}
+            >
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
   );
 }
 

@@ -14,14 +14,11 @@ function Playlists() {
     const fetchPlaylists = async () => {
       const data = await getUsersPlaylists();
       setPlaylistsData(data?.data?.items);
-      console.log(data);
     };
 
-    setTimeout(() => {
-      fetchPlaylists();
+    fetchPlaylists();
 
-      // setLoading(false);
-    }, 1500);
+    setLoading(false);
   }, []);
 
   if (loading) {
