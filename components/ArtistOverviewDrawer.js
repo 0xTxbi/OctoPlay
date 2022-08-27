@@ -1,5 +1,6 @@
 import {
   Avatar,
+  AvatarBadge,
   Badge,
   Box,
   Button,
@@ -7,6 +8,7 @@ import {
   Center,
   CircularProgress,
   CircularProgressLabel,
+  Container,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -31,6 +33,7 @@ import {
   Tfoot,
   Th,
   Thead,
+  Tooltip,
   Tr,
   VStack,
 } from "@chakra-ui/react";
@@ -39,8 +42,19 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { FaSpotify } from "react-icons/fa";
-import { getArtistAlbums, getUsersProfile } from "../requests";
-import { convertReleaseDate, formatFigure, truncateText } from "../utils/utils";
+import {
+  getArtistAlbums,
+  getArtistTopTracks,
+  getRelatedArtists,
+  getUsersProfile,
+} from "../requests";
+import {
+  convertReleaseDate,
+  convertReleaseDateToYear,
+  formatFigure,
+  truncateText,
+} from "../utils/utils";
+import Carousel from "./Carousel";
 
 function ArtistOverviewDrawer({
   isOpen,
@@ -52,12 +66,13 @@ function ArtistOverviewDrawer({
   artistImage,
   uri,
 }) {
-  const [artistAlbums, setArtistAlbums] = useState(null);
   const [userMarket, setUserMarket] = useState(null);
-  // console.log(artistID);
+  const [artistAlbums, setArtistAlbums] = useState(null);
+  const [artistTopTracks, setArtistTopTracks] = useState(null);
+  const [relatedArtists, setRelatedArtists] = useState(null);
 
+  // fetch user's market
   useEffect(() => {
-    // fetch user's market
     const fetchUserMarket = async () => {
       const data = await getUsersProfile();
       setUserMarket(data?.data?.country);
@@ -66,15 +81,34 @@ function ArtistOverviewDrawer({
     fetchUserMarket();
   }, [artistID]);
 
+  // fetch artist's albums
   useEffect(() => {
     const fetchArtistAlbumData = async () => {
       const data = await getArtistAlbums(artistID, userMarket, 5);
       setArtistAlbums(data?.data?.items);
+
+      return { data };
+    };
+
+    const fetchArtistTopTracksData = async () => {
+      const data = await getArtistTopTracks(artistID, userMarket);
+      setArtistTopTracks(data?.data?.tracks);
+      return { data };
+    };
+
+    const fetchRelatedArtistsData = async () => {
+      const data = await getRelatedArtists(artistID);
+      console.log(data);
+      setRelatedArtists(data?.data?.artists);
       return { data };
     };
 
     fetchArtistAlbumData();
+    fetchArtistTopTracksData();
+    fetchRelatedArtistsData();
   }, [artistID]);
+
+  console.log(relatedArtists);
 
   return (
     <>
@@ -89,7 +123,7 @@ function ArtistOverviewDrawer({
                 <Heading>{name}</Heading>
                 <CircularProgress
                   value={popularity}
-                  color="green.500"
+                  color={popularity >= 80 ? "green.500" : "orange.500"}
                   size="50"
                   thickness="7px"
                 >
@@ -104,7 +138,7 @@ function ArtistOverviewDrawer({
 
               {/* Albums */}
               <VStack pt="5rem">
-                {artistAlbums !== null && artistAlbums.length > 0 ? (
+                {artistAlbums?.length > 0 ? (
                   <>
                     <Heading>Albums</Heading>
                     <TableContainer pt={5}>
@@ -138,6 +172,82 @@ function ArtistOverviewDrawer({
                 ) : (
                   <Heading>No albums yet</Heading>
                 )}
+              </VStack>
+
+              {/* Top tracks */}
+              <VStack pt="5rem">
+                {artistAlbums?.length > 0 ? (
+                  <>
+                    <Heading>Top Tracks</Heading>
+                    <TableContainer pt={5}>
+                      <Table variant="simple" overflow="scroll" size="sm">
+                        <Thead>
+                          <Tr>
+                            <Th>Name</Th>
+                            <Th>Album</Th>
+                            <Th>Year</Th>
+                            <Th isNumeric>Popularity</Th>
+                          </Tr>
+                        </Thead>
+                        <Tbody>
+                          {artistTopTracks?.map((track) => (
+                            <Tr>
+                              <Td>{truncateText(track?.name, 20)}</Td>
+                              <Td>{truncateText(track?.album?.name, 15)}</Td>
+                              <Td>
+                                {convertReleaseDateToYear(
+                                  track?.album?.release_date
+                                )}
+                              </Td>
+                              <Td isNumeric>
+                                <Progress
+                                  value={track?.popularity}
+                                  colorScheme={
+                                    track?.popularity >= 75 ? "green" : "orange"
+                                  }
+                                  size="sm"
+                                />
+                              </Td>
+                            </Tr>
+                          ))}
+                        </Tbody>
+                      </Table>
+                    </TableContainer>
+                  </>
+                ) : (
+                  <Heading>No top tracks yet</Heading>
+                )}
+              </VStack>
+
+              {/* Related Artists */}
+              <VStack pt="5rem">
+                <Heading>Related Artists</Heading>
+                <Container>
+                  <Carousel variant="custom">
+                    {relatedArtists?.map((artist) => (
+                      <Box h="auto" bg="transparent">
+                        <Tooltip label={artist?.name}>
+                          <Avatar
+                            src={artist?.images[0]?.url}
+                            size="xl"
+                            mb={5}
+                            name={artist?.name}
+                          >
+                            <AvatarBadge
+                              border="none"
+                              bg={
+                                artist?.popularity >= 85
+                                  ? "green.400"
+                                  : "orange.400"
+                              }
+                              boxSize="0.7em"
+                            />
+                          </Avatar>
+                        </Tooltip>
+                      </Box>
+                    ))}
+                  </Carousel>
+                </Container>
               </VStack>
             </VStack>
           </DrawerBody>

@@ -60,6 +60,34 @@ function Carousel({ children, variant }) {
     ],
   };
 
+  const customCarouselSettings = {
+    arrows: false,
+    slidesToShow: 4,
+    slidesToScroll: 2,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          centerPadding: "40px",
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          centerPadding: "40px",
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
+
   if (variant === "single") {
     return (
       <>
@@ -73,6 +101,32 @@ function Carousel({ children, variant }) {
     return (
       <>
         <Slider ref={setCarouselBtnRef} {...multipleItemsCarouselSettings}>
+          {children}
+        </Slider>
+        <Center mt={5}>
+          <ButtonGroup spacing={5}>
+            <Button
+              onClick={carouselBtnRef?.slickPrev}
+              bg="green.500"
+              _hover={{ bg: "green.600" }}
+            >
+              Previous
+            </Button>
+            <Button
+              onClick={carouselBtnRef?.slickNext}
+              _hover={{ bg: "green.500" }}
+            >
+              Next
+            </Button>
+          </ButtonGroup>
+        </Center>
+      </>
+    );
+  }
+  if (variant === "custom") {
+    return (
+      <>
+        <Slider ref={setCarouselBtnRef} {...customCarouselSettings}>
           {children}
         </Slider>
         <Center mt={5}>

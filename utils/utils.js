@@ -15,6 +15,11 @@ export const convertReleaseDate = (rawReleaseDate) => {
   return moment(rawReleaseDate, "YYYY/MM/DD").format("MMM Do, YYYY");
 };
 
+// convert track/album release date to desired format
+export const convertReleaseDateToYear = (rawReleaseDate) => {
+  return moment(rawReleaseDate, "YYYY/MM/DD").format("YYYY");
+};
+
 // format raw figure to proper format
 export const formatFigure = (num) => {
   if (num < 1e3) return num;

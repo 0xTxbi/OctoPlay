@@ -49,3 +49,21 @@ export const getArtistAlbums = async (artistID, market, limit) => {
 
   return response;
 };
+
+// GET artist's top tracks
+export const getArtistTopTracks = async (artistID, market) => {
+  const response = await axiosInstance.get(
+    `artists/${artistID}/top-tracks?market=${market}`
+  );
+
+  return response;
+};
+
+// GET artist's related artists
+export const getRelatedArtists = async (artistID) => {
+  const response = await axiosInstance.get(
+    `artists/${artistID}/related-artists`
+  );
+
+  return response;
+};
