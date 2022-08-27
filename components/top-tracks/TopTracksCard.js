@@ -35,14 +35,11 @@ function TopTracksCard({
   useEffect(() => {
     const fetchArtistData = async () => {
       const data = await getArtist(artistID);
-      console.log(data?.data);
       setArtistData(data?.data);
       return { data };
     };
 
     fetchArtistData();
-
-    console.log(artistData);
   }, [artistID]);
 
   return (
@@ -133,6 +130,7 @@ function TopTracksCard({
       <ArtistOverviewDrawer
         isOpen={isOpen}
         onClose={onClose}
+        artistID={artistID}
         artistImage={artistData?.images[0]?.url}
         name={artistData?.name}
         popularity={artistData?.popularity}

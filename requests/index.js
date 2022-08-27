@@ -33,10 +33,19 @@ export const getUsersPlaylists = async () => {
   return response;
 };
 
-// General Requests
+// Artist Requests
 // GET artist's data
 export const getArtist = async (artistID) => {
   const response = await axiosInstance.get(`artists/${artistID}`);
+
+  return response;
+};
+
+// GET artist's albums
+export const getArtistAlbums = async (artistID, market, limit) => {
+  const response = await axiosInstance.get(
+    `artists/${artistID}/albums?include_groups=album&market=${market}&limit=${limit}`
+  );
 
   return response;
 };
