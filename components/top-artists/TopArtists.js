@@ -6,9 +6,11 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  useDisclosure,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { getUsersTopArtists } from "../../requests";
+import ArtistOverviewDrawer from "../ArtistOverviewDrawer";
 import Carousel from "../Carousel";
 import TopArtistsCard from "./TopArtistsCard";
 

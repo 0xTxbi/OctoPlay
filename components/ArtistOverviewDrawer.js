@@ -5,40 +5,30 @@ import {
   Box,
   Button,
   ButtonGroup,
-  Center,
   CircularProgress,
   CircularProgressLabel,
   Container,
   Drawer,
   DrawerBody,
-  DrawerCloseButton,
   DrawerContent,
   DrawerFooter,
-  DrawerHeader,
   DrawerOverlay,
-  Flex,
   Heading,
-  HStack,
   Icon,
   Image,
   Link,
   Progress,
-  Stack,
   Table,
-  TableCaption,
   TableContainer,
   Tbody,
   Td,
   Text,
-  Tfoot,
   Th,
   Thead,
   Tooltip,
   Tr,
   VStack,
 } from "@chakra-ui/react";
-import Head from "next/head";
-import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { FaSpotify } from "react-icons/fa";
@@ -79,7 +69,7 @@ function ArtistOverviewDrawer({
     };
 
     fetchUserMarket();
-  }, [artistID]);
+  }, []);
 
   // fetch artist's albums
   useEffect(() => {
@@ -98,17 +88,14 @@ function ArtistOverviewDrawer({
 
     const fetchRelatedArtistsData = async () => {
       const data = await getRelatedArtists(artistID);
-      console.log(data);
       setRelatedArtists(data?.data?.artists);
       return { data };
     };
 
-    fetchArtistAlbumData();
-    fetchArtistTopTracksData();
-    fetchRelatedArtistsData();
-  }, [artistID]);
-
-  console.log(relatedArtists);
+    fetchArtistAlbumData()
+      .then(fetchArtistTopTracksData())
+      .then(fetchRelatedArtistsData());
+  }, []);
 
   return (
     <>
@@ -138,7 +125,7 @@ function ArtistOverviewDrawer({
 
               {/* Albums */}
               <VStack pt="5rem">
-                {artistAlbums?.length > 0 ? (
+                {artistAlbums && artistAlbums?.length > 0 ? (
                   <>
                     <Heading>Albums</Heading>
                     <TableContainer pt={5}>

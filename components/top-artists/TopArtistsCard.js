@@ -2,20 +2,25 @@ import {
   Badge,
   Box,
   Button,
+  ButtonGroup,
   Center,
   Flex,
   Heading,
   Icon,
+  IconButton,
   Image,
   Link,
   Progress,
   Stack,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import { AiOutlineDotChart } from "react-icons/ai";
 import { FaSpotify } from "react-icons/fa";
 import { getArtist } from "../../requests";
 import { formatFigure } from "../../utils/utils";
+import ArtistOverviewDrawer from "../ArtistOverviewDrawer";
 
 function TopArtistsCard({
   artistID,
@@ -27,6 +32,7 @@ function TopArtistsCard({
   uri,
 }) {
   const [artistData, setArtistData] = useState(null);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     const fetchArtistData = async () => {
@@ -39,6 +45,7 @@ function TopArtistsCard({
     fetchArtistData();
   }, [artistID]);
 
+  console.log(artistData);
   return (
     <Center py={6}>
       <Box
@@ -52,23 +59,29 @@ function TopArtistsCard({
       >
         <Image h={"150px"} w={"full"} src={artistImage} objectFit={"cover"} />
         <Flex justify={"center"} mt={-4}>
-          <Link href={uri} isExternal>
-            <Button
-              w={"full"}
+          <ButtonGroup>
+            <IconButton
+              onClick={() => onOpen()}
+              aria-label="View Full Stats"
               bg={"green.500"}
-              size="sm"
-              color={"white"}
-              fontSize="sm"
-              leftIcon={<Icon as={FaSpotify} />}
-              rounded={"md"}
               _hover={{
                 transform: "translateY(-2px)",
                 boxShadow: "lg",
               }}
-            >
-              Visit Artist's Profile
-            </Button>
-          </Link>
+              icon={<Icon as={AiOutlineDotChart} />}
+            />
+            <Link href={uri} isExternal>
+              <IconButton
+                aria-label="View Full Stats"
+                bg={"green.500"}
+                _hover={{
+                  transform: "translateY(-2px)",
+                  boxShadow: "lg",
+                }}
+                icon={<Icon as={FaSpotify} />}
+              />
+            </Link>
+          </ButtonGroup>
         </Flex>
 
         <Box p={5}>
@@ -114,6 +127,17 @@ function TopArtistsCard({
           </Stack>
         </Box>
       </Box>
+
+      <ArtistOverviewDrawer
+        isOpen={isOpen}
+        onClose={onClose}
+        artistID={artistID}
+        artistImage={artistData?.images[0]?.url}
+        name={artistData?.name}
+        popularity={artistData?.popularity}
+        followers={artistData?.followers?.total}
+        uri={artistData?.uri}
+      />
     </Center>
   );
 }

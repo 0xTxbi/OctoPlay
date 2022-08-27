@@ -2,10 +2,12 @@ import {
   Avatar,
   Box,
   Button,
+  ButtonGroup,
   Center,
   Flex,
   Heading,
   Icon,
+  IconButton,
   Image,
   Link,
   Stack,
@@ -15,6 +17,7 @@ import {
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { AiOutlineDotChart } from "react-icons/ai";
 import { FaSpotify } from "react-icons/fa";
 import { getArtist } from "../../requests";
 import { convertDuration, convertReleaseDate } from "../../utils/utils";
@@ -46,7 +49,7 @@ function TopTracksCard({
     <>
       <Center py={6}>
         <Box
-          maxW={"270px"}
+          maxW={"290px"}
           h="360px"
           w={"full"}
           bg={"gray.800"}
@@ -105,7 +108,7 @@ function TopTracksCard({
               </Stack>
             </Stack>
 
-            <Link href={uri} isExternal>
+            <ButtonGroup>
               <Button
                 w={"full"}
                 my={5}
@@ -113,16 +116,34 @@ function TopTracksCard({
                 size="sm"
                 color={"white"}
                 fontSize="sm"
-                leftIcon={<Icon as={FaSpotify} />}
+                leftIcon={<Icon as={AiOutlineDotChart} />}
                 rounded={"md"}
                 _hover={{
                   transform: "translateY(-2px)",
                   boxShadow: "lg",
                 }}
               >
-                Listen on Spotify
+                Nerd Stats
               </Button>
-            </Link>
+              <Link href={uri} isExternal>
+                <Button
+                  w={"full"}
+                  my={5}
+                  bg={"green.500"}
+                  size="sm"
+                  color={"white"}
+                  fontSize="sm"
+                  leftIcon={<Icon as={FaSpotify} />}
+                  rounded={"md"}
+                  _hover={{
+                    transform: "translateY(-2px)",
+                    boxShadow: "lg",
+                  }}
+                >
+                  View Track
+                </Button>
+              </Link>
+            </ButtonGroup>
           </Box>
         </Box>
       </Center>
