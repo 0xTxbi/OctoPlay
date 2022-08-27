@@ -29,7 +29,6 @@ export default function Profile() {
 
     const getSesh = async () => {
       const session = await getSession();
-      console.log(session);
     };
 
     getSesh();

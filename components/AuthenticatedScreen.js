@@ -36,7 +36,8 @@ function AuthenticatedScreen() {
   }
 
   useEffect(() => {
-    sessionStorage?.setItem("userToken", session?.accessToken);
+    const ISSERVER = typeof window === "undefined";
+    if (!ISSERVER) sessionStorage?.setItem("userToken", session?.accessToken);
   }, [session]);
 
   return (
@@ -87,7 +88,8 @@ function AuthenticatedScreen() {
           <Text>or</Text>
           <Button
             onClick={() => {
-              sessionStorage.removeItem("userToken");
+              const ISSERVER = typeof window === "undefined";
+              if (!ISSERVER) sessionStorage.removeItem("userToken");
               signOut({
                 redirect: "false",
               });

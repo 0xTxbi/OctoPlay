@@ -24,9 +24,12 @@ export default function Home() {
   const [isValidSession, setIsValidSession] = useState(false);
 
   useEffect(() => {
-    sessionStorage.getItem("userToken" === null)
-      ? setIsValidSession(false)
-      : setIsValidSession(true);
+    const ISSERVER = typeof window === "undefined";
+    if (!ISSERVER) {
+      sessionStorage.getItem("userToken" === null)
+        ? setIsValidSession(false)
+        : setIsValidSession(true);
+    }
   });
 
   if (status === "authenticated" && isValidSession != null) {
