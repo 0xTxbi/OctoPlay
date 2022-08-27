@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Badge,
   Box,
   Button,
@@ -13,8 +12,6 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import axios from "axios";
-import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import { FaSpotify } from "react-icons/fa";
 import { getArtist } from "../../requests";
@@ -85,9 +82,6 @@ function TopArtistsCard({
             >
               {name}
             </Heading>
-            {/* <Text color={"gray.500"} fontSize="xs" noOfLines={1}>
-              {album}
-            </Text> */}
           </Stack>
 
           <Stack direction={"column"} justify={"center"} spacing={2}>

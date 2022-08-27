@@ -16,11 +16,20 @@ import Head from "next/head";
 import { useSession, signIn, signOut } from "next-auth/react";
 import AuthenticatedScreen from "../components/AuthenticatedScreen";
 import UnauthenticatedScreen from "../components/UnauthenticatedScreen";
+import { useEffect } from "react";
+import { useState } from "react";
 
 export default function Home() {
   const { status } = useSession();
+  const [isValidSession, setIsValidSession] = useState(false);
 
-  if (status === "authenticated") {
+  useEffect(() => {
+    sessionStorage.getItem("userToken" === null)
+      ? setIsValidSession(false)
+      : setIsValidSession(true);
+  });
+
+  if (status === "authenticated" && isValidSession != null) {
     return <AuthenticatedScreen />;
   } else {
     return <UnauthenticatedScreen />;

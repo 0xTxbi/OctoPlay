@@ -25,22 +25,24 @@ function Playlists() {
     return <Loader />;
   } else if (!loading) {
     return (
-      <Carousel variant={playlistsData?.length === 1 ? "single" : "multiple"}>
-        {playlistsData?.map((playlist) => (
-          <>
-            <PlaylistsCard
-              key={playlist?.id}
-              name={playlist?.name}
-              description={playlist?.description}
-              playlistImage={playlist?.images[0]?.url}
-              isPublic={playlist?.public}
-              isCollaborative={playlist?.collaborative}
-              totalTracks={playlist?.tracks?.total}
-              uri={playlist?.uri}
-            />
-          </>
-        ))}
-      </Carousel>
+      <>
+        <Carousel variant={playlistsData?.length === 1 ? "single" : "multiple"}>
+          {playlistsData?.map((playlist) => (
+            <>
+              <PlaylistsCard
+                key={playlist?.id}
+                name={playlist?.name}
+                description={playlist?.description}
+                playlistImage={playlist?.images[0]?.url}
+                isPublic={playlist?.public}
+                isCollaborative={playlist?.collaborative}
+                totalTracks={playlist?.tracks?.total}
+                uri={playlist?.uri}
+              />
+            </>
+          ))}
+        </Carousel>
+      </>
     );
   }
 }
