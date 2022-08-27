@@ -23,3 +23,8 @@ export const formatFigure = (num) => {
   if (num >= 1e9 && num < 1e12) return +(num / 1e6).toFixed(1) + "B";
   if (num >= 1e12) return +(num / 1e6).toFixed(1) + "T";
 };
+
+// Truncate text
+export const truncateText = (input, length) => {
+  return input.length > length ? `${input.substring(0, length)}...` : input;
+};

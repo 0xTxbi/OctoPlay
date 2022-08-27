@@ -40,7 +40,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { FaSpotify } from "react-icons/fa";
 import { getArtistAlbums, getUsersProfile } from "../requests";
-import { convertReleaseDate, formatFigure } from "../utils/utils";
+import { convertReleaseDate, formatFigure, truncateText } from "../utils/utils";
 
 function ArtistOverviewDrawer({
   isOpen,
@@ -126,9 +126,7 @@ function ArtistOverviewDrawer({
                                   boxSize="50px"
                                 />
                               </Td>
-                              <Td>
-                                <Text noOfLines={1}>{album?.name}</Text>
-                              </Td>
+                              <Td>{truncateText(album?.name, 25)}</Td>
                               <Td>{convertReleaseDate(album?.release_date)}</Td>
                               <Td isNumeric>{album?.total_tracks}</Td>
                             </Tr>
