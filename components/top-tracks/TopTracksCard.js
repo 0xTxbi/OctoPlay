@@ -22,6 +22,7 @@ import { FaSpotify } from "react-icons/fa";
 import { getArtist } from "../../requests";
 import { convertDuration, convertReleaseDate } from "../../utils/utils";
 import ArtistOverviewDrawer from "../ArtistOverviewDrawer";
+import TrackDetailsDrawer from "../TrackDetailsDrawer";
 
 function TopTracksCard({
   title,
@@ -32,7 +33,16 @@ function TopTracksCard({
   releaseDate,
   uri,
 }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isTrackOpen,
+    onOpen: onTrackOpen,
+    onClose: onTrackClose,
+  } = useDisclosure();
+  const {
+    isOpen: isArtistOpen,
+    onOpen: onArtistOpen,
+    onClose: onArtistClose,
+  } = useDisclosure();
   const [artistData, setArtistData] = useState(null);
 
   useEffect(() => {
@@ -61,14 +71,14 @@ function TopTracksCard({
           <Flex justify={"center"} mt={-7}>
             <Avatar
               onClick={() => {
-                onOpen();
+                onArtistOpen();
               }}
               size={"md"}
               src={artistData?.images[0]?.url}
               alt={"Author"}
               _hover={{ cursor: "pointer" }}
               css={{
-                border: "2px solid white",
+                border: "1px solid white",
               }}
             />
           </Flex>
@@ -111,6 +121,7 @@ function TopTracksCard({
             <ButtonGroup>
               <Button
                 w={"full"}
+                onClick={() => onTrackOpen()}
                 my={5}
                 bg={"green.500"}
                 size="sm"
@@ -149,8 +160,8 @@ function TopTracksCard({
       </Center>
 
       <ArtistOverviewDrawer
-        isOpen={isOpen}
-        onClose={onClose}
+        isOpen={isArtistOpen}
+        onClose={onArtistClose}
         artistID={artistID}
         artistImage={artistData?.images[0]?.url}
         name={artistData?.name}
@@ -158,6 +169,8 @@ function TopTracksCard({
         followers={artistData?.followers?.total}
         uri={artistData?.uri}
       />
+
+      <TrackDetailsDrawer isOpen={isTrackOpen} onClose={onTrackClose} />
     </>
   );
 }
