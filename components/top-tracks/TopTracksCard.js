@@ -170,7 +170,12 @@ function TopTracksCard({
         uri={artistData?.uri}
       />
 
-      <TrackDetailsDrawer isOpen={isTrackOpen} onClose={onTrackClose} />
+      <TrackDetailsDrawer
+        isOpen={isTrackOpen}
+        onClose={onTrackClose}
+        trackID={uri.substr(14)}
+        artistID={artistID}
+      />
     </>
   );
 }

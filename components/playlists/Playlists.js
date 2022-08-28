@@ -7,7 +7,6 @@ import PlaylistsCard from "./PlaylistsCard";
 function Playlists() {
   const [playlistsData, setPlaylistsData] = useState(null);
   const [loading, setLoading] = useState(false);
-  console.log(loading);
 
   useEffect(() => {
     setLoading(true);

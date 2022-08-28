@@ -45,7 +45,6 @@ function TopArtistsCard({
     fetchArtistData();
   }, [artistID]);
 
-  console.log(artistData);
   return (
     <Center py={6}>
       <Box

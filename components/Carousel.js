@@ -10,7 +10,7 @@ function Carousel({ children, variant }) {
   const multipleItemsCarouselSettings = {
     arrows: false,
     slidesToShow: 3,
-    slidesToScroll: 2,
+    slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
     responsive: [

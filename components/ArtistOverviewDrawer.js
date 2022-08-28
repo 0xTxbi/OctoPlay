@@ -103,11 +103,7 @@ function ArtistOverviewDrawer({
                   size="50"
                   thickness="7px"
                 >
-                  <CircularProgressLabel
-                    onClick={() => console.log(popularity)}
-                  >
-                    {popularity}
-                  </CircularProgressLabel>
+                  <CircularProgressLabel>{popularity}</CircularProgressLabel>
                 </CircularProgress>
                 <Badge colorScheme="green">
                   <Text fontSize="sm">{`${formatFigure(

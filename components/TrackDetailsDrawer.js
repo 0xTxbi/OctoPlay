@@ -13,29 +13,25 @@ import {
   DrawerContent,
   DrawerFooter,
   DrawerOverlay,
+  Flex,
   Heading,
+  HStack,
   Icon,
+  IconButton,
   Image,
   Link,
-  Progress,
-  Table,
-  TableContainer,
-  Tbody,
-  Td,
+  Spacer,
   Text,
-  Th,
-  Thead,
-  Tooltip,
-  Tr,
   VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { FaSpotify } from "react-icons/fa";
+import { FaPlay, FaSpotify } from "react-icons/fa";
 import {
   getArtistAlbums,
   getArtistTopTracks,
   getRelatedArtists,
+  getTrack,
   getUsersProfile,
 } from "../requests";
 import {
@@ -49,50 +45,22 @@ import Carousel from "./Carousel";
 function TrackDetailsDrawer({
   isOpen,
   onClose,
+  trackID,
   artistID,
-  name,
-  popularity,
-  followers,
   artistImage,
   uri,
 }) {
-  const [userMarket, setUserMarket] = useState(null);
+  const [trackInfo, setTrackInfo] = useState(null);
 
   // fetch user's market
   useEffect(() => {
-    const fetchUserMarket = async () => {
-      const data = await getUsersProfile();
-      setUserMarket(data?.data?.country);
+    const fetchTrackInfo = async () => {
+      const data = await getTrack(trackID);
+      setTrackInfo(data?.data);
     };
 
-    fetchUserMarket();
-  }, []);
-
-  // // fetch artist's albums
-  // useEffect(() => {
-  //   const fetchArtistAlbumData = async () => {
-  //     const data = await getArtistAlbums(artistID, userMarket, 5);
-  //     setArtistAlbums(data?.data?.items);
-
-  //     return { data };
-  //   };
-
-  //   const fetchArtistTopTracksData = async () => {
-  //     const data = await getArtistTopTracks(artistID, userMarket);
-  //     setArtistTopTracks(data?.data?.tracks);
-  //     return { data };
-  //   };
-
-  //   const fetchRelatedArtistsData = async () => {
-  //     const data = await getRelatedArtists(artistID);
-  //     setRelatedArtists(data?.data?.artists);
-  //     return { data };
-  //   };
-
-  //   fetchArtistAlbumData()
-  //     .then(fetchArtistTopTracksData())
-  //     .then(fetchRelatedArtistsData());
-  // }, []);
+    fetchTrackInfo();
+  }, [artistID]);
 
   return (
     <>
@@ -100,7 +68,66 @@ function TrackDetailsDrawer({
         <DrawerOverlay />
         <DrawerContent>
           <DrawerBody>
-            <VStack py={6}>{/* Quick Stats */}</VStack>
+            <VStack py={6}>
+              {/* Quick Stats */}
+              <Container>
+                <Flex>
+                  <HStack>
+                    <Image
+                      src={trackInfo?.album?.images[0]?.url}
+                      boxSize="120px"
+                      borderRadius="sm"
+                    />
+                    <Box alignSelf="end">
+                      <Heading fontSize="2xl">{trackInfo?.name}</Heading>
+                      <Badge
+                        mr={2}
+                        colorScheme={
+                          trackInfo?.popularity >= 70 ? "green" : "orange"
+                        }
+                      >
+                        {trackInfo?.popularity >= 70
+                          ? "Popular"
+                          : "Quite Popular"}
+                      </Badge>
+                      <Badge
+                        colorScheme={
+                          trackInfo?.explicit === true ? "red" : "green"
+                        }
+                      >
+                        {trackInfo?.explicit === true
+                          ? "Explicit"
+                          : "Not Explicit"}
+                      </Badge>
+                      <Text color="gray.300" fontSize="md">
+                        {trackInfo?.album?.name}
+                      </Text>
+                      <Text color="gray.300" fontSize="xs">
+                        {trackInfo?.artists[0]?.name}
+                      </Text>
+                    </Box>
+                  </HStack>
+
+                  <Spacer />
+                  <HStack>
+                    <Box alignSelf="end" textAlign="right">
+                      <IconButton
+                        bg="green.500"
+                        size="lg"
+                        color="white"
+                        rounded="full"
+                        fontSize="sm"
+                        icon={<Icon as={FaPlay} />}
+                        _hover={{
+                          transform: "translateY(-2px)",
+                          boxShadow: "lg",
+                        }}
+                      />
+                    </Box>
+                  </HStack>
+                </Flex>
+              </Container>
+            </VStack>
           </DrawerBody>
 
           <DrawerFooter>

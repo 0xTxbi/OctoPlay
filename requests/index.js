@@ -65,3 +65,11 @@ export const getRelatedArtists = async (artistID) => {
 
   return response;
 };
+
+// Track Requests
+// GET track's info
+export const getTrack = async (trackID) => {
+  const response = await axiosInstance.get(`tracks/${trackID}`);
+
+  return response;
+};
