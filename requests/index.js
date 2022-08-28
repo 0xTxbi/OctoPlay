@@ -42,19 +42,17 @@ export const getArtist = async (artistID) => {
 };
 
 // GET artist's albums
-export const getArtistAlbums = async (artistID, market, limit) => {
+export const getArtistAlbums = async (artistID, limit) => {
   const response = await axiosInstance.get(
-    `artists/${artistID}/albums?include_groups=album&market=${market}&limit=${limit}`
+    `artists/${artistID}/albums?include_groups=album&limit=${limit}`
   );
 
   return response;
 };
 
 // GET artist's top tracks
-export const getArtistTopTracks = async (artistID, market) => {
-  const response = await axiosInstance.get(
-    `artists/${artistID}/top-tracks?market=${market}`
-  );
+export const getArtistTopTracks = async (artistID) => {
+  const response = await axiosInstance.get(`artists/${artistID}/top-tracks`);
 
   return response;
 };

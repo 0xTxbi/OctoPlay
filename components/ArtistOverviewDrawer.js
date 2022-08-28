@@ -56,32 +56,21 @@ function ArtistOverviewDrawer({
   artistImage,
   uri,
 }) {
-  const [userMarket, setUserMarket] = useState(null);
+  // const [userMarket, setUserMarket] = useState(null);
   const [artistAlbums, setArtistAlbums] = useState(null);
   const [artistTopTracks, setArtistTopTracks] = useState(null);
   const [relatedArtists, setRelatedArtists] = useState(null);
 
-  // fetch user's market
-  useEffect(() => {
-    const fetchUserMarket = async () => {
-      const data = await getUsersProfile();
-      setUserMarket(data?.data?.country);
-    };
-
-    fetchUserMarket();
-  }, []);
-
-  // fetch artist's albums
   useEffect(() => {
     const fetchArtistAlbumData = async () => {
-      const data = await getArtistAlbums(artistID, userMarket, 5);
+      const data = await getArtistAlbums(artistID, 5);
       setArtistAlbums(data?.data?.items);
 
       return { data };
     };
 
     const fetchArtistTopTracksData = async () => {
-      const data = await getArtistTopTracks(artistID, userMarket);
+      const data = await getArtistTopTracks(artistID);
       setArtistTopTracks(data?.data?.tracks);
       return { data };
     };
@@ -95,7 +84,7 @@ function ArtistOverviewDrawer({
     fetchArtistAlbumData()
       .then(fetchArtistTopTracksData())
       .then(fetchRelatedArtistsData());
-  }, []);
+  }, [artistID]);
 
   return (
     <>
@@ -110,11 +99,15 @@ function ArtistOverviewDrawer({
                 <Heading>{name}</Heading>
                 <CircularProgress
                   value={popularity}
-                  color={popularity >= 80 ? "green.500" : "orange.500"}
+                  color={popularity >= 75 ? "green.500" : "orange.500"}
                   size="50"
                   thickness="7px"
                 >
-                  <CircularProgressLabel>{popularity}</CircularProgressLabel>
+                  <CircularProgressLabel
+                    onClick={() => console.log(popularity)}
+                  >
+                    {popularity}
+                  </CircularProgressLabel>
                 </CircularProgress>
                 <Badge colorScheme="green">
                   <Text fontSize="sm">{`${formatFigure(
