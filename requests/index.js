@@ -73,3 +73,10 @@ export const getTrack = async (trackID) => {
 
   return response;
 };
+
+// GET track's audio features
+export const getTrackAudioFeatures = async (trackID) => {
+  const response = await axiosInstance.get(`/audio-features/${trackID}`);
+
+  return response;
+};

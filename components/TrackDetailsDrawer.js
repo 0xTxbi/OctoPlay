@@ -1,12 +1,8 @@
 import {
-  Avatar,
-  AvatarBadge,
   Badge,
   Box,
   Button,
   ButtonGroup,
-  CircularProgress,
-  CircularProgressLabel,
   Container,
   Drawer,
   DrawerBody,
@@ -28,38 +24,59 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { FaPlay, FaSpotify } from "react-icons/fa";
 import {
-  getArtistAlbums,
-  getArtistTopTracks,
-  getRelatedArtists,
-  getTrack,
-  getUsersProfile,
-} from "../requests";
-import {
-  convertReleaseDate,
-  convertReleaseDateToYear,
-  formatFigure,
-  truncateText,
-} from "../utils/utils";
-import Carousel from "./Carousel";
+  Area,
+  AreaChart,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+import { getTrack, getTrackAudioFeatures } from "../requests";
+import TrackChart from "./TrackChart";
 
-function TrackDetailsDrawer({
-  isOpen,
-  onClose,
-  trackID,
-  artistID,
-  artistImage,
-  uri,
-}) {
+function TrackDetailsDrawer({ isOpen, onClose, trackID, artistID, uri }) {
   const [trackInfo, setTrackInfo] = useState(null);
+  const [trackFeatures, setTrackFeatures] = useState([]);
+  const trackFeaturesArr = [];
 
   // fetch user's market
   useEffect(() => {
-    const fetchTrackInfo = async () => {
+    const fetchTrackInfoData = async () => {
       const data = await getTrack(trackID);
       setTrackInfo(data?.data);
     };
 
-    fetchTrackInfo();
+    const fetchTrackAudioFeaturesData = async () => {
+      const data = await getTrackAudioFeatures(trackID);
+      trackFeaturesArr.push(
+        {
+          name: "Instrumentalness",
+          value: data?.data?.instrumentalness,
+        },
+
+        {
+          name: "Danceability",
+          value: data?.data?.danceability,
+        },
+        {
+          name: "Speechiness",
+          value: data?.data?.speechiness,
+        },
+        {
+          name: "Liveness",
+          value: data?.data?.liveness,
+        },
+        {
+          name: "Acousticness",
+          value: data?.data?.acousticness,
+        }
+      );
+
+      setTrackFeatures([...trackFeaturesArr]);
+    };
+
+    fetchTrackInfoData().then(fetchTrackAudioFeaturesData());
   }, [artistID]);
 
   return (
@@ -70,7 +87,7 @@ function TrackDetailsDrawer({
           <DrawerBody>
             <VStack py={6}>
               {/* Quick Stats */}
-              <Container>
+              <Container mb="7rem">
                 <Flex>
                   <HStack>
                     <Image
@@ -127,6 +144,16 @@ function TrackDetailsDrawer({
                   </HStack>
                 </Flex>
               </Container>
+              {/* Quick Stats */}
+
+              {/* Chart */}
+              <Container centerContent>
+                <Heading fontSize="2xl" mb={2}>
+                  Audio Features
+                </Heading>
+                <TrackChart trackFeaturesData={trackFeatures} />
+              </Container>
+              {/* Chart */}
             </VStack>
           </DrawerBody>
 

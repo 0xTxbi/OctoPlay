@@ -64,6 +64,7 @@ function AuthenticatedScreen() {
             official API
           </a>
         </Text>
+
         <Stack
           direction={"column"}
           spacing={3}

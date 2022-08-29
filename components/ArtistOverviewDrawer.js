@@ -36,7 +36,6 @@ import {
   getArtistAlbums,
   getArtistTopTracks,
   getRelatedArtists,
-  getUsersProfile,
 } from "../requests";
 import {
   convertReleaseDate,
@@ -72,12 +71,14 @@ function ArtistOverviewDrawer({
     const fetchArtistTopTracksData = async () => {
       const data = await getArtistTopTracks(artistID);
       setArtistTopTracks(data?.data?.tracks);
+
       return { data };
     };
 
     const fetchRelatedArtistsData = async () => {
       const data = await getRelatedArtists(artistID);
       setRelatedArtists(data?.data?.artists);
+
       return { data };
     };
 
@@ -152,7 +153,7 @@ function ArtistOverviewDrawer({
 
               {/* Top tracks */}
               <VStack pt="5rem">
-                {artistAlbums?.length > 0 ? (
+                {artistTopTracks && artistTopTracks?.length > 0 ? (
                   <>
                     <Heading>Top Tracks</Heading>
                     <TableContainer pt={5}>
