@@ -51,10 +51,13 @@ function TrackDetailsDrawer({ isOpen, onClose, trackID, artistID, uri }) {
       const data = await getTrackAudioFeatures(trackID);
       trackFeaturesArr.push(
         {
+          name: "",
+          value: 0,
+        },
+        {
           name: "Instrumentalness",
           value: data?.data?.instrumentalness,
         },
-
         {
           name: "Danceability",
           value: data?.data?.danceability,
@@ -70,6 +73,10 @@ function TrackDetailsDrawer({ isOpen, onClose, trackID, artistID, uri }) {
         {
           name: "Acousticness",
           value: data?.data?.acousticness,
+        },
+        {
+          name: "",
+          value: 0,
         }
       );
 
