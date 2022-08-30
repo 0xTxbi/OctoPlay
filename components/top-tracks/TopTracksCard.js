@@ -175,6 +175,7 @@ function TopTracksCard({
         onClose={onTrackClose}
         trackID={uri.substr(14)}
         artistID={artistID}
+        uri={uri}
       />
     </>
   );

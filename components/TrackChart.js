@@ -3,7 +3,7 @@ import { XAxis, YAxis, Tooltip, AreaChart, Area } from "recharts";
 
 function TrackChart({ trackFeaturesData }) {
   return (
-    <Container centerContent>
+    <Container centerContent mt={10}>
       <AreaChart
         width={500}
         height={400}

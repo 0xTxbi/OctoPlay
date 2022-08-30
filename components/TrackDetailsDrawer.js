@@ -22,22 +22,38 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { FaPlay, FaSpotify } from "react-icons/fa";
-import {
-  Area,
-  AreaChart,
-  CartesianGrid,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { FaPause, FaPlay, FaSpotify } from "react-icons/fa";
+import ReactPlayer from "react-player";
 import { getTrack, getTrackAudioFeatures } from "../requests";
 import TrackChart from "./TrackChart";
 
 function TrackDetailsDrawer({ isOpen, onClose, trackID, artistID, uri }) {
   const [trackInfo, setTrackInfo] = useState(null);
   const [trackFeatures, setTrackFeatures] = useState([]);
+  const [playerControls, setPlayerControls] = useState({
+    pip: false,
+    playing: false,
+    controls: false,
+    light: false,
+    muted: false,
+    played: 0,
+    loaded: 0,
+    playbackRate: 1.0,
+    loop: true,
+  });
+
+  const handlePlayPause = () => {
+    setPlayerControls({ playing: !playerControls.playing });
+  };
+
+  const handlePlay = () => {
+    setPlayerControls({ playing: true });
+  };
+
+  const handlePause = () => {
+    setPlayerControls({ playing: false });
+  };
+
   const trackFeaturesArr = [];
 
   // fetch user's market
@@ -85,6 +101,8 @@ function TrackDetailsDrawer({ isOpen, onClose, trackID, artistID, uri }) {
 
     fetchTrackInfoData().then(fetchTrackAudioFeaturesData());
   }, [artistID]);
+
+  const { playing, loop } = playerControls;
 
   return (
     <>
@@ -135,17 +153,36 @@ function TrackDetailsDrawer({ isOpen, onClose, trackID, artistID, uri }) {
                   <Spacer />
                   <HStack>
                     <Box alignSelf="end" textAlign="right">
-                      <IconButton
-                        bg="green.500"
-                        size="lg"
-                        color="white"
-                        rounded="full"
-                        fontSize="sm"
-                        icon={<Icon as={FaPlay} />}
-                        _hover={{
-                          transform: "translateY(-2px)",
-                          boxShadow: "lg",
+                      {trackInfo?.preview_url && (
+                        <IconButton
+                          onClick={() => handlePlayPause()}
+                          bg="green.500"
+                          size="lg"
+                          color="white"
+                          rounded="full"
+                          fontSize="sm"
+                          icon={
+                            playerControls?.playing ? (
+                              <Icon as={FaPause} />
+                            ) : (
+                              <Icon as={FaPlay} />
+                            )
+                          }
+                          _hover={{
+                            transform: "translateY(-2px)",
+                            boxShadow: "lg",
+                          }}
+                        />
+                      )}
+                      <ReactPlayer
+                        style={{
+                          display: "none",
                         }}
+                        url={trackInfo?.preview_url}
+                        onPlay={handlePlay}
+                        onPause={handlePause}
+                        playing={playing}
+                        loop={loop}
                       />
                     </Box>
                   </HStack>
