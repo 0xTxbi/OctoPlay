@@ -1,7 +1,6 @@
 import {
   Badge,
   Box,
-  Button,
   ButtonGroup,
   Center,
   Flex,
@@ -15,10 +14,9 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
 import { AiOutlineDotChart } from "react-icons/ai";
 import { FaSpotify } from "react-icons/fa";
-import { getArtist } from "../../requests";
+import { useArtist } from "../../hooks/artists/useArtist";
 import { formatFigure } from "../../utils/utils";
 import ArtistOverviewDrawer from "../ArtistOverviewDrawer";
 
@@ -31,19 +29,9 @@ function TopArtistsCard({
   followers,
   uri,
 }) {
-  const [artistData, setArtistData] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  useEffect(() => {
-    const fetchArtistData = async () => {
-      const data = await getArtist(artistID);
-      setArtistData(data?.data);
-
-      return { data };
-    };
-
-    fetchArtistData();
-  }, [artistID]);
+  const { artist: artistData } = useArtist(artistID);
 
   return (
     <Center py={6}>

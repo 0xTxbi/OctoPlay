@@ -19,7 +19,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { AiOutlineDotChart } from "react-icons/ai";
 import { FaSpotify } from "react-icons/fa";
-import { getArtist } from "../../requests";
+import { useArtist } from "../../hooks/artists/useArtist";
 import { convertDuration, convertReleaseDate } from "../../utils/utils";
 import ArtistOverviewDrawer from "../ArtistOverviewDrawer";
 import TrackDetailsDrawer from "../TrackDetailsDrawer";
@@ -43,17 +43,8 @@ function TopTracksCard({
     onOpen: onArtistOpen,
     onClose: onArtistClose,
   } = useDisclosure();
-  const [artistData, setArtistData] = useState(null);
 
-  useEffect(() => {
-    const fetchArtistData = async () => {
-      const data = await getArtist(artistID);
-      setArtistData(data?.data);
-      return { data };
-    };
-
-    fetchArtistData();
-  }, [artistID]);
+  const { artist: artistData } = useArtist(artistID);
 
   return (
     <>
@@ -75,6 +66,7 @@ function TopTracksCard({
               }}
               size={"md"}
               src={artistData?.images[0]?.url}
+              name={artistData?.name}
               alt={"Author"}
               _hover={{ cursor: "pointer" }}
               css={{

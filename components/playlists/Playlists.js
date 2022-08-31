@@ -1,49 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { getUsersPlaylists } from "../../requests";
+import { useUserPlaylists } from "../../hooks/user/useUserPlaylists";
 import Carousel from "../Carousel";
-import Loader from "../Loader";
 import PlaylistsCard from "./PlaylistsCard";
 
 function Playlists() {
-  const [playlistsData, setPlaylistsData] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const { userPlaylists } = useUserPlaylists();
 
-  useEffect(() => {
-    setLoading(true);
-    const fetchPlaylists = async () => {
-      const data = await getUsersPlaylists();
-      setPlaylistsData(data?.data?.items);
-    };
-
-    fetchPlaylists();
-
-    setLoading(false);
-  }, []);
-
-  if (loading) {
-    return <Loader />;
-  } else if (!loading) {
-    return (
-      <>
-        <Carousel variant={playlistsData?.length === 1 ? "single" : "multiple"}>
-          {playlistsData?.map((playlist) => (
-            <>
-              <PlaylistsCard
-                key={playlist?.id}
-                name={playlist?.name}
-                description={playlist?.description}
-                playlistImage={playlist?.images[0]?.url}
-                isPublic={playlist?.public}
-                isCollaborative={playlist?.collaborative}
-                totalTracks={playlist?.tracks?.total}
-                uri={playlist?.uri}
-              />
-            </>
-          ))}
-        </Carousel>
-      </>
-    );
-  }
+  return (
+    <>
+      <Carousel
+        variant={userPlaylists?.items?.length === 1 ? "single" : "multiple"}
+      >
+        {userPlaylists?.items?.map((playlist) => (
+          <>
+            <PlaylistsCard
+              key={playlist?.id}
+              name={playlist?.name}
+              description={playlist?.description}
+              playlistImage={playlist?.images[0]?.url}
+              isPublic={playlist?.public}
+              isCollaborative={playlist?.collaborative}
+              totalTracks={playlist?.tracks?.total}
+              uri={playlist?.uri}
+            />
+          </>
+        ))}
+      </Carousel>
+    </>
+  );
 }
 
 export default Playlists;

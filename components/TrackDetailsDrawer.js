@@ -24,12 +24,47 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { FaPause, FaPlay, FaSpotify } from "react-icons/fa";
 import ReactPlayer from "react-player";
-import { getTrack, getTrackAudioFeatures } from "../requests";
+import { useTrackAudioFeatures } from "../hooks/tracks/useTrackAudioFeatures";
+import { useTrackInfo } from "../hooks/tracks/useTrackInfo";
 import TrackChart from "./TrackChart";
 
 function TrackDetailsDrawer({ isOpen, onClose, trackID, artistID, uri }) {
-  const [trackInfo, setTrackInfo] = useState(null);
-  const [trackFeatures, setTrackFeatures] = useState([]);
+  const trackFeaturesArr = [];
+  const { trackInfo } = useTrackInfo(trackID);
+  const { trackAudioFeatures } = useTrackAudioFeatures(trackID);
+
+  trackFeaturesArr.push(
+    {
+      name: "",
+      value: 0,
+    },
+    {
+      name: "Instrumentalness",
+      value: trackAudioFeatures?.instrumentalness,
+    },
+    {
+      name: "Danceability",
+      value: trackAudioFeatures?.danceability,
+    },
+    {
+      name: "Speechiness",
+      value: trackAudioFeatures?.speechiness,
+    },
+    {
+      name: "Liveness",
+      value: trackAudioFeatures?.liveness,
+    },
+    {
+      name: "Acousticness",
+      value: trackAudioFeatures?.acousticness,
+    },
+    {
+      name: "",
+      value: 0,
+    }
+  );
+
+  // Music player config
   const [playerControls, setPlayerControls] = useState({
     pip: false,
     playing: false,
@@ -53,55 +88,6 @@ function TrackDetailsDrawer({ isOpen, onClose, trackID, artistID, uri }) {
   const handlePause = () => {
     setPlayerControls({ playing: false });
   };
-
-  const trackFeaturesArr = [];
-
-  // fetch user's market
-  useEffect(() => {
-    const fetchTrackInfoData = async () => {
-      const data = await getTrack(trackID);
-      setTrackInfo(data?.data);
-    };
-
-    const fetchTrackAudioFeaturesData = async () => {
-      const data = await getTrackAudioFeatures(trackID);
-      trackFeaturesArr.push(
-        {
-          name: "",
-          value: 0,
-        },
-        {
-          name: "Instrumentalness",
-          value: data?.data?.instrumentalness,
-        },
-        {
-          name: "Danceability",
-          value: data?.data?.danceability,
-        },
-        {
-          name: "Speechiness",
-          value: data?.data?.speechiness,
-        },
-        {
-          name: "Liveness",
-          value: data?.data?.liveness,
-        },
-        {
-          name: "Acousticness",
-          value: data?.data?.acousticness,
-        },
-        {
-          name: "",
-          value: 0,
-        }
-      );
-
-      setTrackFeatures([...trackFeaturesArr]);
-    };
-
-    fetchTrackInfoData().then(fetchTrackAudioFeaturesData());
-  }, [artistID]);
-
   const { playing, loop } = playerControls;
 
   return (
@@ -201,7 +187,7 @@ function TrackDetailsDrawer({ isOpen, onClose, trackID, artistID, uri }) {
                 <Heading fontSize="2xl" mb={2}>
                   Audio Features
                 </Heading>
-                <TrackChart trackFeaturesData={trackFeatures} />
+                <TrackChart trackFeaturesData={[...trackFeaturesArr]} />
               </Container>
               {/* Chart */}
             </VStack>

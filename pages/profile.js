@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
 import HomeHeader from "../components/HomeHeader";
-import Link from "next/link";
 import {
   Container,
   Stack,
@@ -11,29 +9,16 @@ import {
   Center,
   useDisclosure,
 } from "@chakra-ui/react";
-import { getSession, useSession } from "next-auth/react";
 import OverviewPageModal from "../components/OverviewPageModal";
 import { useState } from "react";
-import { getUsersProfile } from "../requests";
+import { useUserProfile } from "../hooks/user/useUserProfile";
 
 export default function Profile() {
-  const { data: session } = useSession();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState("");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getUsersProfile();
-    };
-
-    const getSesh = async () => {
-      const session = await getSession();
-    };
-
-    getSesh();
-    fetchData();
-  }, []);
+  const { user, isLoading, isError } = useUserProfile();
 
   return (
     <>
@@ -52,7 +37,7 @@ export default function Profile() {
               fontSize={{ base: "xl", sm: "2xl", md: "4xl" }}
               lineHeight={"110%"}
             >
-              Welcome {session?.user?.name}
+              Welcome, {user?.display_name}
             </Heading>
             <Text>Select any of the buttons to proceed 👇🏽</Text>
             <Stack

@@ -32,11 +32,9 @@ import {
 import { useState } from "react";
 import { useEffect } from "react";
 import { FaSpotify } from "react-icons/fa";
-import {
-  getArtistAlbums,
-  getArtistTopTracks,
-  getRelatedArtists,
-} from "../requests";
+import { useArtistAlbums } from "../hooks/artists/useArtistAlbums";
+import { useArtistTopTracks } from "../hooks/artists/useArtistTopTracks";
+import { useRelatedArtists } from "../hooks/artists/useRelatedArtists";
 import {
   convertReleaseDate,
   convertReleaseDateToYear,
@@ -55,37 +53,9 @@ function ArtistOverviewDrawer({
   artistImage,
   uri,
 }) {
-  // const [userMarket, setUserMarket] = useState(null);
-  const [artistAlbums, setArtistAlbums] = useState(null);
-  const [artistTopTracks, setArtistTopTracks] = useState(null);
-  const [relatedArtists, setRelatedArtists] = useState(null);
-
-  useEffect(() => {
-    const fetchArtistAlbumData = async () => {
-      const data = await getArtistAlbums(artistID, 5);
-      setArtistAlbums(data?.data?.items);
-
-      return { data };
-    };
-
-    const fetchArtistTopTracksData = async () => {
-      const data = await getArtistTopTracks(artistID);
-      setArtistTopTracks(data?.data?.tracks);
-
-      return { data };
-    };
-
-    const fetchRelatedArtistsData = async () => {
-      const data = await getRelatedArtists(artistID);
-      setRelatedArtists(data?.data?.artists);
-
-      return { data };
-    };
-
-    fetchArtistAlbumData()
-      .then(fetchArtistTopTracksData())
-      .then(fetchRelatedArtistsData());
-  }, [artistID]);
+  const { artistAlbums } = useArtistAlbums(artistID, 5);
+  const { artistTopTracks } = useArtistTopTracks(artistID);
+  const { relatedArtists } = useRelatedArtists(artistID);
 
   return (
     <>
@@ -207,7 +177,7 @@ function ArtistOverviewDrawer({
                 <Heading>Related Artists</Heading>
                 <Container>
                   <Carousel variant="custom">
-                    {relatedArtists?.map((artist) => (
+                    {relatedArtists?.artists?.map((artist) => (
                       <Box h="auto" bg="transparent">
                         <Tooltip label={artist?.name}>
                           <Avatar

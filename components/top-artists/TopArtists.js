@@ -9,27 +9,20 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { getUsersTopArtists } from "../../requests";
+import { useUserTopArtists } from "../../hooks/user/useUserTopArtists";
 import ArtistOverviewDrawer from "../ArtistOverviewDrawer";
 import Carousel from "../Carousel";
 import TopArtistsCard from "./TopArtistsCard";
 
 function TopArtists() {
-  const [topArtistsData, setTopArtistsData] = useState(null);
   const [dataRange, setDataRange] = useState("medium_term");
   const [filterTitle, setFilterTitle] = useState("Past 6 months");
-
-  useEffect(() => {
-    const fetchTopArtists = async () => {
-      const limit = 10;
-      const data = await getUsersTopArtists(limit, dataRange);
-      setTopArtistsData(data?.data?.items);
-
-      return { data };
-    };
-
-    fetchTopArtists();
-  }, [dataRange]);
+  const limit = 10;
+  const {
+    topArtists: topArtistsData,
+    isError,
+    isLoading,
+  } = useUserTopArtists(limit, dataRange);
 
   return (
     <>
@@ -74,19 +67,17 @@ function TopArtists() {
         </Menu>
       </Flex>
       <Carousel variant={topArtistsData?.length === 1 ? "single" : "multiple"}>
-        {topArtistsData?.map((topArtist) => (
-          <>
-            <TopArtistsCard
-              key={topArtist?.id}
-              artistID={topArtist?.id}
-              name={topArtist?.name}
-              artistImage={topArtist?.images[0]?.url}
-              genre={topArtist?.genres[0]}
-              popularity={topArtist?.popularity}
-              followers={topArtist?.followers?.total}
-              uri={topArtist?.uri}
-            />
-          </>
+        {topArtistsData?.items?.map((topArtist) => (
+          <TopArtistsCard
+            key={topArtist?.id}
+            artistID={topArtist?.id}
+            name={topArtist?.name}
+            artistImage={topArtist?.images[0]?.url}
+            genre={topArtist?.genres[0]}
+            popularity={topArtist?.popularity}
+            followers={topArtist?.followers?.total}
+            uri={topArtist?.uri}
+          />
         ))}
       </Carousel>
     </>

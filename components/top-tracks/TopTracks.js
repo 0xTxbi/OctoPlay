@@ -7,29 +7,25 @@ import {
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
-import { getUsersTopTracks } from "../../requests";
+import { useUserTopTracks } from "../../hooks/user/useUserTopTracks";
 import Carousel from "../Carousel";
 import TopTracksCard from "./TopTracksCard";
 
 function TopTracks() {
-  const [topTracksData, setTopTracksData] = useState(null);
+  // const [topTracksData, setTopTracksData] = useState(null);
   const [dataRange, setDataRange] = useState("medium_term");
   const [filterTitle, setFilterTitle] = useState("Past 6 months");
+  const limit = 10;
+  const {
+    topTracks: topTracksData,
+    isLoading,
+    isError,
+  } = useUserTopTracks(limit, dataRange);
 
-  useEffect(() => {
-    const fetchTopTracks = async () => {
-      const limit = 10;
-      const data = await getUsersTopTracks(limit, dataRange);
-      setTopTracksData(data?.data?.items);
-
-      return { data };
-    };
-
-    fetchTopTracks();
-  }, [dataRange]);
-
+  if (isLoading) console.log("loading");
+  if (isError) console.log("error");
   return (
     <>
       <Flex justifyContent={"flex-end"}>
@@ -73,7 +69,7 @@ function TopTracks() {
         </Menu>
       </Flex>
       <Carousel variant={topTracksData?.length === 1 ? "single" : "multiple"}>
-        {topTracksData?.map((topTrack) => (
+        {topTracksData?.items?.map((topTrack) => (
           <TopTracksCard
             key={topTrack?.id}
             title={topTrack?.name}
