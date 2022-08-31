@@ -12,6 +12,7 @@ import React, { useEffect, useState } from "react";
 import { useUserTopArtists } from "../../hooks/user/useUserTopArtists";
 import ArtistOverviewDrawer from "../ArtistOverviewDrawer";
 import Carousel from "../Carousel";
+import Loader from "../Loader";
 import TopArtistsCard from "./TopArtistsCard";
 
 function TopArtists() {
@@ -23,6 +24,9 @@ function TopArtists() {
     isError,
     isLoading,
   } = useUserTopArtists(limit, dataRange);
+
+  if (isLoading) return <Loader />;
+  if (isError) console.log(isError);
 
   return (
     <>

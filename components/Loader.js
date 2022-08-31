@@ -1,11 +1,10 @@
-import { Container } from "@chakra-ui/react";
+import { Container, Spinner } from "@chakra-ui/react";
 import React from "react";
-import { ClockLoader } from "react-spinners";
 
 function Loader() {
   return (
     <Container centerContent>
-      <ClockLoader size={150} />
+      <Spinner speed="0.5" color="green.500" />
     </Container>
   );
 }

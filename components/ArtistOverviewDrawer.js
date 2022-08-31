@@ -42,6 +42,7 @@ import {
   truncateText,
 } from "../utils/utils";
 import Carousel from "./Carousel";
+import Loader from "./Loader";
 
 function ArtistOverviewDrawer({
   isOpen,
@@ -53,9 +54,12 @@ function ArtistOverviewDrawer({
   artistImage,
   uri,
 }) {
-  const { artistAlbums } = useArtistAlbums(artistID, 5);
+  const { artistAlbums, isError, isLoading } = useArtistAlbums(artistID, 5);
   const { artistTopTracks } = useArtistTopTracks(artistID);
   const { relatedArtists } = useRelatedArtists(artistID);
+
+  if (isLoading) return <Loader />;
+  if (isError) console.log(isError);
 
   return (
     <>

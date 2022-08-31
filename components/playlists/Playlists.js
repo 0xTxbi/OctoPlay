@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useUserPlaylists } from "../../hooks/user/useUserPlaylists";
 import Carousel from "../Carousel";
+import Loader from "../Loader";
 import PlaylistsCard from "./PlaylistsCard";
 
 function Playlists() {
-  const { userPlaylists } = useUserPlaylists();
+  const { userPlaylists, isLoading } = useUserPlaylists();
+
+  if (isLoading) return <Loader />;
 
   return (
     <>

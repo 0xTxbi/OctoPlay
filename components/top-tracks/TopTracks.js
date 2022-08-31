@@ -11,6 +11,7 @@ import React from "react";
 import { useState } from "react";
 import { useUserTopTracks } from "../../hooks/user/useUserTopTracks";
 import Carousel from "../Carousel";
+import Loader from "../Loader";
 import TopTracksCard from "./TopTracksCard";
 
 function TopTracks() {
@@ -24,7 +25,7 @@ function TopTracks() {
     isError,
   } = useUserTopTracks(limit, dataRange);
 
-  if (isLoading) console.log("loading");
+  if (isLoading) return <Loader />;
   if (isError) console.log("error");
   return (
     <>
