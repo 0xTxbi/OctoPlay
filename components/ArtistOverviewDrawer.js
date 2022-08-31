@@ -89,7 +89,13 @@ function ArtistOverviewDrawer({
 
   return (
     <>
-      <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="lg">
+      <Drawer
+        isOpen={isOpen}
+        placement="right"
+        onClose={onClose}
+        size="lg"
+        closeOnOverlayClick={false}
+      >
         <DrawerOverlay />
         <DrawerContent>
           <DrawerBody>

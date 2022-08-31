@@ -21,6 +21,7 @@ function OverviewPageModal({ isOpen, onClose, title, content }) {
         isOpen={isOpen}
         isCentered
         motionPreset="slideInBottom"
+        closeOnOverlayClick={false}
       >
         <ModalOverlay />
         <ModalContent maxW="80vw">
