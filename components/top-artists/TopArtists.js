@@ -6,12 +6,11 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
-  useDisclosure,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { useUserTopArtists } from "../../hooks/user/useUserTopArtists";
-import ArtistOverviewDrawer from "../ArtistOverviewDrawer";
 import Carousel from "../Carousel";
+import ErrorModal from "../ErrorModal";
 import Loader from "../Loader";
 import TopArtistsCard from "./TopArtistsCard";
 
@@ -26,7 +25,6 @@ function TopArtists() {
   } = useUserTopArtists(limit, dataRange);
 
   if (isLoading) return <Loader />;
-  if (isError) console.log(isError);
 
   return (
     <>
@@ -84,6 +82,8 @@ function TopArtists() {
           />
         ))}
       </Carousel>
+
+      <ErrorModal error={isError?.message} />
     </>
   );
 }

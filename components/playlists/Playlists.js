@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
 import { useUserPlaylists } from "../../hooks/user/useUserPlaylists";
 import Carousel from "../Carousel";
+import ErrorModal from "../ErrorModal";
 import Loader from "../Loader";
 import PlaylistsCard from "./PlaylistsCard";
 
 function Playlists() {
-  const { userPlaylists, isLoading } = useUserPlaylists();
+  const { userPlaylists, isLoading, isError } = useUserPlaylists();
 
   if (isLoading) return <Loader />;
 
@@ -29,6 +29,8 @@ function Playlists() {
           </>
         ))}
       </Carousel>
+
+      <ErrorModal error={isError?.message} />
     </>
   );
 }

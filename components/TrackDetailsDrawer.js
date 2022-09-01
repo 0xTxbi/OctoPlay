@@ -25,6 +25,7 @@ import { FaPause, FaPlay, FaSpotify } from "react-icons/fa";
 import ReactPlayer from "react-player";
 import { useTrackAudioFeatures } from "../hooks/tracks/useTrackAudioFeatures";
 import { useTrackInfo } from "../hooks/tracks/useTrackInfo";
+import ErrorModal from "./ErrorModal";
 import Loader from "./Loader";
 import TrackChart from "./TrackChart";
 
@@ -32,10 +33,6 @@ function TrackDetailsDrawer({ isOpen, onClose, trackID, artistID, uri }) {
   const trackFeaturesArr = [];
   const { trackInfo, isLoading, isError } = useTrackInfo(trackID);
   const { trackAudioFeatures } = useTrackAudioFeatures(trackID);
-
-  if (isLoading) return <Loader />;
-  if (isError) console.log(isError);
-
   trackFeaturesArr.push(
     {
       name: "",
@@ -92,6 +89,8 @@ function TrackDetailsDrawer({ isOpen, onClose, trackID, artistID, uri }) {
     setPlayerControls({ playing: false });
   };
   const { playing, loop } = playerControls;
+
+  if (isLoading) return <Loader />;
 
   return (
     <>
@@ -225,6 +224,8 @@ function TrackDetailsDrawer({ isOpen, onClose, trackID, artistID, uri }) {
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
+
+      <ErrorModal error={isError?.message} />
     </>
   );
 }

@@ -8,7 +8,6 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react";
-import React from "react";
 import Playlists from "./playlists/Playlists";
 import TopArtists from "./top-artists/TopArtists";
 import TopTracks from "./top-tracks/TopTracks";

@@ -29,8 +29,6 @@ import {
   Tr,
   VStack,
 } from "@chakra-ui/react";
-import { useState } from "react";
-import { useEffect } from "react";
 import { FaSpotify } from "react-icons/fa";
 import { useArtistAlbums } from "../hooks/artists/useArtistAlbums";
 import { useArtistTopTracks } from "../hooks/artists/useArtistTopTracks";
@@ -42,6 +40,7 @@ import {
   truncateText,
 } from "../utils/utils";
 import Carousel from "./Carousel";
+import ErrorModal from "./ErrorModal";
 import Loader from "./Loader";
 
 function ArtistOverviewDrawer({
@@ -59,7 +58,6 @@ function ArtistOverviewDrawer({
   const { relatedArtists } = useRelatedArtists(artistID);
 
   if (isLoading) return <Loader />;
-  if (isError) console.log(isError);
 
   return (
     <>
@@ -238,6 +236,8 @@ function ArtistOverviewDrawer({
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
+
+      <ErrorModal error={isError?.message} />
     </>
   );
 }

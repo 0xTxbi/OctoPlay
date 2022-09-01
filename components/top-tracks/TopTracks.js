@@ -7,15 +7,14 @@ import {
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
-import React from "react";
 import { useState } from "react";
 import { useUserTopTracks } from "../../hooks/user/useUserTopTracks";
 import Carousel from "../Carousel";
+import ErrorModal from "../ErrorModal";
 import Loader from "../Loader";
 import TopTracksCard from "./TopTracksCard";
 
 function TopTracks() {
-  // const [topTracksData, setTopTracksData] = useState(null);
   const [dataRange, setDataRange] = useState("medium_term");
   const [filterTitle, setFilterTitle] = useState("Past 6 months");
   const limit = 10;
@@ -26,7 +25,7 @@ function TopTracks() {
   } = useUserTopTracks(limit, dataRange);
 
   if (isLoading) return <Loader />;
-  if (isError) console.log("error");
+
   return (
     <>
       <Flex justifyContent={"flex-end"}>
@@ -83,6 +82,8 @@ function TopTracks() {
           />
         ))}
       </Carousel>
+
+      <ErrorModal error={isError?.message} />
     </>
   );
 }
