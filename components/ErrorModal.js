@@ -12,7 +12,6 @@ import { signIn } from "next-auth/react";
 import { BsSpotify } from "react-icons/bs";
 
 function ErrorModal({ error }) {
-  console.log(error);
   return (
     <Modal
       isOpen={error ? true : false}
@@ -25,7 +24,7 @@ function ErrorModal({ error }) {
         {/* Render if internet connection is lost */}
         {error === "Network Error" && (
           <>
-            <ModalHeader textAlign="center">Bad Internet</ModalHeader>
+            <ModalHeader textAlign="center">Connection Error</ModalHeader>
             <ModalBody mx={10} textAlign="center" mb={10}>
               <Text>Check your internet settings.</Text>
             </ModalBody>

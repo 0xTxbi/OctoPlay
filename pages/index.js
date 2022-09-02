@@ -17,7 +17,7 @@ export default function Home() {
     }
   });
 
-  if (status === "authenticated" && isValidSession != null) {
+  if (status === "authenticated" && isValidSession !== null) {
     return <AuthenticatedScreen />;
   } else {
     return <UnauthenticatedScreen />;

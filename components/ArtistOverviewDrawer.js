@@ -10,6 +10,7 @@ import {
   Container,
   Drawer,
   DrawerBody,
+  DrawerCloseButton,
   DrawerContent,
   DrawerFooter,
   DrawerOverlay,
@@ -29,6 +30,7 @@ import {
   Tr,
   VStack,
 } from "@chakra-ui/react";
+import React from "react";
 import { FaSpotify } from "react-icons/fa";
 import { useArtistAlbums } from "../hooks/artists/useArtistAlbums";
 import { useArtistTopTracks } from "../hooks/artists/useArtistTopTracks";
@@ -70,6 +72,7 @@ function ArtistOverviewDrawer({
       >
         <DrawerOverlay />
         <DrawerContent>
+          <DrawerCloseButton />
           <DrawerBody>
             <VStack py={6}>
               {/* Quick Stats */}
@@ -93,7 +96,7 @@ function ArtistOverviewDrawer({
 
               {/* Albums */}
               <VStack pt="5rem">
-                {artistAlbums && artistAlbums?.length > 0 ? (
+                {artistAlbums || artistAlbums?.length > 0 ? (
                   <>
                     <Heading>Albums</Heading>
                     <TableContainer pt={5}>
@@ -107,7 +110,7 @@ function ArtistOverviewDrawer({
                           </Tr>
                         </Thead>
                         <Tbody>
-                          {artistAlbums?.map((album) => (
+                          {artistAlbums?.items?.map((album) => (
                             <Tr>
                               <Td>
                                 <Image
@@ -130,8 +133,8 @@ function ArtistOverviewDrawer({
               </VStack>
 
               {/* Top tracks */}
-              <VStack pt="5rem">
-                {artistTopTracks && artistTopTracks?.length > 0 ? (
+              {/* <VStack pt="5rem">
+                {artistTopTracks || artistTopTracks?.length > 0 ? (
                   <>
                     <Heading>Top Tracks</Heading>
                     <TableContainer pt={5}>
@@ -172,7 +175,7 @@ function ArtistOverviewDrawer({
                 ) : (
                   <Heading>No top tracks yet</Heading>
                 )}
-              </VStack>
+              </VStack> */}
 
               {/* Related Artists */}
               <VStack pt="5rem">
