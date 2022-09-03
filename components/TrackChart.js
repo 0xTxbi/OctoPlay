@@ -18,7 +18,7 @@ function TrackChart({ trackFeaturesData }) {
         <XAxis dataKey="name" />
         <YAxis hide="true" />
         <Tooltip />
-        <Area type="monotone" dataKey="value" stroke="#38a169" fill="#38a169" />
+        <Area dataKey="value" stroke="#38a169" fill="#38a169" />
       </AreaChart>
     </Container>
   );
