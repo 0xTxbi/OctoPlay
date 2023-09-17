@@ -41,10 +41,7 @@ export default function UnauthenticatedScreen() {
 					OctoPlay
 				</h1>
 
-				<Button
-					className="mt-5 w-full bg-green-500 cursor-pointer"
-					onClick={() => signIn()}
-				>
+				<Button className="mt-5 w-full bg-green-500 cursor-pointer">
 					<SpotifyIcon className="mr-2 h-4 w-4" />
 					Sign In
 				</Button>
