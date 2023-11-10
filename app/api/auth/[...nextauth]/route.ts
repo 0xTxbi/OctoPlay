@@ -16,6 +16,7 @@ const handler = NextAuth({
 				return {
 					accessToken: account.access_token,
 					refreshToken: account.refresh_token,
+					user,
 				};
 			}
 
@@ -23,8 +24,7 @@ const handler = NextAuth({
 		},
 		async session({ session, token, user }) {
 			session.accessToken = token.accessToken;
-
-			console.log(user);
+			session.user = token.user;
 			return session;
 		},
 	},
