@@ -1,7 +1,10 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import SpotifyIcon from "@/components/ui/icons/spotify-icon";
-import { useSession } from "next-auth/react";
+import { ArrowRightIcon } from "@radix-ui/react-icons";
+import { useSession, signIn, signOut } from "next-auth/react";
+import Link from "next/link";
+import * as React from "react";
 
 export default function Hero() {
 	const { status } = useSession();
@@ -43,15 +46,39 @@ export default function Hero() {
 					OctoPlay
 				</h1>
 
-				<Button
-					onClick={() => console.log("hey")}
-					isLoading={status === "loading"}
-					disabled={status === "loading"}
-					className="mt-5 w-full bg-green-500 cursor-pointer"
-				>
-					<SpotifyIcon className="mr-2 h-4 w-4" />
-					Sign In
-				</Button>
+				{status === "loading" ? (
+					<Button
+						isLoading
+						disabled
+						className="mt-5 w-full bg-green-500 cursor-pointer"
+					></Button>
+				) : (
+					<React.Fragment>
+						{status ===
+						"unauthenticated" ? (
+							<Button
+								onClick={() =>
+									signIn(
+										"spotify"
+									)
+								}
+								className="mt-5 w-full bg-green-500 cursor-pointer"
+							>
+								<SpotifyIcon className="mr-2 h-4 w-4" />
+								Sign In
+							</Button>
+						) : (
+							<Link href="/stats">
+								<Button className="mt-5 w-full bg-green-500">
+									<ArrowRightIcon className="mr-2 h-4 w-4" />
+									View
+									Listening
+									Stats
+								</Button>
+							</Link>
+						)}
+					</React.Fragment>
+				)}
 			</div>
 
 			<div></div>
