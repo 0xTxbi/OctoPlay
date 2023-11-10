@@ -3,7 +3,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { cn } from "@/lib/utils";
 import { TabsContent } from "@radix-ui/react-tabs";
-import { TopTracks } from "./TopTracks";
+import { TopTracks } from "./top-tracks";
 
 export function MainNav({
 	className,

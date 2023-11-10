@@ -1,5 +1,5 @@
-import { MainNav } from "./MainNav";
-import { UserMenu } from "./UserMenu";
+import { MainNav } from "./main-nav";
+import { UserMenu } from "./user-menu";
 
 export function Header() {
 	return (

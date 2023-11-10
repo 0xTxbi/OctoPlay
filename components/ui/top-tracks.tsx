@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { TopTrackCard } from "./TopTrackCard";
+import { TopTrackCard } from "./top-track-card";
 
 type TopTracksProps = React.ComponentProps<typeof Card>;
 

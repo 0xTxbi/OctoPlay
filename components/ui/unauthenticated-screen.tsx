@@ -1,8 +1,6 @@
-"use client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import SpotifyIcon from "@/components/ui/icons/spotify-icon";
-import { signIn } from "next-auth/react";
 
 export default function UnauthenticatedScreen() {
 	return (
@@ -41,6 +39,13 @@ export default function UnauthenticatedScreen() {
 					OctoPlay
 				</h1>
 
+				<button
+					onClick={() => {
+						console.log("hey");
+					}}
+				>
+					heyy
+				</button>
 				<Button className="mt-5 w-full bg-green-500 cursor-pointer">
 					<SpotifyIcon className="mr-2 h-4 w-4" />
 					Sign In

@@ -1,4 +1,4 @@
-import { MainNav } from "@/components/ui/MainNav";
+import { MainNav } from "@/components/ui/main-nav";
 
 export default function StatsPage() {
 	return (

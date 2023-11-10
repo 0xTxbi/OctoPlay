@@ -1,4 +1,4 @@
-import { Header } from "@/components/ui/Header";
+import { Header } from "@/components/ui/header";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
