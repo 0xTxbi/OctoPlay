@@ -45,6 +45,8 @@ export default function Hero() {
 
 				<Button
 					onClick={() => console.log("hey")}
+					isLoading={status === "loading"}
+					disabled={status === "loading"}
 					className="mt-5 w-full bg-green-500 cursor-pointer"
 				>
 					<SpotifyIcon className="mr-2 h-4 w-4" />
