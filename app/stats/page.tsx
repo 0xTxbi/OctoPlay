@@ -8,6 +8,8 @@ export default function StatsPage() {
 	console.log(session);
 
 	return (
-		<div className="flex flex-col items-center justify-center"></div>
+		<div className="flex flex-col items-center justify-center">
+			<MainNav />
+		</div>
 	);
 }

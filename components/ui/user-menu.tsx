@@ -11,7 +11,16 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export function UserMenu() {
+interface UserMenuProps {
+	userBasicDetails?: {
+		id?: string | null | undefined;
+		name?: string | null | undefined;
+		image?: string | null | undefined;
+		email?: string | null | undefined;
+	};
+}
+
+export function UserMenu({ userBasicDetails }: UserMenuProps) {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
@@ -19,10 +28,12 @@ export function UserMenu() {
 					variant="ghost"
 					className="relative h-8 w-8 rounded-full"
 				>
-					<Avatar className="h-8 w-8">
+					<Avatar>
 						<AvatarImage
-							src="#"
-							alt="@shadcn"
+							src={
+								userBasicDetails?.image ||
+								undefined
+							}
 						/>
 						<AvatarFallback>
 							0x
@@ -38,10 +49,12 @@ export function UserMenu() {
 				<DropdownMenuLabel className="font-normal">
 					<div className="flex flex-col space-y-1">
 						<p className="text-sm font-medium leading-none">
-							txbi
+							{userBasicDetails?.name}
 						</p>
 						<p className="text-xs leading-none text-muted-foreground">
-							txbi@txbi.dev
+							{
+								userBasicDetails?.email
+							}
 						</p>
 					</div>
 				</DropdownMenuLabel>

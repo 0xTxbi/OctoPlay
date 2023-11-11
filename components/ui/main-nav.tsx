@@ -4,6 +4,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { TabsContent } from "@radix-ui/react-tabs";
 import { TopTracks } from "./top-tracks";
+import { Overview } from "./overview";
 
 export function MainNav({
 	className,
@@ -41,6 +42,9 @@ export function MainNav({
 						Your Playlists
 					</TabsTrigger>
 				</TabsList>
+				<TabsContent value="overview">
+					<Overview />
+				</TabsContent>
 				<TabsContent value="top-tracks">
 					<TopTracks />
 				</TabsContent>
