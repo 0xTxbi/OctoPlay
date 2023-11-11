@@ -1,7 +1,5 @@
 "use client";
-
 import { useSession } from "next-auth/react";
-import { MainNav } from "./main-nav";
 import { UserMenu } from "./user-menu";
 import Link from "next/link";
 
