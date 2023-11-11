@@ -13,7 +13,7 @@ export function MainNav({
 	return (
 		<nav
 			className={cn(
-				"flex space-x-4 items-center lg:space-x-6",
+				// "flex space-x-4 items-center lg:space-x-6",
 				className
 			)}
 			{...props}
@@ -23,9 +23,12 @@ export function MainNav({
 				className="space-y-10 mb-10 mt-10"
 			>
 				<TabsList>
-					<TabsTrigger value="overview">
+					{/* <TabsTrigger
+						disabled
+						value="overview"
+					>
 						Overview
-					</TabsTrigger>
+					</TabsTrigger> */}
 					<TabsTrigger value="top-tracks">
 						Top Tracks
 					</TabsTrigger>
@@ -42,9 +45,9 @@ export function MainNav({
 						Your Playlists
 					</TabsTrigger>
 				</TabsList>
-				<TabsContent value="overview">
+				{/* <TabsContent value="overview">
 					<Overview />
-				</TabsContent>
+				</TabsContent> */}
 				<TabsContent value="top-tracks">
 					<TopTracks />
 				</TabsContent>

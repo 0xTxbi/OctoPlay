@@ -30,7 +30,7 @@ type TopTrackCardProps = React.ComponentProps<typeof Card>;
 export function TopTrackCard({ className, ...props }: TopTrackCardProps) {
 	return (
 		<Card
-			className={cn("w-[320px]", className)}
+			className={cn("w-[320px] mr-5", className)}
 			{...props}
 		>
 			<CardHeader className="p-0">
@@ -40,8 +40,8 @@ export function TopTrackCard({ className, ...props }: TopTrackCardProps) {
 						"https://i.scdn.co/image/ab67616d0000b27302854a7060fccc1a66a4b5ad"
 					}
 					alt="Picture of the author"
-					width={320}
-					height={320}
+					width={500}
+					height={500}
 				/>
 			</CardHeader>
 			<CardContent className="grid gap-4 mt-5">
