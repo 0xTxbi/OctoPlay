@@ -76,7 +76,9 @@ export function UserMenu({ userBasicDetails }: UserMenuProps) {
 				<DropdownMenuSeparator />
 				<DropdownMenuItem
 					className="cursor-pointer"
-					onClick={() => signOut()}
+					onClick={() =>
+						signOut({ callbackUrl: "/" })
+					}
 				>
 					Log out
 					<DropdownMenuShortcut>
