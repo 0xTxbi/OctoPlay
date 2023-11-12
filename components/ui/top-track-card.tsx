@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import SpotifyIcon from "./icons/spotify-icon";
+import { truncateText } from "../../lib/utils";
 
 type TopTrackCardProps = React.ComponentProps<typeof Card>;
 
@@ -47,7 +48,7 @@ export function TopTrackCard({
 			</CardHeader>
 			<CardContent className="grid gap-4 mt-5">
 				<h2 className="scroll-m-20 text-xl font-semibold tracking-tight">
-					{name}
+					{truncateText(name, 20)}
 				</h2>
 				<h3 className="scroll-m-20 text-md font-semibold tracking-tight">
 					{album}
