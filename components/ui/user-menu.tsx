@@ -11,6 +11,7 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { signOut } from "next-auth/react";
+import VerifiedIcon from "./icons/verified-icon";
 
 interface UserMenuProps {
 	userBasicDetails?: {
@@ -25,22 +26,15 @@ export function UserMenu({ userBasicDetails }: UserMenuProps) {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button
-					variant="ghost"
-					className="relative h-8 w-8 rounded-full"
-				>
-					<Avatar>
-						<AvatarImage
-							src={
-								userBasicDetails?.image ||
-								undefined
-							}
-						/>
-						<AvatarFallback>
-							0x
-						</AvatarFallback>
-					</Avatar>
-				</Button>
+				<Avatar className="hover:cursor-pointer">
+					<AvatarImage
+						src={
+							userBasicDetails?.image ||
+							undefined
+						}
+					/>
+					<AvatarFallback>0x</AvatarFallback>
+				</Avatar>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent
 				className="w-56"
@@ -49,9 +43,14 @@ export function UserMenu({ userBasicDetails }: UserMenuProps) {
 			>
 				<DropdownMenuLabel className="font-normal">
 					<div className="flex flex-col space-y-1">
-						<p className="text-sm font-medium leading-none">
-							{userBasicDetails?.name}
-						</p>
+						<div className="flex space-x-1">
+							<p className="text-lg font-medium leading-none">
+								{
+									userBasicDetails?.name
+								}
+							</p>
+							<VerifiedIcon />
+						</div>
 						<p className="text-xs leading-none text-muted-foreground">
 							{
 								userBasicDetails?.email
@@ -75,7 +74,10 @@ export function UserMenu({ userBasicDetails }: UserMenuProps) {
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem onClick={() => signOut()}>
+				<DropdownMenuItem
+					className="cursor-pointer"
+					onClick={() => signOut()}
+				>
 					Log out
 					<DropdownMenuShortcut>
 						⇧⌘Q
