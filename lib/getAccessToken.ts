@@ -3,6 +3,7 @@ type AccessTokenResponse = {
 	error?: {
 		message: string;
 	};
+	expires: string;
 };
 
 const getAccessToken = async (): Promise<string> => {

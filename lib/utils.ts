@@ -6,4 +6,5 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 // swr config
-export const fetcher = (...args) => fetch(...args).then((res) => res.json());
+export const fetcher = (url: string, ...args: any[]) =>
+	fetch(url, ...args).then((res) => res.json());

@@ -1,11 +1,15 @@
 "use client";
 
-import { MainNav } from "@/components/ui/main-nav";
-import { useSession } from "next-auth/react";
+import useAuthSWR from "@/lib/hooks/useAuthSWR";
+import useTopTracks from "@/lib/hooks/useTopTracks";
+import { fetcher } from "@/lib/utils";
+import useSWR from "swr";
 
-export default function StatsPage() {
-	const { data: session } = useSession();
-	console.log(session);
+export default function Stats() {
+	const { data, isLoading } = useAuthSWR(
+		"https://api.spotify.com/v1/me/top/artists"
+	);
 
-	return <MainNav />;
+	console.log(isLoading, data);
+	return <h1>hey</h1>;
 }

@@ -10,6 +10,7 @@ import {
 	DropdownMenuShortcut,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { signOut } from "next-auth/react";
 
 interface UserMenuProps {
 	userBasicDetails?: {
@@ -74,7 +75,7 @@ export function UserMenu({ userBasicDetails }: UserMenuProps) {
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem>
+				<DropdownMenuItem onClick={() => signOut()}>
 					Log out
 					<DropdownMenuShortcut>
 						⇧⌘Q

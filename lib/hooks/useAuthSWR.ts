@@ -20,7 +20,8 @@ const fetcher = async (url: string) => {
 };
 
 interface AuthSWRResponse<T> {
-	data: T;
+	// make data nullable
+	data: T | null;
 	error: Error;
 	isLoading: boolean;
 }
@@ -29,7 +30,8 @@ const useAuthSWR = <T>(url: string): AuthSWRResponse<T> => {
 	const { data, error } = useSWR<T>(url, fetcher);
 
 	return {
-		data,
+		// return null if data is undefined
+		data: data || null,
 		error,
 		isLoading: !data && !error,
 	};
