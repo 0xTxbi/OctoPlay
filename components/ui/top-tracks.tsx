@@ -17,7 +17,7 @@ export function TopTracks({ className, ...props }: TopTracksProps) {
 					name={track.name}
 					album={track.album?.name}
 					artwork={track.album?.images[0].url}
-					artist={track.artist}
+					artist={track.artists[0].name}
 					duration={track.duration_ms}
 					previewUrl={track.preview_url}
 				/>
