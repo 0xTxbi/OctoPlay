@@ -1,4 +1,4 @@
-import useAuthenticatedSWR from "./useAuthenticatedSWR";
+import useAuthenticatedSWR from "./useAuthSWR";
 
 type Track = {
 	name: string;
@@ -11,15 +11,15 @@ type TopTracksProps = {
 
 function useTopTracks({
 	time_range = "medium_term",
-	limit = 20,
+	limit = 10,
 }: TopTracksProps = {}) {
 	const { data, error, isLoading } = useAuthenticatedSWR<Track[]>(
-		`https://api.spotify.com/v1/me/top/artists?time_range=${time_range}&limit=${limit}`
+		`https://api.spotify.com/v1/me/top/tracks?time_range=${time_range}&limit=${limit}`
 	);
 
 	console.log(data, error, isLoading);
 
-	// Handle loading and error states
+	// handle loading and error states
 	if (isLoading) {
 		return { error: null, loading: true, data: null };
 	}
@@ -28,8 +28,7 @@ function useTopTracks({
 		return { error, loading: false, data: null };
 	}
 
-	// Now you have the user's top tracks data to work with
-	return { error: null, loading: false, data };
+	return { error: null, loading: false, topTracks: data?.items };
 }
 
 export default useTopTracks;

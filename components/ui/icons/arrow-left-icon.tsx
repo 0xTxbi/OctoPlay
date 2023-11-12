@@ -1,10 +1,17 @@
-// ArrowLeftIcon.tsx
 import React from "react";
 
-const ArrowLeftIcon: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
+interface ArrowLeftIconProps {
+	onClick?: () => void;
+	className?: string;
+}
+
+const ArrowLeftIcon: React.FC<ArrowLeftIconProps> = ({
+	onClick,
+	className,
+}) => {
 	return (
 		<div
-			className="w-8 h-8 text-white rounded-full flex items-center justify-center cursor-pointer transition duration-300 "
+			className={className}
 			onClick={onClick}
 		>
 			<svg
@@ -12,7 +19,7 @@ const ArrowLeftIcon: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
 				fill="none"
 				viewBox="0 0 24 24"
 				stroke="currentColor"
-				className="w-6 h-6 transform rotate-180"
+				className="w-8 h-8 transform rotate-180 bg-green-500 rounded-full p-2 cursor-pointer"
 			>
 				<path
 					strokeLinecap="round"

@@ -12,14 +12,11 @@ export function MainNav({
 }: React.HTMLAttributes<HTMLElement>) {
 	return (
 		<nav
-			className={cn(
-				// "flex space-x-4 items-center lg:space-x-6",
-				className
-			)}
+			className={cn(className)}
 			{...props}
 		>
 			<Tabs
-				defaultValue="overview"
+				defaultValue="top-tracks"
 				className="space-y-10 mb-10 mt-10"
 			>
 				<TabsList>

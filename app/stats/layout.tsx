@@ -1,4 +1,6 @@
+import { Button } from "@/components/ui/button";
 import { Header } from "@/components/ui/header";
+import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -12,7 +14,7 @@ export default function StatsLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<section>
+		<section className="container mt-5">
 			<Header />
 
 			<div className="mx-5 h-full">{children}</div>

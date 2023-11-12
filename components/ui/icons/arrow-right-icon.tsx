@@ -11,7 +11,7 @@ const ArrowRightIcon: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
 				fill="none"
 				viewBox="0 0 24 24"
 				stroke="currentColor"
-				className="w-6 h-6"
+				className="w-8 h-8 bg-green-500 rounded-full p-2 cursor-pointer"
 			>
 				<path
 					strokeLinecap="round"
