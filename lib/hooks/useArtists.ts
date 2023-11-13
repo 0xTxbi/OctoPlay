@@ -12,16 +12,7 @@ interface ArtistHookResult {
 }
 
 function useArtists({ ids }: { ids: string }): ArtistHookResult {
-	const idArray = ids.split(",").map((id) => id.trim());
-	const isSingleId = idArray.length === 1;
-
-	const url = isSingleId
-		? `https://api.spotify.com/v1/artists/${encodeURIComponent(
-				ids
-		  )}`
-		: `https://api.spotify.com/v1/artists?ids=${encodeURIComponent(
-				ids
-		  )}`;
+	const url = `https://api.spotify.com/v1/artists?ids=${ids}`;
 
 	const { data, error, isLoading } = useAuthenticatedSWR<{
 		artists: Artist[];
