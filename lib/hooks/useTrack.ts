@@ -16,8 +16,6 @@ function useTrack({ id }: { id: string }): TrackHookResult {
 		`https://api.spotify.com/v1/tracks/${id}`
 	);
 
-	console.log(data, error, isLoading);
-
 	// loading and error states
 	if (isLoading) {
 		return { error: null, loading: true, trackInfo: null };

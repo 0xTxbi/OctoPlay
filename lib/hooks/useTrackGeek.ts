@@ -1,5 +1,6 @@
 import useArtists from "./useArtists";
 import useAuthenticatedSWR from "./useAuthSWR";
+import useTrackFeatures from "./useTrackFeatures";
 
 interface TrackGeek {
 	id: string;
@@ -11,11 +12,17 @@ interface ArtistGeek {
 	name: string;
 }
 
+interface TrackAudioFeatures {
+	id: string;
+	name: string;
+}
+
 interface TrackGeekHookResult {
 	error: Error | null;
 	loading: boolean;
 	trackGeekInfo: TrackGeek | null;
 	artistGeekInfo: ArtistGeek[] | null;
+	trackAudioFeatures: TrackAudioFeatures | null;
 }
 
 function useTrackGeek({ id }: { id: string }): TrackGeekHookResult {
@@ -32,6 +39,9 @@ function useTrackGeek({ id }: { id: string }): TrackGeekHookResult {
 	// retrieve artist(s) info
 	const { artistsInfo } = useArtists({ ids: artistIds });
 
+	// fetch track's audio features
+	const { trackFeaturesInfo } = useTrackFeatures({ id: id });
+
 	// loading and error states
 	if (isLoading) {
 		return {
@@ -39,6 +49,7 @@ function useTrackGeek({ id }: { id: string }): TrackGeekHookResult {
 			loading: true,
 			trackGeekInfo: null,
 			artistGeekInfo: null,
+			trackAudioFeatures: null,
 		};
 	}
 
@@ -48,6 +59,7 @@ function useTrackGeek({ id }: { id: string }): TrackGeekHookResult {
 			loading: false,
 			trackGeekInfo: null,
 			artistGeekInfo: null,
+			trackAudioFeatures: null,
 		};
 	}
 
@@ -56,6 +68,7 @@ function useTrackGeek({ id }: { id: string }): TrackGeekHookResult {
 		loading: false,
 		trackGeekInfo: data,
 		artistGeekInfo: artistsInfo,
+		trackAudioFeatures: trackFeaturesInfo,
 	};
 }
 
