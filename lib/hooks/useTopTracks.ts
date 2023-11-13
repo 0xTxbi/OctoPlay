@@ -17,8 +17,6 @@ function useTopTracks({
 		`https://api.spotify.com/v1/me/top/tracks?time_range=${time_range}&limit=${limit}`
 	);
 
-	console.log(data, error, isLoading);
-
 	// handle loading and error states
 	if (isLoading) {
 		return { error: null, loading: true, data: null };

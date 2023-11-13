@@ -7,13 +7,13 @@ type TopTracksProps = React.ComponentProps<typeof Card>;
 
 export function TopTracks({ className, ...props }: TopTracksProps) {
 	const { topTracks, loading, error } = useTopTracks();
-	console.log(topTracks, loading, error);
 
 	return (
 		<Carousel>
 			{topTracks?.map((track) => (
 				<TopTrackCard
 					key={track.id}
+					trackId={track.id}
 					name={track.name}
 					album={track.album?.name}
 					artwork={track.album?.images[0].url}

@@ -4,11 +4,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import SpotifyIcon from "@/components/ui/icons/spotify-icon";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import * as React from "react";
 
 export default function Hero() {
+	const { status } = useSession();
+
 	return (
 		<main className="flex min-h-screen flex-col items-center justify-between p-24">
 			<div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
