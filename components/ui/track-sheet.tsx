@@ -11,7 +11,22 @@ import {
 import { Button } from "@/components/ui/button";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 
-export function TrackSheet() {
+export interface TrackSheetComponentProps {
+	trackId: string;
+	name: string;
+	album: string;
+	artwork: string;
+	artist: string;
+	duration: string;
+	previewUrl: string;
+}
+
+export function TrackSheet({
+	trackId,
+	name,
+	album,
+	artwork,
+}: TrackSheetComponentProps) {
 	// const { trackInfo, loading, error } = useTrack(
 	// 	"1sxGIhaxY8eF52e1TlShSP"
 	// );

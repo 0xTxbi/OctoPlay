@@ -11,6 +11,8 @@ import { truncateText } from "../../lib/utils";
 import { PlayIcon } from "@radix-ui/react-icons";
 import { TrackSheet } from "./track-sheet";
 import useTrack from "@/lib/hooks/useTrack";
+import useArtists from "@/lib/hooks/useArtists";
+import useTrackGeek from "@/lib/hooks/useTrackGeek";
 
 type TopTrackCardProps = React.ComponentProps<typeof Card>;
 
@@ -35,11 +37,10 @@ export function TopTrackCard({
 	className,
 	...props
 }: TopTrackCardComponentProps) {
-	console.log(trackId);
-
-	const { trackInfo } = useTrack({ id: trackId });
-
-	console.log(trackInfo);
+	const { trackGeekInfo } = useTrackGeek({
+		id: trackId,
+	});
+	console.log(trackGeekInfo);
 
 	return (
 		<>
