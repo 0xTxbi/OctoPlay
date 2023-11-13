@@ -18,8 +18,6 @@ function useArtists({ ids }: { ids: string }): ArtistHookResult {
 		artists: Artist[];
 	}>(url);
 
-	console.log(data, error, isLoading);
-
 	// Loading and error states
 	if (isLoading) {
 		return { error: null, loading: true, artistsInfo: null };

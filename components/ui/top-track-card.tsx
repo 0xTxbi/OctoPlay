@@ -37,10 +37,10 @@ export function TopTrackCard({
 	className,
 	...props
 }: TopTrackCardComponentProps) {
-	const { trackGeekInfo } = useTrackGeek({
-		id: trackId,
-	});
-	console.log(trackGeekInfo);
+	const { trackGeekInfo, artistGeekInfo, trackAudioFeatures } =
+		useTrackGeek({
+			id: trackId,
+		});
 
 	return (
 		<>
@@ -78,7 +78,28 @@ export function TopTrackCard({
 						<PlayIcon className="mr-2 h-4 w-4" />{" "}
 						Play
 					</Button>
-					<TrackSheet />
+					<TrackSheet
+						name={trackGeekInfo?.name}
+						image={
+							trackGeekInfo?.album
+								?.images[0].url
+						}
+						album={
+							trackGeekInfo?.album
+								.name
+						}
+						releaseDate={
+							trackGeekInfo?.album
+								?.release_date
+						}
+						duration={
+							trackGeekInfo?.duration_ms
+						}
+						explicit={
+							trackGeekInfo?.explicit
+						}
+						artist={artistGeekInfo}
+					/>
 				</CardFooter>
 			</Card>
 		</>

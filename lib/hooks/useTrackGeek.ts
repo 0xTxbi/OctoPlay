@@ -1,10 +1,14 @@
+import { TopTrackCardComponentProps } from "@/components/ui/top-track-card";
 import useArtists from "./useArtists";
-import useAuthenticatedSWR from "./useAuthSWR";
+import useTrack from "./useTrack";
 import useTrackFeatures from "./useTrackFeatures";
 
-interface TrackGeek {
-	id: string;
-	name: string;
+export interface TrackGeek extends TopTrackCardComponentProps {
+	releaseDate: string;
+	explicit: boolean;
+	image: string;
+	// artistName: string;
+	// artistImage: string;
 }
 
 interface ArtistGeek {
@@ -27,15 +31,13 @@ interface TrackGeekHookResult {
 
 function useTrackGeek({ id }: { id: string }): TrackGeekHookResult {
 	// fetch track details
-	const { data, error, isLoading } = useAuthenticatedSWR<TrackGeek>(
-		`https://api.spotify.com/v1/tracks/${id}`
-	);
-
-	console.log(data, error, isLoading);
+	const { trackInfo, error, loading } = useTrack({ id: id });
 
 	// fetch details of involved artists
 	// obtain ids
-	const artistIds = data?.artists.map((artist) => artist.id).join(",");
+	const artistIds = trackInfo?.artists
+		.map((artist) => artist.id)
+		.join(",");
 	// retrieve artist(s) info
 	const { artistsInfo } = useArtists({ ids: artistIds });
 
@@ -43,7 +45,7 @@ function useTrackGeek({ id }: { id: string }): TrackGeekHookResult {
 	const { trackFeaturesInfo } = useTrackFeatures({ id: id });
 
 	// loading and error states
-	if (isLoading) {
+	if (loading) {
 		return {
 			error: null,
 			loading: true,
@@ -66,7 +68,7 @@ function useTrackGeek({ id }: { id: string }): TrackGeekHookResult {
 	return {
 		error: null,
 		loading: false,
-		trackGeekInfo: data,
+		trackGeekInfo: trackInfo,
 		artistGeekInfo: artistsInfo,
 		trackAudioFeatures: trackFeaturesInfo,
 	};

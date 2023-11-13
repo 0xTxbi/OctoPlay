@@ -16,8 +16,6 @@ function useTrackFeatures({ id }: { id: string }): TrackFeaturesHookResult {
 		`https://api.spotify.com/v1/audio-features/${id}`
 	);
 
-	console.log(data, error, isLoading);
-
 	// loading and error states
 	if (isLoading) {
 		return { error: null, loading: true, trackFeaturesInfo: null };
