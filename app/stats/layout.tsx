@@ -1,6 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { Header } from "@/components/ui/header";
-import { ArrowLeftIcon } from "@radix-ui/react-icons";
+import Header from "@/components/ui/header";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
