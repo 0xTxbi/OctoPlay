@@ -10,8 +10,6 @@ import Image from "next/image";
 import { truncateText } from "../../lib/utils";
 import { PlayIcon } from "@radix-ui/react-icons";
 import { TrackSheet } from "./track-sheet";
-import useTrack from "@/lib/hooks/useTrack";
-import useArtists from "@/lib/hooks/useArtists";
 import useTrackGeek from "@/lib/hooks/useTrackGeek";
 
 type TopTrackCardProps = React.ComponentProps<typeof Card>;

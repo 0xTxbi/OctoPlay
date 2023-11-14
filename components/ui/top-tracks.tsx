@@ -2,20 +2,9 @@ import { Card } from "@/components/ui/card";
 import { TopTrackCard } from "./top-track-card";
 import Carousel from "./carousel";
 import useTopTracks from "@/lib/hooks/useTopTracks";
-import { Button } from "./button";
-import { IconAdjustments } from "@tabler/icons-react";
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuLabel,
-	DropdownMenuRadioGroup,
-	DropdownMenuRadioItem,
-	DropdownMenuSeparator,
-	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import React from "react";
-import { ClockIcon } from "@radix-ui/react-icons";
 import { RangeFilter } from "./range-filter-dropdown";
+import CardSkeleton from "./card-skeleton";
 
 type TopTracksProps = React.ComponentProps<typeof Card>;
 
@@ -37,6 +26,8 @@ export function TopTracks({ className, ...props }: TopTracksProps) {
 					onValueChange={handleTimeRangeChange}
 				/>
 			</div>
+
+			{loading && <CardSkeleton />}
 			<Carousel>
 				{topTracks?.map((track) => (
 					<TopTrackCard

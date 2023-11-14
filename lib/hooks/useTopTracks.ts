@@ -20,10 +20,8 @@ function useTopTracks({
 
 	const trackIds = data?.items?.map((track) => track.id).join(",");
 
-	// console.log(trackIds);
-
 	const { tracksInfo } = useTracks({ ids: trackIds });
-	console.log(tracksInfo);
+
 	// handle loading and error states
 	if (isLoading) {
 		return { error: null, loading: true, data: null };
