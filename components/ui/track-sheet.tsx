@@ -22,7 +22,6 @@ import { formatDate, formatDuration } from "@/lib/utils";
 import Divider from "./divider";
 import { Badge } from "./badge";
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
-import { truncateText } from "../../lib/utils";
 import { ScrollArea } from "./scroll-area";
 
 export function TrackSheet({
@@ -89,38 +88,39 @@ export function TrackSheet({
 								</Button>
 							</div>
 							<Divider />
-
-							{artist?.map(
-								(artiste) => (
-									<div
-										key={
-											artiste.id
-										}
-										className="flex items-center space-x-2"
-									>
-										<Avatar>
-											<AvatarImage
-												src={
-													artiste
-														?.images[1]
-														.url
+							<ScrollArea className="h-10">
+								{artist?.map(
+									(
+										artiste
+									) => (
+										<div
+											key={
+												artiste.id
+											}
+											className="flex items-center space-x-2"
+										>
+											<Avatar>
+												<AvatarImage
+													src={
+														artiste
+															?.images[1]
+															.url
+													}
+													alt="@shadcn"
+												/>
+												<AvatarFallback>
+													0x
+												</AvatarFallback>
+											</Avatar>
+											<h3 className="text-xs">
+												{
+													artiste?.name
 												}
-												alt="@shadcn"
-											/>
-											<AvatarFallback>
-												0x
-											</AvatarFallback>
-										</Avatar>
-										<h3 className="text-xs">
-											{truncateText(
-												artiste?.name,
-												10
-											)}
-										</h3>
-									</div>
-								)
-							)}
-
+											</h3>
+										</div>
+									)
+								)}
+							</ScrollArea>
 							<Divider />
 							<span className="flex items-center">
 								<CalendarIcon className="mr-2 h-4 w-4" />
