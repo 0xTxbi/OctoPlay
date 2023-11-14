@@ -1,6 +1,6 @@
 "use client";
 import { useSession } from "next-auth/react";
-import { UserMenu } from "./user-menu";
+import { UserMenu } from "../../components/ui/user-menu";
 import Link from "next/link";
 
 export default function Header() {
