@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react";
 import { UserMenu } from "./user-menu";
 import Link from "next/link";
 
-export function Header() {
+export default function Header() {
 	const { data: session } = useSession();
 
 	return (
