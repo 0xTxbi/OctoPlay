@@ -37,10 +37,9 @@ export function TopTrackCard({
 	className,
 	...props
 }: TopTrackCardComponentProps) {
-	const { trackGeekInfo, artistGeekInfo, trackAudioFeatures } =
-		useTrackGeek({
-			id: trackId,
-		});
+	const { trackGeekInfo, artistGeekInfo } = useTrackGeek({
+		id: trackId,
+	});
 
 	return (
 		<>

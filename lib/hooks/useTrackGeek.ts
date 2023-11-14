@@ -26,7 +26,6 @@ interface TrackGeekHookResult {
 	loading: boolean;
 	trackGeekInfo: TrackGeek | null;
 	artistGeekInfo: ArtistGeek[] | null;
-	trackAudioFeatures: TrackAudioFeatures | null;
 }
 
 function useTrackGeek({ id }: { id: string }): TrackGeekHookResult {
@@ -42,7 +41,7 @@ function useTrackGeek({ id }: { id: string }): TrackGeekHookResult {
 	const { artistsInfo } = useArtists({ ids: artistIds });
 
 	// fetch track's audio features
-	const { trackFeaturesInfo } = useTrackFeatures({ id: id });
+	// const { trackFeaturesInfo } = useTrackFeatures({ id: id });
 
 	// loading and error states
 	if (loading) {
@@ -51,7 +50,7 @@ function useTrackGeek({ id }: { id: string }): TrackGeekHookResult {
 			loading: true,
 			trackGeekInfo: null,
 			artistGeekInfo: null,
-			trackAudioFeatures: null,
+			// trackAudioFeatures: null,
 		};
 	}
 
@@ -61,7 +60,7 @@ function useTrackGeek({ id }: { id: string }): TrackGeekHookResult {
 			loading: false,
 			trackGeekInfo: null,
 			artistGeekInfo: null,
-			trackAudioFeatures: null,
+			// trackAudioFeatures: null,
 		};
 	}
 
@@ -70,7 +69,7 @@ function useTrackGeek({ id }: { id: string }): TrackGeekHookResult {
 		loading: false,
 		trackGeekInfo: trackInfo,
 		artistGeekInfo: artistsInfo,
-		trackAudioFeatures: trackFeaturesInfo,
+		// trackAudioFeatures: trackFeaturesInfo,
 	};
 }
 
