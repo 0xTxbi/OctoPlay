@@ -89,35 +89,38 @@ export function TrackSheet({
 								</Button>
 							</div>
 							<Divider />
-							<div className="flex items-center space-x-2">
-								{artist?.map(
-									(
-										artiste
-									) => (
-										<>
-											<Avatar>
-												<AvatarImage
-													src={
-														artiste
-															?.images[1]
-															.url
-													}
-													alt="@shadcn"
-												/>
-												<AvatarFallback>
-													0x
-												</AvatarFallback>
-											</Avatar>
-											<h3 className="text-xs">
-												{truncateText(
-													artiste?.name,
-													10
-												)}
-											</h3>
-										</>
-									)
-								)}
-							</div>
+
+							{artist?.map(
+								(artiste) => (
+									<div
+										key={
+											artiste.id
+										}
+										className="flex items-center space-x-2"
+									>
+										<Avatar>
+											<AvatarImage
+												src={
+													artiste
+														?.images[1]
+														.url
+												}
+												alt="@shadcn"
+											/>
+											<AvatarFallback>
+												0x
+											</AvatarFallback>
+										</Avatar>
+										<h3 className="text-xs">
+											{truncateText(
+												artiste?.name,
+												10
+											)}
+										</h3>
+									</div>
+								)
+							)}
+
 							<Divider />
 							<span className="flex items-center">
 								<CalendarIcon className="mr-2 h-4 w-4" />
