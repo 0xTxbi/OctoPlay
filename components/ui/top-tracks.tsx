@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import React from "react";
 import { ClockIcon } from "@radix-ui/react-icons";
+import { RangeFilter } from "./range-filter-dropdown";
 
 type TopTracksProps = React.ComponentProps<typeof Card>;
 
@@ -24,43 +25,17 @@ export function TopTracks({ className, ...props }: TopTracksProps) {
 		time_range: time_range,
 	});
 
+	const handleTimeRangeChange = (value: string) => {
+		setTime_range(value);
+	};
+
 	return (
 		<>
 			<div className="flex justify-end">
-				<DropdownMenu>
-					<DropdownMenuTrigger asChild>
-						<Button className="bg-green-500 mb-4 text-end">
-							<IconAdjustments
-								size={20}
-								className="mr-2"
-							/>
-							Filter
-						</Button>
-					</DropdownMenuTrigger>
-					<DropdownMenuContent className="">
-						<DropdownMenuLabel className="flex items-center">
-							<ClockIcon className="mr-2" />
-							Time Range
-						</DropdownMenuLabel>
-						<DropdownMenuSeparator />
-						<DropdownMenuRadioGroup
-							value={time_range}
-							onValueChange={
-								setTime_range
-							}
-						>
-							<DropdownMenuRadioItem value="short_term">
-								Short term
-							</DropdownMenuRadioItem>
-							<DropdownMenuRadioItem value="medium_term">
-								Medium term
-							</DropdownMenuRadioItem>
-							<DropdownMenuRadioItem value="long_term">
-								Long term
-							</DropdownMenuRadioItem>
-						</DropdownMenuRadioGroup>
-					</DropdownMenuContent>
-				</DropdownMenu>
+				<RangeFilter
+					value={time_range}
+					onValueChange={handleTimeRangeChange}
+				/>
 			</div>
 			<Carousel>
 				{topTracks?.map((track) => (
