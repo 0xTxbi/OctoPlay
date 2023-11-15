@@ -16,7 +16,7 @@ function useArtistRelatedArtists({
 }: {
 	id: string;
 }): ArtistRelatedArtistsHookResult {
-	const url = `https://api.spotify.com/v1/artists/${id}/top-tracks`;
+	const url = `https://api.spotify.com/v1/artists/${id}/related-artists`;
 
 	const { data, error, isLoading } = useAuthenticatedSWR<{
 		topTracks: ArtistRelatedArtists[];

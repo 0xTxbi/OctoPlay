@@ -12,7 +12,7 @@ interface ArtistTopTracksHookResult {
 }
 
 function useArtistTopTracks({ id }: { id: string }): ArtistTopTracksHookResult {
-	const url = `https://api.spotify.com/v1/artists/${id}/top-tracks`;
+	const url = `https://api.spotify.com/v1/artists/${id}/top-tracks?market=US`;
 
 	const { data, error, isLoading } = useAuthenticatedSWR<{
 		topTracks: ArtistTopTracks[];
