@@ -33,7 +33,7 @@ function useTopArtists({
 		return { error, loading: false, data: null };
 	}
 
-	return { error: null, loading: false, topArtists: data?.items };
+	return { error: null, loading: false, topArtists: artistsInfo };
 }
 
 export default useTopArtists;

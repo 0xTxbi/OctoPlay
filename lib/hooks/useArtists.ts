@@ -1,8 +1,12 @@
 import useAuthenticatedSWR from "./useAuthSWR";
 
 interface Artist {
-	id: string;
+	artistId: string;
 	name: string;
+	image: string;
+	followers: number;
+	genres: string[];
+	popularity: string;
 }
 
 interface ArtistHookResult {

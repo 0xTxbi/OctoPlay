@@ -6,6 +6,7 @@ import React from "react";
 import { RangeFilter } from "./range-filter-dropdown";
 import CardSkeleton from "./card-skeleton";
 import useTopArtists from "@/lib/hooks/useTopArtitsts";
+import { TopArtistCard } from "./top-artist-card";
 
 type TopArtistsProps = React.ComponentProps<typeof Card>;
 
@@ -30,24 +31,22 @@ export function TopArtists({ className, ...props }: TopArtistsProps) {
 				/>
 			</div>
 
-			{/* {loading && <CardSkeleton />}
+			{loading && <CardSkeleton />}
 			<Carousel>
-				{topTracks?.map((track) => (
-					<TopTrackCard
-						key={track.id}
-						trackId={track.id}
-						name={track.name}
-						album={track.album?.name}
-						artwork={
-							track.album?.images[0]
-								.url
+				{topArtists?.map((artist) => (
+					<TopArtistCard
+						key={artist.id}
+						artistId={artist.id}
+						name={artist.name}
+						image={artist.images[1].url}
+						followers={
+							artist.followers?.total
 						}
-						artist={track.artists[0].name}
-						duration={track.duration_ms}
-						previewUrl={track.preview_url}
+						genres={artist.genres}
+						popularity={artist.popularity}
 					/>
 				))}
-			</Carousel> */}
+			</Carousel>
 		</>
 	);
 }
