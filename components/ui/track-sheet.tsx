@@ -106,7 +106,7 @@ export function TrackSheet({
 															?.images[1]
 															.url
 													}
-													alt="@shadcn"
+													alt={`image of ${name}`}
 												/>
 												<AvatarFallback>
 													0x

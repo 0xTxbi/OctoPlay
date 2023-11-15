@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn, formatFollowersCount } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -8,7 +8,10 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import { truncateText } from "../../lib/utils";
-import { PlayIcon } from "@radix-ui/react-icons";
+import { InfoCircledIcon, PlayIcon } from "@radix-ui/react-icons";
+import { Badge } from "./badge";
+import VerifiedIcon from "./icons/verified-icon";
+import { Progress } from "./progress";
 
 type TopArtistCardProps = React.ComponentProps<typeof Card>;
 
@@ -18,7 +21,7 @@ export interface TopArtistCardComponentProps extends TopArtistCardProps {
 	image: string;
 	followers: number;
 	genres: string[];
-	popularity: string;
+	popularity: number;
 }
 
 export function TopArtistCard({
@@ -41,38 +44,49 @@ export function TopArtistCard({
 				className={cn("mr-5", className)}
 				{...props}
 			>
-				<CardHeader className="p-0">
+				<CardHeader className="flex p-0">
 					<Image
-						className="rounded-t-md"
+						className="rounded-full p-[24px]"
 						src={image}
 						alt={`Picture of ${name}`}
-						width={320}
-						height={320}
+						width={160}
+						height={160}
 					/>
 				</CardHeader>
-				<CardContent className="grid gap-4 mt-5">
+				<CardContent className="grid gap-4">
+					<div className="flex space-x-1 items-center">
+						<h2 className="scroll-m-20 text-xl font-semibold tracking-normal">
+							{truncateText(name, 15)}
+						</h2>
+						<VerifiedIcon />
+					</div>
 					<h2 className="scroll-m-20 text-xl font-semibold tracking-normal">
-						{truncateText(name, 15)}
-					</h2>
-					<h2 className="scroll-m-20 text-xl font-semibold tracking-normal">
-						{followers}
+						<Badge>
+							{`${formatFollowersCount(
+								followers
+							)} followers`}
+						</Badge>
 					</h2>
 					<h3 className="scroll-m-20 text-md font-medium tracking-tight">
 						{/* {genres} */}
 					</h3>
 					<div className="flex place-items-center">
 						<h3 className="scroll-m-20 text-sm font-light tracking-tight">
-							{popularity}
+							Popularity
 						</h3>
 					</div>
+					<Progress
+						value={popularity}
+						className="text-green-500"
+					/>
 				</CardContent>
 				<CardFooter className="space-x-2">
 					<Button
 						disabled
 						className="w-full bg-green-400"
 					>
-						<PlayIcon className="mr-2 h-4 w-4" />{" "}
-						Play
+						<InfoCircledIcon className="mr-2 h-4 w-4" />{" "}
+						Info
 					</Button>
 					{/* <TrackSheet
 						name={trackGeekInfo?.name}

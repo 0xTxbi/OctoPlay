@@ -10,21 +10,6 @@ import {
 import Image from "next/image";
 import SpotifyIcon from "./icons/spotify-icon";
 
-const notifications = [
-	{
-		title: "Your call has been confirmed.",
-		description: "1 hour ago",
-	},
-	{
-		title: "You have a new message!",
-		description: "1 hour ago",
-	},
-	{
-		title: "Your subscription is expiring soon!",
-		description: "2 hours ago",
-	},
-];
-
 type OverviewCardProps = React.ComponentProps<typeof Card>;
 
 export function OverviewCard({ className, ...props }: OverviewCardProps) {
@@ -52,7 +37,7 @@ export function OverviewCard({ className, ...props }: OverviewCardProps) {
 					<Avatar className="h-8 w-8">
 						<AvatarImage
 							src="https://i.scdn.co/image/ab6761610000e5eb4293385d324db8558179afd9"
-							alt="@shadcn"
+							alt={`image`}
 						/>
 						<AvatarFallback>
 							0x

@@ -61,3 +61,19 @@ export function formatDuration(durationInMs: number): string {
 
 	return `${formattedHours} ${formattedMinutes} ${formattedSeconds}`.trim();
 }
+
+// format followers count
+export function formatFollowersCount(count: number): string {
+	const suffixes = ["", "k", "M", "B", "T"];
+	const tier = (Math.log10(count) / 3) | 0;
+
+	if (tier === 0) return count.toString();
+
+	const suffix = suffixes[tier];
+	const scale = Math.pow(10, tier * 3);
+
+	const scaledNumber = count / scale;
+
+	// handle cases like 15.5k instead of 15k
+	return scaledNumber.toFixed(1) + suffix;
+}
