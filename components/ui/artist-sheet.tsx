@@ -22,10 +22,10 @@ import { ScrollArea } from "./scroll-area";
 import { ArtistGeek } from "@/lib/hooks/useArtistGeek";
 import VerifiedIcon from "./icons/verified-icon";
 import Link from "next/link";
-import { IconTags, IconVinyl } from "@tabler/icons-react";
+import { IconTags, IconUsersGroup, IconVinyl } from "@tabler/icons-react";
 import { ArtistAlbumCard } from "./artist-album-card";
-import Carousel from "./carousel";
 import CarouselMini from "./carousel-mini";
+import { RelatedArtistsCard } from "./related-artists-card";
 
 export function ArtistSheet({
 	artistId,
@@ -36,11 +36,10 @@ export function ArtistSheet({
 	popularity,
 	uri,
 	albums,
+	relatedArtists,
 	className,
 	...props
 }: ArtistGeek) {
-	console.log(albums.length);
-
 	return (
 		<Sheet>
 			<SheetTrigger asChild>
@@ -155,20 +154,40 @@ export function ArtistSheet({
 							</div>
 
 							<span className="flex items-center">
-								<CalendarIcon className="mr-2 h-4 w-4" />
-								<h3 className="text-sm"></h3>
+								<IconUsersGroup className="mr-2 h-4 w-4" />
+								<h3 className="text-lg font-medium tracking-normal">
+									Similar
+									Artists
+									<span className="text-xs font-light text-gray-400 tracking-tight">
+										{` (${relatedArtists.length})`}
+									</span>
+								</h3>
 							</span>
-							<span className="flex items-center">
-								<ClockIcon className="mr-2 h-4 w-4" />
-								<h3 className="text-sm"></h3>
-							</span>
-
-							<Divider />
-							{/* badges */}
-							<div className="space-x-2">
-								{/* todo: properly guage popularity */}
-								{/* <Badge>popular</Badge> */}
-								<Badge></Badge>
+							<div>
+								<CarouselMini>
+									{relatedArtists.map(
+										(
+											relatedArtist
+										) => (
+											<RelatedArtistsCard
+												key={
+													relatedArtist.id
+												}
+												name={
+													relatedArtist.name
+												}
+												image={
+													relatedArtist
+														.images[1]
+														.url
+												}
+												artistId={
+													relatedArtist.id
+												}
+											/>
+										)
+									)}
+								</CarouselMini>
 							</div>
 						</div>
 					</div>

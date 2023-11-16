@@ -7,6 +7,7 @@ import useArtistRelatedArtists from "./useArtistRelatedArtists";
 export interface ArtistGeek extends TopArtistCardComponentProps {
 	uri: string;
 	albums: [];
+	relatedArtists: [];
 }
 
 interface ArtistTopTracks {}

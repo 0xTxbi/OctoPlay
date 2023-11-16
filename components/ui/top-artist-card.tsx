@@ -57,7 +57,7 @@ export function TopArtistCard({
 			>
 				<CardHeader className="flex p-0">
 					<Image
-						className="rounded-full p-[24px]"
+						className="rounded-full p-[24px] max-h-[160px] object-cover"
 						src={image}
 						alt={`Picture of ${name}`}
 						width={160}
@@ -129,6 +129,9 @@ export function TopArtistCard({
 							}
 							albums={
 								artistAlbumsGeekInfo
+							}
+							relatedArtists={
+								artistRelatedArtistsGeekInfo
 							}
 						/>
 					)}
