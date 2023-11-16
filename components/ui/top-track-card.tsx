@@ -11,6 +11,7 @@ import { truncateText } from "../../lib/utils";
 import { PlayIcon } from "@radix-ui/react-icons";
 import { TrackSheet } from "./track-sheet";
 import useTrackGeek from "@/lib/hooks/useTrackGeek";
+import { IconUser, IconVinyl } from "@tabler/icons-react";
 
 type TopTrackCardProps = React.ComponentProps<typeof Card>;
 
@@ -47,25 +48,29 @@ export function TopTrackCard({
 			>
 				<CardHeader className="p-0">
 					<Image
-						className="rounded-t-md"
+						className="rounded-t-md max-h-[350px]"
 						src={artwork}
 						alt="Picture of the author"
-						width={500}
-						height={500}
+						width={350}
+						height={350}
 					/>
 				</CardHeader>
 				<CardContent className="grid gap-4 mt-5">
-					<h2 className="scroll-m-20 text-xl font-semibold tracking-normal">
-						{truncateText(name, 15)}
+					<h2 className="scroll-m-20 text-xl font-semibold tracking-tight">
+						{truncateText(name, 20)}
 					</h2>
-					<h3 className="scroll-m-20 text-md font-medium tracking-tight">
-						{album}
-					</h3>
-					<div className="flex place-items-center">
-						<h3 className="scroll-m-20 text-sm font-light tracking-tight">
+					<span className="flex items-center text-gray-400">
+						<IconVinyl className="mr-1 h-4 w-4" />
+						<h3 className="scroll-m-20 text-xs font-normal tracking-tight">
+							{album}
+						</h3>
+					</span>
+					<span className="flex items-center text-gray-400">
+						<IconUser className="mr-1 h-4 w-4" />
+						<h3 className="scroll-m-20 text-xs font-normal tracking-tight">
 							{artist}
 						</h3>
-					</div>
+					</span>
 				</CardContent>
 				<CardFooter className="space-x-2">
 					<Button
