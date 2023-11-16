@@ -14,7 +14,7 @@ interface ArtistAlbumHookResult {
 }
 
 function useArtistAlbums({ id }: { id: string }): ArtistAlbumHookResult {
-	const url = `https://api.spotify.com/v1/artists/${id}/albums?include_groups=album&limit=5`;
+	const url = `https://api.spotify.com/v1/artists/${id}/albums?include_groups=album`;
 
 	const { data, error, isLoading } = useAuthenticatedSWR<{
 		albums: ArtistAlbums[];

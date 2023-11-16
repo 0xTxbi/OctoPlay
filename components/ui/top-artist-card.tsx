@@ -47,7 +47,7 @@ export function TopArtistCard({
 		id: artistId,
 	});
 
-	console.log(loading);
+	console.log(artistRelatedArtistsGeekInfo);
 
 	return (
 		<>

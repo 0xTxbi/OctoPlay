@@ -24,6 +24,8 @@ import VerifiedIcon from "./icons/verified-icon";
 import Link from "next/link";
 import { IconTags, IconVinyl } from "@tabler/icons-react";
 import { ArtistAlbumCard } from "./artist-album-card";
+import Carousel from "./carousel";
+import CarouselMini from "./carousel-mini";
 
 export function ArtistSheet({
 	artistId,
@@ -37,7 +39,7 @@ export function ArtistSheet({
 	className,
 	...props
 }: ArtistGeek) {
-	console.log(albums);
+	console.log(albums.length);
 
 	return (
 		<Sheet>
@@ -116,29 +118,42 @@ export function ArtistSheet({
 								<IconVinyl className="mr-2 h-4 w-4" />
 								<h3 className="text-lg font-medium tracking-normal">
 									Albums
+									<span className="text-xs font-light text-gray-400 tracking-tight">
+										{` (${albums.length})`}
+									</span>
 								</h3>
 							</span>
+
 							<div>
-								{albums.map(
-									(
-										album
-									) => (
-										<ArtistAlbumCard
-											name={
-												album.name
-											}
-											artwork={
-												album
-													.images[1]
-													.url
-											}
-											albumId={
-												album.id
-											}
-										/>
-									)
-								)}
+								<CarouselMini>
+									{albums.map(
+										(
+											album
+										) => (
+											<ArtistAlbumCard
+												key={
+													album.id
+												}
+												name={
+													album.name
+												}
+												artwork={
+													album
+														.images[1]
+														.url
+												}
+												albumId={
+													album.id
+												}
+												numberOfTracks={
+													album.total_tracks
+												}
+											/>
+										)
+									)}
+								</CarouselMini>
 							</div>
+
 							<span className="flex items-center">
 								<CalendarIcon className="mr-2 h-4 w-4" />
 								<h3 className="text-sm"></h3>
