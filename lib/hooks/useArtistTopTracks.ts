@@ -7,7 +7,7 @@ export interface ArtistTopTracks {
 
 interface ArtistTopTracksHookResult {
 	error: Error | null;
-	loading: boolean;
+	artistTopTracksloading: boolean;
 	artistTopTracksInfo: ArtistTopTracks[] | null;
 }
 
@@ -18,24 +18,26 @@ function useArtistTopTracks({ id }: { id: string }): ArtistTopTracksHookResult {
 		topTracks: ArtistTopTracks[];
 	}>(url);
 
-	console.log(data);
-
 	// Loading and error states
 	if (isLoading) {
 		return {
 			error: null,
-			loading: true,
+			artistTopTracksloading: true,
 			artistTopTracksInfo: null,
 		};
 	}
 
 	if (error) {
-		return { error, loading: false, artistTopTracksInfo: null };
+		return {
+			error,
+			artistTopTracksloading: false,
+			artistTopTracksInfo: null,
+		};
 	}
 
 	return {
 		error: null,
-		loading: false,
+		artistTopTracksloading: false,
 		artistTopTracksInfo: data?.tracks || null,
 	};
 }

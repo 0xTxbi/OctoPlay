@@ -7,7 +7,7 @@ export interface ArtistRelatedArtists {
 
 interface ArtistRelatedArtistsHookResult {
 	error: Error | null;
-	loading: boolean;
+	artistRelatedArtistsloading: boolean;
 	artistRelatedArtistsInfo: ArtistRelatedArtists[] | null;
 }
 
@@ -22,13 +22,11 @@ function useArtistRelatedArtists({
 		topTracks: ArtistRelatedArtists[];
 	}>(url);
 
-	console.log(data);
-
 	// Loading and error states
 	if (isLoading) {
 		return {
 			error: null,
-			loading: true,
+			artistRelatedArtistsloading: true,
 			artistRelatedArtistsInfo: null,
 		};
 	}
@@ -36,14 +34,14 @@ function useArtistRelatedArtists({
 	if (error) {
 		return {
 			error,
-			loading: false,
+			artistRelatedArtistsloading: false,
 			artistRelatedArtistsInfo: null,
 		};
 	}
 
 	return {
 		error: null,
-		loading: false,
+		artistRelatedArtistsloading: false,
 		artistRelatedArtistsInfo: data?.artists || null,
 	};
 }

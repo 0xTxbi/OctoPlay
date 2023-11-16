@@ -9,7 +9,7 @@ export interface ArtistAlbums {
 
 interface ArtistAlbumHookResult {
 	error: Error | null;
-	loading: boolean;
+	artistAlbumloading: boolean;
 	artistAlbumsInfo: ArtistAlbums[] | null;
 }
 
@@ -20,21 +20,27 @@ function useArtistAlbums({ id }: { id: string }): ArtistAlbumHookResult {
 		albums: ArtistAlbums[];
 	}>(url);
 
-	console.log(data);
-
 	// Loading and error states
 	if (isLoading) {
-		return { error: null, loading: true, artistAlbumsInfo: null };
+		return {
+			error: null,
+			artistAlbumloading: true,
+			artistAlbumsInfo: null,
+		};
 	}
 
 	if (error) {
-		return { error, loading: false, artistAlbumsInfo: null };
+		return {
+			error,
+			artistAlbumloading: false,
+			artistAlbumsInfo: null,
+		};
 	}
 
 	return {
 		error: null,
-		loading: false,
-		artistAlbumsInfo: data?.albums || null,
+		artistAlbumloading: false,
+		artistAlbumsInfo: data?.items || null,
 	};
 }
 

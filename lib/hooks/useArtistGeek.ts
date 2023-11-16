@@ -1,13 +1,13 @@
-import { TopTrackCardComponentProps } from "@/components/ui/top-track-card";
-import useArtists from "./useArtists";
-import useTrack from "./useTrack";
-import useTrackFeatures from "./useTrackFeatures";
+import useArtists, { Artist } from "./useArtists";
 import { TopArtistCardComponentProps } from "@/components/ui/top-artist-card";
 import useArtistAlbums, { ArtistAlbums } from "./useArtistAlbums";
 import useArtistTopTracks from "./useArtistTopTracks";
 import useArtistRelatedArtists from "./useArtistRelatedArtists";
 
-export interface ArtistGeek extends TopArtistCardComponentProps {}
+export interface ArtistGeek extends TopArtistCardComponentProps {
+	uri: string;
+	albums: [];
+}
 
 interface ArtistTopTracks {}
 
@@ -16,32 +16,55 @@ interface ArtistRelatedArtists {}
 interface ArtistGeekHookResult {
 	error: Error | null;
 	loading: boolean;
-	artistsGeekInfo: ArtistGeek[] | null;
-	artistAlbumsGeekInfo: ArtistAlbums[] | null;
+	artistsGeekInfo: ArtistGeek | Artist | null;
+	artistAlbumsGeekInfo: ArtistAlbums | null;
 	artistTopTracksGeekInfo: ArtistTopTracks[] | null;
 	artistRelatedArtistsGeekInfo: ArtistRelatedArtists[] | null;
 }
 
 function useArtistGeek({ id }: { id: string }): ArtistGeekHookResult {
 	// fetch artist details
-	const { artistsInfo, error, loading } = useArtists({ ids: id });
+	const {
+		artistsInfo,
+		error: artistError,
+		artistloading,
+	} = useArtists({ ids: id });
 
 	// fetch their albums
-	const { artistAlbumsInfo } = useArtistAlbums({ id: id });
+	const {
+		artistAlbumsInfo,
+		error: albumError,
+		artistAlbumloading,
+	} = useArtistAlbums({ id: id });
 
 	// fetch their top tracks
-	const { artistTopTracksInfo } = useArtistTopTracks({ id: id });
+	const {
+		artistTopTracksInfo,
+		error: topTracksError,
+		artistTopTracksloading,
+	} = useArtistTopTracks({ id: id });
 
 	// fetch artists related to them
-	const { artistRelatedArtistsInfo } = useArtistRelatedArtists({
+	const {
+		artistRelatedArtistsInfo,
+		error: relatedArtistsError,
+		artistRelatedArtistsloading,
+	} = useArtistRelatedArtists({
 		id: id,
 	});
 
-	// fetch track's audio features
-	// const { trackFeaturesInfo } = useTrackFeatures({ id: id });
+	// Check if all sub-hooks have resolved
+	const allSubHooksResolved =
+		!artistloading &&
+		!albumError &&
+		!artistAlbumloading &&
+		!topTracksError &&
+		!artistTopTracksloading &&
+		!relatedArtistsError &&
+		!artistRelatedArtistsloading;
 
 	// loading and error states
-	if (loading) {
+	if (!allSubHooksResolved) {
 		return {
 			error: null,
 			loading: true,
@@ -52,9 +75,18 @@ function useArtistGeek({ id }: { id: string }): ArtistGeekHookResult {
 		};
 	}
 
-	if (error) {
+	if (
+		artistError ||
+		albumError ||
+		topTracksError ||
+		relatedArtistsError
+	) {
 		return {
-			error: error,
+			error:
+				artistError ||
+				albumError ||
+				topTracksError ||
+				relatedArtistsError,
 			loading: false,
 			artistsGeekInfo: null,
 			artistAlbumsGeekInfo: null,
@@ -66,7 +98,7 @@ function useArtistGeek({ id }: { id: string }): ArtistGeekHookResult {
 	return {
 		error: null,
 		loading: false,
-		artistsGeekInfo: artistsInfo,
+		artistsGeekInfo: artistsInfo[0],
 		artistAlbumsGeekInfo: artistAlbumsInfo,
 		artistTopTracksGeekInfo: artistTopTracksInfo,
 		artistRelatedArtistsGeekInfo: artistRelatedArtistsInfo,

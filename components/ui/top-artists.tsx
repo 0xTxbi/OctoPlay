@@ -14,8 +14,6 @@ export function TopArtists({ className, ...props }: TopArtistsProps) {
 		time_range: time_range,
 	});
 
-	console.log(topArtists);
-
 	const handleTimeRangeChange = (value: string) => {
 		setTime_range(value);
 	};

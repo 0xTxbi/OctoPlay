@@ -8,17 +8,19 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import { truncateText } from "../../lib/utils";
-import { InfoCircledIcon, PlayIcon } from "@radix-ui/react-icons";
+import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { Badge } from "./badge";
 import VerifiedIcon from "./icons/verified-icon";
 import { Progress } from "./progress";
+import useArtistGeek from "@/lib/hooks/useArtistGeek";
+import { ArtistSheet } from "./artist-sheet";
 
 type TopArtistCardProps = React.ComponentProps<typeof Card>;
 
 export interface TopArtistCardComponentProps extends TopArtistCardProps {
 	artistId: string;
 	name: string;
-	image: string;
+	image: string | any;
 	followers: number;
 	genres: string[];
 	popularity: number;
@@ -34,9 +36,18 @@ export function TopArtistCard({
 	className,
 	...props
 }: TopArtistCardComponentProps) {
-	// const { trackGeekInfo, artistGeekInfo } = useTrackGeek({
-	// 	id: trackId,
-	// });
+	const {
+		artistsGeekInfo,
+		artistAlbumsGeekInfo,
+		artistTopTracksGeekInfo,
+		artistRelatedArtistsGeekInfo,
+		loading,
+		error,
+	} = useArtistGeek({
+		id: artistId,
+	});
+
+	console.log(loading);
 
 	return (
 		<>
@@ -88,28 +99,39 @@ export function TopArtistCard({
 						<InfoCircledIcon className="mr-2 h-4 w-4" />{" "}
 						Info
 					</Button>
-					{/* <TrackSheet
-						name={trackGeekInfo?.name}
-						image={
-							trackGeekInfo?.album
-								?.images[0].url
-						}
-						album={
-							trackGeekInfo?.album
-								.name
-						}
-						releaseDate={
-							trackGeekInfo?.album
-								?.release_date
-						}
-						duration={
-							trackGeekInfo?.duration_ms
-						}
-						explicit={
-							trackGeekInfo?.explicit
-						}
-						artist={artistGeekInfo}
-					/> */}
+
+					{!loading && (
+						<ArtistSheet
+							artistId={
+								artistsGeekInfo?.id
+							}
+							name={
+								artistsGeekInfo?.name
+							}
+							image={
+								artistsGeekInfo
+									?.images[0]
+									.url
+							}
+							followers={formatFollowersCount(
+								artistsGeekInfo
+									?.followers
+									?.total
+							)}
+							genres={
+								artistsGeekInfo?.genres
+							}
+							popularity={
+								artistsGeekInfo?.popularity
+							}
+							uri={
+								artistsGeekInfo?.uri
+							}
+							albums={
+								artistAlbumsGeekInfo
+							}
+						/>
+					)}
 				</CardFooter>
 			</Card>
 		</>

@@ -1,6 +1,6 @@
 import useAuthenticatedSWR from "./useAuthSWR";
 
-interface Artist {
+export interface Artist {
 	artistId: string;
 	name: string;
 	image: string;
@@ -11,7 +11,7 @@ interface Artist {
 
 interface ArtistHookResult {
 	error: Error | null;
-	loading: boolean;
+	artistloading: boolean;
 	artistsInfo: Artist[] | null;
 }
 
@@ -24,16 +24,16 @@ function useArtists({ ids }: { ids: string }): ArtistHookResult {
 
 	// Loading and error states
 	if (isLoading) {
-		return { error: null, loading: true, artistsInfo: null };
+		return { error: null, artistloading: true, artistsInfo: null };
 	}
 
 	if (error) {
-		return { error, loading: false, artistsInfo: null };
+		return { error, artistloading: false, artistsInfo: null };
 	}
 
 	return {
 		error: null,
-		loading: false,
+		artistloading: false,
 		artistsInfo: data?.artists || null,
 	};
 }
