@@ -61,13 +61,13 @@ export function UserMenu({ userBasicDetails }: UserMenuProps) {
 				</DropdownMenuLabel>
 				<DropdownMenuSeparator />
 				<DropdownMenuGroup>
-					<DropdownMenuItem>
+					<DropdownMenuItem disabled>
 						Profile
 						<DropdownMenuShortcut>
 							⇧⌘P
 						</DropdownMenuShortcut>
 					</DropdownMenuItem>
-					<DropdownMenuItem>
+					<DropdownMenuItem disabled>
 						Open Spotify App
 						<DropdownMenuShortcut>
 							⌘S

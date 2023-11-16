@@ -92,14 +92,6 @@ export function TopArtistCard({
 					/>
 				</CardContent>
 				<CardFooter className="space-x-2">
-					<Button
-						disabled
-						className="w-full bg-green-400"
-					>
-						<InfoCircledIcon className="mr-2 h-4 w-4" />{" "}
-						Info
-					</Button>
-
 					{!loading && (
 						<ArtistSheet
 							artistId={

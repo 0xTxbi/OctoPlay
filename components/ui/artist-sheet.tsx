@@ -45,7 +45,7 @@ export function ArtistSheet({
 			<SheetTrigger asChild>
 				<Button className="w-full bg-green-400">
 					<InfoCircledIcon className="mr-2 h-4 w-4" />
-					Stats
+					Info
 				</Button>
 			</SheetTrigger>
 			<SheetContent className="flex flex-col">
