@@ -28,6 +28,7 @@ export function UserMenu({ userBasicDetails }: UserMenuProps) {
 			<DropdownMenuTrigger asChild>
 				<Avatar className="hover:cursor-pointer">
 					<AvatarImage
+						className="object-cover"
 						src={
 							userBasicDetails?.image ||
 							undefined
