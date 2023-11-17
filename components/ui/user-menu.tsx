@@ -82,9 +82,6 @@ export function UserMenu({ userBasicDetails }: UserMenuProps) {
 					}
 				>
 					Log out
-					<DropdownMenuShortcut>
-						⇧⌘Q
-					</DropdownMenuShortcut>
 				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>

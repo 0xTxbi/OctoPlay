@@ -19,10 +19,8 @@ function useTopArtists({
 	);
 
 	const artistsIds = data?.items?.map((artist) => artist.id).join(",");
-	console.log(artistsIds);
 
 	const { artistsInfo } = useArtists({ ids: artistsIds });
-	console.log(artistsInfo);
 
 	// handle loading and error states
 	if (isLoading) {

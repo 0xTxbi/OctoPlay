@@ -14,6 +14,7 @@ import VerifiedIcon from "./icons/verified-icon";
 import { Progress } from "./progress";
 import useArtistGeek from "@/lib/hooks/useArtistGeek";
 import { ArtistSheet } from "./artist-sheet";
+import useArtists from "@/lib/hooks/useArtists";
 
 type TopArtistCardProps = React.ComponentProps<typeof Card>;
 
@@ -46,8 +47,6 @@ export function TopArtistCard({
 	} = useArtistGeek({
 		id: artistId,
 	});
-
-	console.log(artistRelatedArtistsGeekInfo);
 
 	return (
 		<>

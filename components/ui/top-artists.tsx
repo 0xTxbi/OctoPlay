@@ -18,6 +18,8 @@ export function TopArtists({ className, ...props }: TopArtistsProps) {
 		setTime_range(value);
 	};
 
+	console.log(loading);
+
 	return (
 		<>
 			<div className="flex justify-end">
@@ -27,22 +29,31 @@ export function TopArtists({ className, ...props }: TopArtistsProps) {
 				/>
 			</div>
 
-			{loading && <CardSkeleton mode="artists" />}
-			<Carousel>
-				{topArtists?.map((artist) => (
-					<TopArtistCard
-						key={artist.id}
-						artistId={artist.id}
-						name={artist.name}
-						image={artist.images[1].url}
-						followers={
-							artist.followers?.total
-						}
-						genres={artist.genres}
-						popularity={artist.popularity}
-					/>
-				))}
-			</Carousel>
+			{loading ? (
+				<CardSkeleton mode="artists" />
+			) : (
+				<Carousel>
+					{topArtists?.map((artist) => (
+						<TopArtistCard
+							key={artist.id}
+							artistId={artist.id}
+							name={artist.name}
+							image={
+								artist.images[1]
+									.url
+							}
+							followers={
+								artist.followers
+									?.total
+							}
+							genres={artist.genres}
+							popularity={
+								artist.popularity
+							}
+						/>
+					))}
+				</Carousel>
+			)}
 		</>
 	);
 }

@@ -28,11 +28,11 @@ const CarouselMini: React.FC<CarouselMiniProps> = ({ children }) => {
 	const settings = {
 		speed: 500,
 		centerMode: true,
+		fade: true,
 		arrows: false,
 		swipe: false,
 		slidesToShow: 1,
 		slidesToScroll: 1,
-		initialSlide: 0,
 		responsive: [
 			{
 				breakpoint: 1024,
