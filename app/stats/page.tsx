@@ -1,12 +1,17 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import ArrowLeftIcon from "@/components/ui/icons/arrow-left-icon";
 import { MainNav } from "@/components/ui/main-nav";
-import { TopTracks } from "@/components/ui/top-tracks";
-import useAuthSWR from "@/lib/hooks/useAuthSWR";
+import useCurrentUser from "@/lib/hooks/useCurrentuser";
+import usePlaylists from "@/lib/hooks/useUserPlaylists";
 import Link from "next/link";
 
 export default function Stats() {
+	const { userInfo } = useCurrentUser();
+	const { playlistsInfo } = usePlaylists();
+
+	console.log(playlistsInfo);
+
+	console.log(userInfo);
 	return (
 		<div>
 			<Link href="/">
