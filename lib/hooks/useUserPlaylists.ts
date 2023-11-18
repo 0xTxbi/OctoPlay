@@ -11,7 +11,7 @@ interface Playlist {
 	items: PlaylistItem[];
 }
 
-interface PlaylistItem {
+export interface PlaylistItem {
 	collaborative: boolean;
 	description: string;
 	external_urls: {
@@ -35,7 +35,7 @@ interface PlaylistItem {
 		uri: string;
 		display_name: string;
 	};
-	public: boolean;
+	isPublic: boolean;
 	snapshot_id: string;
 	tracks: {
 		href: string;
@@ -45,7 +45,7 @@ interface PlaylistItem {
 	uri: string;
 }
 
-interface PlaylistImage {
+export interface PlaylistImage {
 	url: string;
 	height: number;
 	width: number;

@@ -6,12 +6,6 @@ import usePlaylists from "@/lib/hooks/useUserPlaylists";
 import Link from "next/link";
 
 export default function Stats() {
-	const { userInfo } = useCurrentUser();
-	const { playlistsInfo } = usePlaylists();
-
-	console.log(playlistsInfo);
-
-	console.log(userInfo);
 	return (
 		<div>
 			<Link href="/">
