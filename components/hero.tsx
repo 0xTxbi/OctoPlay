@@ -7,6 +7,7 @@ import { ArrowRightIcon } from "@radix-ui/react-icons";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import * as React from "react";
+import AudioPlayer from "./ui/audio-player";
 
 export default function Hero() {
 	const { status } = useSession();
@@ -81,6 +82,8 @@ export default function Hero() {
 					</React.Fragment>
 				)}
 			</div>
+
+			<AudioPlayer />
 
 			<div></div>
 		</main>
