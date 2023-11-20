@@ -23,6 +23,8 @@ import Divider from "./divider";
 import { Badge } from "./badge";
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 import { ScrollArea } from "./scroll-area";
+import { useState } from "react";
+import AudioPlayer from "./audio-player";
 
 export function TrackSheet({
 	trackId,
@@ -38,6 +40,8 @@ export function TrackSheet({
 	className,
 	...props
 }: TrackGeek) {
+	const [isAudioPlayerVisible, setIsAudioPlayerVisible] = useState(false);
+
 	return (
 		<Sheet>
 			<SheetTrigger asChild>
@@ -81,7 +85,11 @@ export function TrackSheet({
 									</span>
 								</div>
 								<Button
-									disabled
+									onClick={() =>
+										setIsAudioPlayerVisible(
+											!isAudioPlayerVisible
+										)
+									}
 									className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center"
 								>
 									<PlayIcon className="h-12 w-12" />
@@ -162,6 +170,7 @@ export function TrackSheet({
 					</SheetClose>
 				</SheetFooter>
 			</SheetContent>
+			{isAudioPlayerVisible && <AudioPlayer />}
 		</Sheet>
 	);
 }
