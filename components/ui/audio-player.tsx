@@ -1,57 +1,92 @@
-import React, { useState, useRef } from "react";
-import { formatDuration } from "@/lib/utils";
+import React, { useState, useRef, useEffect } from "react";
 import {
 	IconPlayerPause,
 	IconPlayerPlay,
 	IconPlayerSkipBack,
 	IconPlayerSkipForward,
 } from "@tabler/icons-react";
-import { Button } from "./button";
 import { Slider } from "./slider";
 import Portal from "../portal";
+import Image from "next/image";
+import { formatTrackDuration } from "@/lib/utils";
+import { Progress } from "./progress";
 
 interface AudioPlayerProps {
-	url: string;
+	url?: string;
+	name?: string;
 	image: string;
-	duration: number;
 }
 
-const AudioPlayer: React.FC<AudioPlayerProps> = ({ url, image, duration }) => {
-	const audioRef = useRef<HTMLAudioElement>(null);
-	const [isPlaying, setIsPlaying] = useState(false);
+const AudioPlayer: React.FC<AudioPlayerProps> = ({ url, name, image }) => {
+	const audioRef = useRef<HTMLAudioElement | null>(null);
+	const isPlayingRef = useRef<boolean>(false);
+	const currentTimeRef = useRef<number>(0);
+
+	const handleTimeUpdate = () => {
+		const audio = audioRef.current;
+		if (audio) {
+			currentTimeRef.current = audio.currentTime;
+		}
+	};
+
+	const handleEnded = () => {
+		isPlayingRef.current = false;
+		currentTimeRef.current = 0;
+	};
 
 	const handlePlayPause = () => {
 		const audio = audioRef.current;
 
 		if (audio) {
-			if (isPlaying) {
+			if (isPlayingRef.current) {
 				audio.pause();
 			} else {
 				audio.play();
 			}
-			setIsPlaying((prevIsPlaying) => !prevIsPlaying);
+			isPlayingRef.current = !isPlayingRef.current;
 		}
 	};
 
+	useEffect(() => {
+		const audio = audioRef.current;
+
+		if (audio) {
+			audio.play().then(() => {
+				isPlayingRef.current = true;
+			});
+
+			return () => {
+				audio.pause();
+				audio.currentTime = 0;
+			};
+		}
+
+		return () => {};
+	}, []);
+
 	return (
 		<Portal>
-			<div className="fixed z-[99999px] bottom-2 h-15 w-[400px] left-2 rounded-md p-4 flex items-center space-x-4 bg--200 shadow-lg">
+			<div className="fixed z-[99999px] bottom-2 h-15 w-[400px] left-2 rounded-md p-4 flex items-center space-x-4 bg-[#0b0a0a] shadow-lg">
 				<div className="h-[100px] w-[100px]">
-					<img
-						src="http://localhost:3000/_next/image?url=https%3A%2F%2Fi.scdn.co%2Fimage%2Fab67616d0000b2739bf7698a1737bc7c2e4a14f3&w=640&q=75"
+					<Image
+						src={image}
 						alt="Album Cover"
+						height={100}
+						width={100}
 						className="h-full w-auto object-cover rounded-md"
 					/>
 				</div>
 
 				<div className="flex-grow justify-center">
-					<p className="text-white text-center">
-						Now Playing
+					<p className="text-white text-md tracking-wide text-center">
+						{name}
 					</p>
 					<audio
 						ref={audioRef}
 						src={url}
 						preload="auto"
+						onTimeUpdate={handleTimeUpdate}
+						onEnded={handleEnded}
 					/>
 					<div className="flex items-center justify-center mt-1">
 						<button>
@@ -63,7 +98,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ url, image, duration }) => {
 							}
 							className="text-white"
 						>
-							{isPlaying ? (
+							{isPlayingRef.current ? (
 								<IconPlayerPause className="h-6 w-6" />
 							) : (
 								<IconPlayerPlay className="h-6 w-6" />
@@ -74,11 +109,18 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ url, image, duration }) => {
 						</button>
 						<span className="text-white"></span>
 					</div>
-					<Slider
+					<Progress
 						className="mt-3"
-						max={100}
-						step={1}
+						max={30}
+						value={currentTimeRef.current}
 					/>
+					<p className="text-gray-500 text-xs mt-2 text-right">
+						{formatTrackDuration(
+							currentTimeRef.current *
+								1000
+						)}
+						/0:30
+					</p>
 				</div>
 			</div>
 		</Portal>

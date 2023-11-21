@@ -12,6 +12,8 @@ import { PlayIcon } from "@radix-ui/react-icons";
 import { TrackSheet } from "./track-sheet";
 import useTrackGeek from "@/lib/hooks/useTrackGeek";
 import { IconUser, IconVinyl } from "@tabler/icons-react";
+import AudioPlayer from "./audio-player";
+import { useState } from "react";
 
 type TopTrackCardProps = React.ComponentProps<typeof Card>;
 
@@ -36,6 +38,7 @@ export function TopTrackCard({
 	className,
 	...props
 }: TopTrackCardComponentProps) {
+	const [isAudioPlayerVisible, setIsAudioPlayerVisible] = useState(false);
 	const { trackGeekInfo, artistGeekInfo } = useTrackGeek({
 		id: trackId,
 	});
@@ -74,7 +77,11 @@ export function TopTrackCard({
 				</CardContent>
 				<CardFooter className="space-x-2">
 					<Button
-						disabled
+						onClick={() =>
+							setIsAudioPlayerVisible(
+								!isAudioPlayerVisible
+							)
+						}
 						className="w-full bg-green-400"
 					>
 						<PlayIcon className="mr-2 h-4 w-4" />{" "}
@@ -104,6 +111,17 @@ export function TopTrackCard({
 					/>
 				</CardFooter>
 			</Card>
+
+			{isAudioPlayerVisible && (
+				<AudioPlayer
+					url={trackGeekInfo?.preview_url}
+					name={trackGeekInfo?.name}
+					image={
+						trackGeekInfo?.album?.images[0]
+							.url
+					}
+				/>
+			)}
 		</>
 	);
 }

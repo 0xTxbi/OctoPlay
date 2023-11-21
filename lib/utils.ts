@@ -62,6 +62,17 @@ export function formatDuration(durationInMs: number): string {
 	return `${formattedHours} ${formattedMinutes} ${formattedSeconds}`.trim();
 }
 
+// format track duration
+export function formatTrackDuration(duration: number): string {
+	const minutes = Math.floor(duration / 60000);
+	const seconds = Math.floor((duration % 60000) / 1000);
+
+	const minutesString = String(minutes).padStart(2, "0");
+	const secondsString = String(seconds).padStart(2, "0");
+
+	return `${minutesString}:${secondsString}`;
+}
+
 // format followers count
 export function formatFollowersCount(count: number): string {
 	const suffixes = ["", "k", "M", "B", "T"];

@@ -40,8 +40,6 @@ export function TrackSheet({
 	className,
 	...props
 }: TrackGeek) {
-	const [isAudioPlayerVisible, setIsAudioPlayerVisible] = useState(false);
-
 	return (
 		<Sheet>
 			<SheetTrigger asChild>
@@ -85,11 +83,7 @@ export function TrackSheet({
 									</span>
 								</div>
 								<Button
-									onClick={() =>
-										setIsAudioPlayerVisible(
-											!isAudioPlayerVisible
-										)
-									}
+									disabled
 									className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center"
 								>
 									<PlayIcon className="h-12 w-12" />
@@ -170,7 +164,6 @@ export function TrackSheet({
 					</SheetClose>
 				</SheetFooter>
 			</SheetContent>
-			{isAudioPlayerVisible && <AudioPlayer />}
 		</Sheet>
 	);
 }

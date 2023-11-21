@@ -2,9 +2,10 @@ import { Card } from "@/components/ui/card";
 import { TopTrackCard } from "./top-track-card";
 import Carousel from "./carousel";
 import useTopTracks from "@/lib/hooks/useTopTracks";
-import React from "react";
+import React, { useState } from "react";
 import { RangeFilter } from "./range-filter-dropdown";
 import CardSkeleton from "./card-skeleton";
+import AudioPlayer from "./audio-player";
 
 type TopTracksProps = React.ComponentProps<typeof Card>;
 
