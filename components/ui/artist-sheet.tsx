@@ -104,7 +104,12 @@ export function ArtistSheet({
 									(
 										genre
 									) => (
-										<Badge className="mr-2">
+										<Badge
+											key={
+												genre.name
+											}
+											className="mr-2"
+										>
 											{
 												genre
 											}
