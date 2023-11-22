@@ -45,11 +45,11 @@ export function UserPlaylistsCard({
 							{`${tracks?.total} tracks`}
 						</h3>
 					</span>
-					<h3 className="scroll-m-20 text-xs font-normal tracking-normal">
+					{/* <h3 className="scroll-m-20 text-xs font-normal tracking-normal">
 						{description?.length > 0
 							? description
 							: "no playlist description attached"}
-					</h3>
+					</h3> */}
 					<h2 className="scroll-m-20 text-xl font-semibold tracking-normal">
 						<Badge>
 							{isPublic

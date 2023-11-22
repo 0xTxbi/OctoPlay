@@ -1,5 +1,4 @@
 import { cn, formatFollowersCount } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import {
 	Card,
 	CardContent,
@@ -8,13 +7,11 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import { truncateText } from "../../lib/utils";
-import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { Badge } from "./badge";
 import VerifiedIcon from "./icons/verified-icon";
 import { Progress } from "./progress";
 import useArtistGeek from "@/lib/hooks/useArtistGeek";
 import { ArtistSheet } from "./artist-sheet";
-import useArtists from "@/lib/hooks/useArtists";
 
 type TopArtistCardProps = React.ComponentProps<typeof Card>;
 

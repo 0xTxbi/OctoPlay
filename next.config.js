@@ -4,15 +4,9 @@ const nextConfig = {
 		remotePatterns: [
 			{
 				protocol: "https",
-				hostname: "image-cdn-ak.spotifycdn.com",
+				hostname: "**",
 				port: "",
-				pathname: "/image/**",
-			},
-			{
-				protocol: "https",
-				hostname: "i.scdn.co",
-				port: "",
-				pathname: "/image/**",
+				pathname: "**",
 			},
 		],
 	},
