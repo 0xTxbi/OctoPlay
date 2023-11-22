@@ -18,7 +18,6 @@ export function UserPlaylistsCard({
 	images,
 	...props
 }: PlaylistItem) {
-	console.log(description);
 	return (
 		<>
 			<Card

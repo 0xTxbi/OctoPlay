@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import {
 	Card,
 	CardContent,
@@ -8,7 +7,6 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import { truncateText } from "../../lib/utils";
-import { PlayIcon } from "@radix-ui/react-icons";
 import { TrackSheet } from "./track-sheet";
 import useTrackGeek from "@/lib/hooks/useTrackGeek";
 import { IconUser, IconVinyl } from "@tabler/icons-react";
@@ -38,7 +36,6 @@ export function TopTrackCard({
 	className,
 	...props
 }: TopTrackCardComponentProps) {
-	const [isAudioPlayerVisible, setIsAudioPlayerVisible] = useState(false);
 	const { trackGeekInfo, artistGeekInfo } = useTrackGeek({
 		id: trackId,
 	});
@@ -46,16 +43,16 @@ export function TopTrackCard({
 	return (
 		<>
 			<Card
-				className={cn("mr-5", className)}
+				className={cn("mr-5 max-w-[300px]", className)}
 				{...props}
 			>
 				<CardHeader className="p-0">
 					<Image
 						className="rounded-t-md max-h-[350px]"
 						src={artwork}
-						alt="Picture of the author"
-						width={350}
-						height={350}
+						alt={`artwork of the ${name} track`}
+						width={300}
+						height={300}
 					/>
 				</CardHeader>
 				<CardContent className="grid gap-4 mt-5">
@@ -76,17 +73,6 @@ export function TopTrackCard({
 					</span>
 				</CardContent>
 				<CardFooter className="space-x-2">
-					<Button
-						onClick={() =>
-							setIsAudioPlayerVisible(
-								!isAudioPlayerVisible
-							)
-						}
-						className="w-full bg-green-400"
-					>
-						<PlayIcon className="mr-2 h-4 w-4" />{" "}
-						Play
-					</Button>
 					<TrackSheet
 						name={trackGeekInfo?.name}
 						image={
@@ -108,11 +94,14 @@ export function TopTrackCard({
 							trackGeekInfo?.explicit
 						}
 						artist={artistGeekInfo}
+						previewUrl={
+							trackGeekInfo?.preview_url
+						}
 					/>
 				</CardFooter>
 			</Card>
 
-			{isAudioPlayerVisible && (
+			{/* {isAudioPlayerVisible && (
 				<AudioPlayer
 					url={trackGeekInfo?.preview_url}
 					name={trackGeekInfo?.name}
@@ -121,7 +110,7 @@ export function TopTrackCard({
 							.url
 					}
 				/>
-			)}
+			)} */}
 		</>
 	);
 }

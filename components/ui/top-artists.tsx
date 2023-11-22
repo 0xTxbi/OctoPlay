@@ -18,8 +18,6 @@ export function TopArtists({ className, ...props }: TopArtistsProps) {
 		setTime_range(value);
 	};
 
-	console.log(loading);
-
 	return (
 		<>
 			<div className="flex justify-end">

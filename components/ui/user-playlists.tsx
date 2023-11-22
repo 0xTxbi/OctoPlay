@@ -9,7 +9,6 @@ type UserPlaylistsProps = React.ComponentProps<typeof Card>;
 
 export function UserPlaylists({ className, ...props }: UserPlaylistsProps) {
 	const { playlistsInfo, playlistsLoading, error } = usePlaylists();
-	console.log(playlistsInfo);
 
 	return (
 		<>

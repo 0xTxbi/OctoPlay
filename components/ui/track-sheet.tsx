@@ -23,8 +23,15 @@ import Divider from "./divider";
 import { Badge } from "./badge";
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 import { ScrollArea } from "./scroll-area";
-import { useState } from "react";
-import AudioPlayer from "./audio-player";
+import { useEffect, useRef, useState } from "react";
+import { Progress } from "./progress";
+import {
+	IconPlayerPause,
+	IconPlayerPlay,
+	IconVinyl,
+} from "@tabler/icons-react";
+
+const TRACK_PREVIEW_DURATION = 30;
 
 export function TrackSheet({
 	trackId,
@@ -40,6 +47,61 @@ export function TrackSheet({
 	className,
 	...props
 }: TrackGeek) {
+	const audioRef = useRef<HTMLAudioElement | null>(null);
+	const isPlayingRef = useRef<boolean>(false);
+	const [isPlaying, setIsPlaying] = useState(false);
+	const [currentTime, setCurrentTime] = useState(0);
+	const requestRef = useRef<number | null>(null);
+
+	const handlePlayPause = () => {
+		const audio = audioRef.current;
+
+		if (audio) {
+			if (isPlaying) {
+				audio.pause();
+				setIsPlaying(false);
+			} else {
+				audio.play();
+				setIsPlaying(true);
+				requestRef.current =
+					requestAnimationFrame(
+						updateCurrentTime
+					);
+			}
+		}
+	};
+
+	const updateCurrentTime = () => {
+		const audio = audioRef.current;
+		if (audio) {
+			setCurrentTime(audio.currentTime);
+			requestRef.current =
+				requestAnimationFrame(updateCurrentTime);
+		}
+	};
+
+	useEffect(() => {
+		const audio = audioRef.current;
+
+		if (audio) {
+			audio.addEventListener("ended", () => {
+				setIsPlaying(false);
+				cancelAnimationFrame(requestRef.current!);
+			});
+		}
+
+		return () => {
+			if (audio) {
+				audio.removeEventListener("ended", () => {
+					setIsPlaying(false);
+					cancelAnimationFrame(
+						requestRef.current!
+					);
+				});
+			}
+		};
+	}, []);
+
 	return (
 		<Sheet>
 			<SheetTrigger asChild>
@@ -48,7 +110,10 @@ export function TrackSheet({
 					Stats
 				</Button>
 			</SheetTrigger>
-			<SheetContent className="flex flex-col">
+			<SheetContent
+				className="flex flex-col"
+				onPointerDownOutside={(e) => e.preventDefault()}
+			>
 				<SheetHeader>
 					<SheetTitle>Track Info</SheetTitle>
 					<SheetDescription>
@@ -74,7 +139,7 @@ export function TrackSheet({
 										}
 									</h2>
 									<span className="flex items-center">
-										<DiscIcon className="mr-2 h-3 w-3" />
+										<IconVinyl className="mr-2 h-3 w-3" />
 										<h3 className="text-xs">
 											{
 												album
@@ -83,12 +148,30 @@ export function TrackSheet({
 									</span>
 								</div>
 								<Button
-									disabled
+									onClick={
+										handlePlayPause
+									}
 									className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center"
 								>
-									<PlayIcon className="h-12 w-12" />
+									{isPlaying ? (
+										<IconPlayerPause className="h-12 w-12" />
+									) : (
+										<IconPlayerPlay className="h-12 w-12" />
+									)}
 								</Button>
 							</div>
+							<audio
+								ref={audioRef}
+								src={previewUrl}
+								hidden
+							/>
+							<Progress
+								value={
+									(currentTime /
+										TRACK_PREVIEW_DURATION) *
+									100
+								}
+							/>
 							<Divider />
 							<ScrollArea className="h-10">
 								{artist?.map(
@@ -103,6 +186,7 @@ export function TrackSheet({
 										>
 											<Avatar>
 												<AvatarImage
+													className="object-cover"
 													src={
 														artiste
 															?.images[1]
