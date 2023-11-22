@@ -1,15 +1,13 @@
 "use client";
-import ArrowLeftIcon from "@/components/ui/icons/arrow-left-icon";
 import { MainNav } from "@/components/ui/main-nav";
-import useCurrentUser from "@/lib/hooks/useCurrentuser";
-import usePlaylists from "@/lib/hooks/useUserPlaylists";
+import { IconArrowLeft } from "@tabler/icons-react";
 import Link from "next/link";
 
 export default function Stats() {
 	return (
 		<div>
 			<Link href="/">
-				<ArrowLeftIcon className="mr-2 mt-5" />
+				<IconArrowLeft className="mr-2 mt-5 h-7 w-7 bg-green-500 rounded-full p-2" />
 			</Link>
 
 			<MainNav />

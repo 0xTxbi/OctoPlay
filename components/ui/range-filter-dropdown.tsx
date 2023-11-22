@@ -23,9 +23,9 @@ export const RangeFilter: React.FC<RangeFilterProps> = ({
 }) => (
 	<DropdownMenu>
 		<DropdownMenuTrigger asChild>
-			<Button className="bg-green-500 mb-4 text-end">
+			<Button className="bg-green-500 mb-4 text-end text-sm text-black">
 				<IconAdjustments
-					size={20}
+					size={15}
 					className="mr-2"
 				/>
 				Filter

@@ -18,7 +18,7 @@ export function MainNav({
 		>
 			<Tabs
 				defaultValue="top-tracks"
-				className="space-y-10 mb-10 mt-10"
+				className="space-y-10 mb-8 mt-8"
 			>
 				<TabsList>
 					<TabsTrigger value="top-tracks">

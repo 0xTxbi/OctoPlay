@@ -2,10 +2,9 @@ import { Card } from "@/components/ui/card";
 import { TopTrackCard } from "./top-track-card";
 import Carousel from "./carousel";
 import useTopTracks from "@/lib/hooks/useTopTracks";
-import React, { useState } from "react";
+import React from "react";
 import { RangeFilter } from "./range-filter-dropdown";
 import CardSkeleton from "./card-skeleton";
-import AudioPlayer from "./audio-player";
 
 type TopTracksProps = React.ComponentProps<typeof Card>;
 
@@ -28,23 +27,37 @@ export function TopTracks({ className, ...props }: TopTracksProps) {
 				/>
 			</div>
 
-			{loading && <CardSkeleton mode="artists" />}
 			<Carousel>
-				{topTracks?.map((track) => (
-					<TopTrackCard
-						key={track.id}
-						trackId={track.id}
-						name={track.name}
-						album={track.album?.name}
-						artwork={
-							track.album?.images[0]
-								.url
-						}
-						artist={track.artists[0].name}
-						duration={track.duration_ms}
-						previewUrl={track.preview_url}
-					/>
-				))}
+				{loading ? (
+					<CardSkeleton mode="artists" />
+				) : (
+					topTracks?.map((track) => (
+						<TopTrackCard
+							key={track.id}
+							trackId={track.id}
+							name={track.name}
+							album={
+								track.album
+									?.name
+							}
+							artwork={
+								track.album
+									?.images[0]
+									.url
+							}
+							artist={
+								track.artists[0]
+									.name
+							}
+							duration={
+								track.duration_ms
+							}
+							previewUrl={
+								track.preview_url
+							}
+						/>
+					))
+				)}
 			</Carousel>
 		</>
 	);

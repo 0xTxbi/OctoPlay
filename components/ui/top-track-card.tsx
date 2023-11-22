@@ -43,7 +43,10 @@ export function TopTrackCard({
 	return (
 		<>
 			<Card
-				className={cn("mr-5 max-w-[300px]", className)}
+				className={cn(
+					"mr-5 lg:max-w-[300px]",
+					className
+				)}
 				{...props}
 			>
 				<CardHeader className="p-0">
@@ -55,14 +58,17 @@ export function TopTrackCard({
 						height={300}
 					/>
 				</CardHeader>
-				<CardContent className="grid gap-4 mt-5">
-					<h2 className="scroll-m-20 text-xl font-semibold tracking-tight">
+				<CardContent className="grid gap-2 lg:gap-4 mt-5">
+					<h2 className="scroll-m-20 md:text-sm lg:text-xl font-semibold tracking-tight">
 						{truncateText(name, 20)}
 					</h2>
 					<span className="flex items-center text-gray-400">
 						<IconVinyl className="mr-1 h-4 w-4" />
 						<h3 className="scroll-m-20 text-xs font-normal tracking-tight">
-							{album}
+							{truncateText(
+								album,
+								10
+							)}
 						</h3>
 					</span>
 					<span className="flex items-center text-gray-400">

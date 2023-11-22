@@ -8,7 +8,7 @@ export default function Header() {
 
 	return (
 		<div className="flex-col items-center md:flex">
-			<div className="flex justify-around w-full h-16 items-center px-4">
+			<div className="flex justify-around w-full h-16 items-center">
 				<Link href="/">
 					<h3 className="text-xl font-medium tracking-tight lg:text-3xl">
 						OctoPlay

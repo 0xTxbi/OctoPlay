@@ -12,9 +12,7 @@ import { Button } from "@/components/ui/button";
 import {
 	CalendarIcon,
 	ClockIcon,
-	DiscIcon,
 	InfoCircledIcon,
-	PlayIcon,
 } from "@radix-ui/react-icons";
 import { TrackGeek } from "@/lib/hooks/useTrackGeek";
 import Image from "next/image";
@@ -105,8 +103,8 @@ export function TrackSheet({
 	return (
 		<Sheet>
 			<SheetTrigger asChild>
-				<Button className="w-full bg-green-400">
-					<InfoCircledIcon className="mr-2 h-4 w-4" />{" "}
+				<Button className="w-full bg-green-400 text-xs lg:text-sm">
+					<InfoCircledIcon className="mr-1 lg:mr-2 h-4 w-4" />{" "}
 					Stats
 				</Button>
 			</SheetTrigger>

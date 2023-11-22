@@ -15,7 +15,7 @@ export default function StatsLayout({
 		<section className="container mt-5">
 			<Header />
 
-			<div className="mx-5 h-full">{children}</div>
+			{children}
 		</section>
 	);
 }
