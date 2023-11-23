@@ -27,11 +27,11 @@ export function TopTracks({ className, ...props }: TopTracksProps) {
 				/>
 			</div>
 
-			<Carousel>
-				{loading ? (
-					<CardSkeleton mode="artists" />
-				) : (
-					topTracks?.map((track) => (
+			{loading ? (
+				<CardSkeleton mode="tracks" />
+			) : (
+				<Carousel>
+					{topTracks?.map((track) => (
 						<TopTrackCard
 							key={track.id}
 							trackId={track.id}
@@ -56,9 +56,9 @@ export function TopTracks({ className, ...props }: TopTracksProps) {
 								track.preview_url
 							}
 						/>
-					))
-				)}
-			</Carousel>
+					))}
+				</Carousel>
+			)}
 		</>
 	);
 }

@@ -1,3 +1,4 @@
+import Carousel from "./carousel";
 import { Skeleton } from "./skeleton";
 
 interface CardSkeletonProps {
@@ -6,18 +7,19 @@ interface CardSkeletonProps {
 
 const CardSkeleton: React.FC<CardSkeletonProps> = ({ mode }) => {
 	return mode === "tracks" ? (
-		<div>
-			<Skeleton className="h-[530px] w-[320px]" />
-			<Skeleton className="h-[530px] w-[320px]" />
-			<Skeleton className="h-[530px] w-[320px]" />
-			<Skeleton className="h-[530px] w-[320px]" />
-		</div>
+		<Carousel>
+			<Skeleton className="mr-5 h-[496px] w-[320px]" />
+			<Skeleton className="mr-5 h-[496px] w-[320px]" />
+			<Skeleton className="mr-5 h-[496px] w-[320px]" />
+			<Skeleton className="mr-5 h-[496px] w-[320px]" />
+		</Carousel>
 	) : (
-		<div>
-			<Skeleton className="h-[394px] w-[365px]" />
-			<Skeleton className="h-[394px] w-[365px]" />
-			<Skeleton className="h-[394px] w-[365px]" />
-		</div>
+		<Carousel>
+			<Skeleton className="mr-5 h-[394px] w-[365px]" />
+			<Skeleton className="mr-5 h-[394px] w-[365px]" />
+			<Skeleton className="mr-5 h-[394px] w-[365px]" />
+			<Skeleton className="mr-5 h-[394px] w-[365px]" />
+		</Carousel>
 	);
 };
 
