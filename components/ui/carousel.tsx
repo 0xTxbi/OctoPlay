@@ -4,8 +4,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./carousel.css";
-import { Button } from "./button";
-import SpotifyIcon from "./icons/spotify-icon";
 import ArrowRightIcon from "./icons/arrow-right-icon";
 import ArrowLeftIcon from "./icons/arrow-left-icon";
 

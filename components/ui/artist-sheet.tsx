@@ -9,12 +9,7 @@ import {
 	SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import {
-	CalendarIcon,
-	ClockIcon,
-	ExternalLinkIcon,
-	InfoCircledIcon,
-} from "@radix-ui/react-icons";
+import { ExternalLinkIcon, InfoCircledIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Divider from "./divider";
 import { Badge } from "./badge";
@@ -60,11 +55,11 @@ export function ArtistSheet({
 						<div className="space-y-4">
 							{/* track basic info */}
 							<Image
-								alt={`album cover of ${name}`}
+								alt={`album cover of ${name} `}
 								src={image}
 								width={640}
 								height={640}
-								className="rounded-md"
+								className="rounded-md "
 							/>
 							<div className="flex space place-content-between">
 								<div className="flex flex-col">
@@ -128,7 +123,7 @@ export function ArtistSheet({
 								</h3>
 							</span>
 
-							<div>
+							<div className="max-w-[250px]">
 								<CarouselMini>
 									{albums.map(
 										(
@@ -168,32 +163,7 @@ export function ArtistSheet({
 									</span>
 								</h3>
 							</span>
-							<div>
-								<CarouselMini>
-									{relatedArtists.map(
-										(
-											relatedArtist
-										) => (
-											<RelatedArtistsCard
-												key={
-													relatedArtist.id
-												}
-												name={
-													relatedArtist.name
-												}
-												image={
-													relatedArtist
-														.images[1]
-														.url
-												}
-												artistId={
-													relatedArtist.id
-												}
-											/>
-										)
-									)}
-								</CarouselMini>
-							</div>
+							<div></div>
 						</div>
 					</div>
 				</ScrollArea>

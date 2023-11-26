@@ -21,21 +21,21 @@ export function UserPlaylistsCard({
 	return (
 		<>
 			<Card
-				className={cn("mr-5")}
+				className={cn("max-w-[250px]")}
 				{...props}
 			>
 				<CardHeader className="p-0">
 					<Image
-						className="rounded-t-md max-h-[350px]"
+						className="rounded-t-md max-h-[250px] object-cover"
 						src={images[0]?.url}
 						alt="Picture of the author"
-						width={350}
-						height={350}
+						width={250}
+						height={250}
 					/>
 				</CardHeader>
 				<CardContent className="grid gap-4 mt-5">
 					<div className="flex space-x-1 items-center">
-						<h2 className="scroll-m-20 text-lg font-semibold tracking-tight">
+						<h2 className="scroll-m-20 text-md font-semibold tracking-tight">
 							{name}
 						</h2>
 					</div>

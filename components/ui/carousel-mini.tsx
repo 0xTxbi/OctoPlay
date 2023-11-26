@@ -3,7 +3,6 @@ import React, { ReactNode, useRef } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./carousel.css";
 import ArrowRightIcon from "./icons/arrow-right-icon";
 import ArrowLeftIcon from "./icons/arrow-left-icon";
 
@@ -46,9 +45,9 @@ const CarouselMini: React.FC<CarouselMiniProps> = ({ children }) => {
 			{
 				breakpoint: 600,
 				settings: {
-					slidesToShow: 2,
-					slidesToScroll: 2,
-					initialSlide: 2,
+					slidesToShow: 1,
+					slidesToScroll: 1,
+					initialSlide: 1,
 				},
 			},
 			{

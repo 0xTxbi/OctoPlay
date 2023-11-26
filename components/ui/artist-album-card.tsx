@@ -1,7 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Image from "next/image";
-import { truncateText } from "../../lib/utils";
 import { DiscIcon } from "@radix-ui/react-icons";
 
 type ArtistAlbumCardProps = React.ComponentProps<typeof Card>;
@@ -24,12 +23,12 @@ export function ArtistAlbumCard({
 	return (
 		<>
 			<Card
-				className={cn("w-[150px]", className)}
+				className={cn("max-w-[70%]", className)}
 				{...props}
 			>
 				<CardHeader className="p-0">
 					<Image
-						className="rounded-t-md"
+						className="rounded-t-md object-cover"
 						src={artwork}
 						alt="Picture of the author"
 						width={300}
