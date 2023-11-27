@@ -35,6 +35,7 @@ export function ArtistSheet({
 	className,
 	...props
 }: ArtistGeek) {
+	console.log(relatedArtists);
 	return (
 		<Sheet>
 			<SheetTrigger asChild>
@@ -163,7 +164,32 @@ export function ArtistSheet({
 									</span>
 								</h3>
 							</span>
-							<div></div>
+							<div>
+								<CarouselMini>
+									{relatedArtists.map(
+										(
+											artist
+										) => (
+											<RelatedArtistsCard
+												key={
+													artist.id
+												}
+												artistId={
+													artist.id
+												}
+												name={
+													artist.name
+												}
+												image={
+													artist
+														.images[2]
+														.url
+												}
+											/>
+										)
+									)}
+								</CarouselMini>
+							</div>
 						</div>
 					</div>
 				</ScrollArea>

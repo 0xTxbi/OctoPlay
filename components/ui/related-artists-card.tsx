@@ -23,12 +23,12 @@ export function RelatedArtistsCard({
 		<>
 			<Card
 				className={cn(
-					"w-[150px] border-none shadow-none",
+					"w-[150px] border-none shadow-none justify-center",
 					className
 				)}
 				{...props}
 			>
-				<CardHeader className="p-0">
+				<CardHeader className="p-0 justify-center text-center">
 					<Image
 						className="rounded-full p-[24px] max-h-[150px] object-cover"
 						src={image}
