@@ -1,5 +1,4 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -7,11 +6,10 @@ import {
 	DropdownMenuItem,
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
-	DropdownMenuShortcut,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { signOut } from "next-auth/react";
-import VerifiedIcon from "./icons/verified-icon";
+import { IconDiscountCheckFilled } from "@tabler/icons-react";
 
 interface UserMenuProps {
 	userBasicDetails?: {
@@ -50,7 +48,7 @@ export function UserMenu({ userBasicDetails }: UserMenuProps) {
 									userBasicDetails?.name
 								}
 							</p>
-							<VerifiedIcon />
+							<IconDiscountCheckFilled className="h-4 w-4 text-green-500" />
 						</div>
 						<p className="text-xs leading-none text-muted-foreground">
 							{
@@ -60,20 +58,7 @@ export function UserMenu({ userBasicDetails }: UserMenuProps) {
 					</div>
 				</DropdownMenuLabel>
 				<DropdownMenuSeparator />
-				<DropdownMenuGroup>
-					<DropdownMenuItem disabled>
-						Profile
-						<DropdownMenuShortcut>
-							⇧⌘P
-						</DropdownMenuShortcut>
-					</DropdownMenuItem>
-					<DropdownMenuItem disabled>
-						Open Spotify App
-						<DropdownMenuShortcut>
-							⌘S
-						</DropdownMenuShortcut>
-					</DropdownMenuItem>
-				</DropdownMenuGroup>
+				<DropdownMenuGroup></DropdownMenuGroup>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem
 					className="cursor-pointer"

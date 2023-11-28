@@ -15,9 +15,13 @@ import Divider from "./divider";
 import { Badge } from "./badge";
 import { ScrollArea } from "./scroll-area";
 import { ArtistGeek } from "@/lib/hooks/useArtistGeek";
-import VerifiedIcon from "./icons/verified-icon";
 import Link from "next/link";
-import { IconTags, IconUsersGroup, IconVinyl } from "@tabler/icons-react";
+import {
+	IconDiscountCheckFilled,
+	IconTags,
+	IconUsersGroup,
+	IconVinyl,
+} from "@tabler/icons-react";
 import { ArtistAlbumCard } from "./artist-album-card";
 import CarouselMini from "./carousel-mini";
 import { RelatedArtistsCard } from "./related-artists-card";
@@ -70,7 +74,7 @@ export function ArtistSheet({
 												name
 											}
 										</h2>
-										<VerifiedIcon />
+										<IconDiscountCheckFilled className="h-4 w-4 text-green-500" />
 									</div>
 									<span className="flex items-center">
 										<Badge variant="secondary">

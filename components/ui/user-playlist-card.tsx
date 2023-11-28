@@ -1,9 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Image from "next/image";
-import { truncateText } from "../../lib/utils";
 import { Badge } from "./badge";
-import VerifiedIcon from "./icons/verified-icon";
 import { PlaylistItem } from "@/lib/hooks/useUserPlaylists";
 import { IconDisc } from "@tabler/icons-react";
 

@@ -8,10 +8,10 @@ import {
 import Image from "next/image";
 import { truncateText } from "../../lib/utils";
 import { Badge } from "./badge";
-import VerifiedIcon from "./icons/verified-icon";
 import { Progress } from "./progress";
 import useArtistGeek from "@/lib/hooks/useArtistGeek";
 import { ArtistSheet } from "./artist-sheet";
+import { IconDiscountCheckFilled } from "@tabler/icons-react";
 
 type TopArtistCardProps = React.ComponentProps<typeof Card>;
 
@@ -65,7 +65,7 @@ export function TopArtistCard({
 						<h2 className="scroll-m-20 text-xl font-semibold tracking-normal">
 							{truncateText(name, 15)}
 						</h2>
-						<VerifiedIcon />
+						<IconDiscountCheckFilled className="h-4 w-4 text-green-500" />
 					</div>
 					<h2 className="scroll-m-20 text-xl font-semibold tracking-normal">
 						<Badge>
