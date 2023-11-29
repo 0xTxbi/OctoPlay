@@ -28,7 +28,7 @@ export function RelatedArtistsCard({
 				)}
 				{...props}
 			>
-				<CardHeader className="p-0 justify-center text-center">
+				<CardHeader className="p-0 flex justify-center items-center">
 					<Image
 						className="rounded-full p-[24px] max-h-[150px] object-cover"
 						src={image}
@@ -38,7 +38,7 @@ export function RelatedArtistsCard({
 					/>
 				</CardHeader>
 				<CardContent className="grid p-0">
-					<h2 className="scroll-m-20 text-xs text-center font-semibold tracking-normal">
+					<h2 className="scroll-m-20 text-xs font-semibold tracking-normal">
 						{name}
 					</h2>
 				</CardContent>
