@@ -10,8 +10,6 @@ import { truncateText } from "../../lib/utils";
 import { TrackSheet } from "./track-sheet";
 import useTrackGeek from "@/lib/hooks/useTrackGeek";
 import { IconUser, IconVinyl } from "@tabler/icons-react";
-import AudioPlayer from "./audio-player";
-import { useState } from "react";
 
 type TopTrackCardProps = React.ComponentProps<typeof Card>;
 
@@ -36,9 +34,10 @@ export function TopTrackCard({
 	className,
 	...props
 }: TopTrackCardComponentProps) {
-	const { trackGeekInfo, artistGeekInfo } = useTrackGeek({
-		id: trackId,
-	});
+	const { trackGeekInfo, artistGeekInfo, trackAudioFeatures } =
+		useTrackGeek({
+			id: trackId,
+		});
 
 	return (
 		<>
@@ -103,20 +102,12 @@ export function TopTrackCard({
 						previewUrl={
 							trackGeekInfo?.preview_url
 						}
+						audioFeatures={
+							trackAudioFeatures
+						}
 					/>
 				</CardFooter>
 			</Card>
-
-			{/* {isAudioPlayerVisible && (
-				<AudioPlayer
-					url={trackGeekInfo?.preview_url}
-					name={trackGeekInfo?.name}
-					image={
-						trackGeekInfo?.album?.images[0]
-							.url
-					}
-				/>
-			)} */}
 		</>
 	);
 }

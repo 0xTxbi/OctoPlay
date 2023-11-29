@@ -39,7 +39,6 @@ export function ArtistSheet({
 	className,
 	...props
 }: ArtistGeek) {
-	console.log(relatedArtists);
 	return (
 		<Sheet>
 			<SheetTrigger asChild>

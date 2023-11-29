@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import {
 	Sheet,
 	SheetClose,
@@ -21,7 +22,6 @@ import Divider from "./divider";
 import { Badge } from "./badge";
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 import { ScrollArea } from "./scroll-area";
-import { useEffect, useRef, useState } from "react";
 import { Progress } from "./progress";
 import {
 	IconPlayerPause,
@@ -32,24 +32,24 @@ import {
 const TRACK_PREVIEW_DURATION = 30;
 
 export function TrackSheet({
-	trackId,
 	name,
 	image,
 	album,
-	artwork,
 	releaseDate,
 	artist,
 	duration,
 	explicit,
 	previewUrl,
 	className,
-	...props
+	audioFeatures,
 }: TrackGeek) {
 	const audioRef = useRef<HTMLAudioElement | null>(null);
-	const isPlayingRef = useRef<boolean>(false);
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [currentTime, setCurrentTime] = useState(0);
 	const requestRef = useRef<number | null>(null);
+
+	const { acousticness, danceability, tempo, liveness, energy } =
+		audioFeatures;
 
 	const handlePlayPause = () => {
 		const audio = audioRef.current;
@@ -121,7 +121,6 @@ export function TrackSheet({
 				<ScrollArea>
 					<div className="grid gap-4 py-4">
 						<div className="space-y-4">
-							{/* track basic info */}
 							<Image
 								alt={`album cover of ${name}`}
 								src={image}
@@ -222,18 +221,71 @@ export function TrackSheet({
 									)}
 								</h3>
 							</span>
-
 							<Divider />
-							{/* badges */}
 							<div className="space-x-2">
-								{/* todo: properly guage popularity */}
-								{/* <Badge>popular</Badge> */}
 								<Badge>
 									{explicit ===
 									true
 										? "explicit"
 										: "not explicit"}
 								</Badge>
+							</div>
+							<Divider />
+							<div className="flex flex-col space-y-4">
+								<div>
+									<h4 className="text-xs mb-1">
+										Acousticness
+									</h4>
+									<Progress
+										value={
+											acousticness *
+											100
+										}
+									/>
+								</div>
+								<div>
+									<h4 className="text-xs mb-1">
+										Danceability
+									</h4>
+									<Progress
+										value={
+											danceability *
+											100
+										}
+									/>
+								</div>
+								<div>
+									<h4 className="text-xs mb-1">
+										Energy
+									</h4>
+									<Progress
+										value={
+											energy *
+											100
+										}
+									/>
+								</div>
+								<div>
+									<h4 className="text-xs mb-1">
+										Tempo
+									</h4>
+									<Progress
+										value={
+											tempo
+										}
+									/>
+								</div>
+								<div>
+									<h4 className="text-xs mb-1">
+										Liveness
+									</h4>
+									<Progress
+										value={
+											liveness *
+											100
+										}
+									/>
+								</div>
 							</div>
 						</div>
 					</div>

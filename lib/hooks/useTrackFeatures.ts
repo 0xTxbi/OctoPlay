@@ -1,20 +1,24 @@
 import useAuthenticatedSWR from "./useAuthSWR";
 
-interface TrackFeatures {
+export interface TrackAudioFeatures {
 	id: string;
-	name: string;
+	danceability: number;
+	tempo: number;
+	liveness: number;
+	acousticness: number;
+	energy: number;
 }
-
 interface TrackFeaturesHookResult {
 	error: Error | null;
 	loading: boolean;
-	trackFeaturesInfo: TrackFeatures | null;
+	trackFeaturesInfo: TrackAudioFeatures | null;
 }
 
 function useTrackFeatures({ id }: { id: string }): TrackFeaturesHookResult {
-	const { data, error, isLoading } = useAuthenticatedSWR<TrackFeatures>(
-		`https://api.spotify.com/v1/audio-features/${id}`
-	);
+	const { data, error, isLoading } =
+		useAuthenticatedSWR<TrackAudioFeatures>(
+			`https://api.spotify.com/v1/audio-features/${id}`
+		);
 
 	// loading and error states
 	if (isLoading) {

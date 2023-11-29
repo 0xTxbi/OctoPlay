@@ -1,22 +1,16 @@
 import { TopTrackCardComponentProps } from "@/components/ui/top-track-card";
 import useArtists from "./useArtists";
 import useTrack from "./useTrack";
-import useTrackFeatures from "./useTrackFeatures";
+import useTrackFeatures, { TrackAudioFeatures } from "./useTrackFeatures";
 
 export interface TrackGeek extends TopTrackCardComponentProps {
 	releaseDate: string;
 	explicit: boolean;
 	image: string;
-	// artistName: string;
-	// artistImage: string;
+	audioFeatures: TrackAudioFeatures;
 }
 
 interface ArtistGeek {
-	id: string;
-	name: string;
-}
-
-interface TrackAudioFeatures {
 	id: string;
 	name: string;
 }
@@ -26,6 +20,7 @@ interface TrackGeekHookResult {
 	loading: boolean;
 	trackGeekInfo: TrackGeek | null;
 	artistGeekInfo: ArtistGeek[] | null;
+	trackAudioFeatures: TrackAudioFeatures | null;
 }
 
 function useTrackGeek({ id }: { id: string }): TrackGeekHookResult {
@@ -41,7 +36,7 @@ function useTrackGeek({ id }: { id: string }): TrackGeekHookResult {
 	const { artistsInfo } = useArtists({ ids: artistIds });
 
 	// fetch track's audio features
-	// const { trackFeaturesInfo } = useTrackFeatures({ id: id });
+	const { trackFeaturesInfo } = useTrackFeatures({ id: id });
 
 	// loading and error states
 	if (loading) {
@@ -50,7 +45,7 @@ function useTrackGeek({ id }: { id: string }): TrackGeekHookResult {
 			loading: true,
 			trackGeekInfo: null,
 			artistGeekInfo: null,
-			// trackAudioFeatures: null,
+			trackAudioFeatures: null,
 		};
 	}
 
@@ -60,7 +55,7 @@ function useTrackGeek({ id }: { id: string }): TrackGeekHookResult {
 			loading: false,
 			trackGeekInfo: null,
 			artistGeekInfo: null,
-			// trackAudioFeatures: null,
+			trackAudioFeatures: null,
 		};
 	}
 
@@ -69,7 +64,7 @@ function useTrackGeek({ id }: { id: string }): TrackGeekHookResult {
 		loading: false,
 		trackGeekInfo: trackInfo,
 		artistGeekInfo: artistsInfo,
-		// trackAudioFeatures: trackFeaturesInfo,
+		trackAudioFeatures: trackFeaturesInfo,
 	};
 }
 
