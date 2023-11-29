@@ -48,9 +48,6 @@ export function TrackSheet({
 	const [currentTime, setCurrentTime] = useState(0);
 	const requestRef = useRef<number | null>(null);
 
-	const { acousticness, danceability, tempo, liveness, energy } =
-		audioFeatures;
-
 	const handlePlayPause = () => {
 		const audio = audioRef.current;
 
@@ -238,7 +235,7 @@ export function TrackSheet({
 									</h4>
 									<Progress
 										value={
-											acousticness *
+											audioFeatures?.acousticness *
 											100
 										}
 									/>
@@ -249,7 +246,7 @@ export function TrackSheet({
 									</h4>
 									<Progress
 										value={
-											danceability *
+											audioFeatures?.danceability *
 											100
 										}
 									/>
@@ -260,7 +257,7 @@ export function TrackSheet({
 									</h4>
 									<Progress
 										value={
-											energy *
+											audioFeatures?.energy *
 											100
 										}
 									/>
@@ -271,7 +268,7 @@ export function TrackSheet({
 									</h4>
 									<Progress
 										value={
-											tempo
+											audioFeatures?.tempo
 										}
 									/>
 								</div>
@@ -281,7 +278,7 @@ export function TrackSheet({
 									</h4>
 									<Progress
 										value={
-											liveness *
+											audioFeatures?.liveness *
 											100
 										}
 									/>

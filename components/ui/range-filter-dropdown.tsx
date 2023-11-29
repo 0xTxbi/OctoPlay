@@ -41,13 +41,22 @@ export const RangeFilter: React.FC<RangeFilterProps> = ({
 				value={value}
 				onValueChange={onValueChange}
 			>
-				<DropdownMenuRadioItem value="short_term">
+				<DropdownMenuRadioItem
+					value="short_term"
+					disabled={value === "short_term"}
+				>
 					Short term
 				</DropdownMenuRadioItem>
-				<DropdownMenuRadioItem value="medium_term">
+				<DropdownMenuRadioItem
+					value="medium_term"
+					disabled={value === "medium_term"}
+				>
 					Medium term
 				</DropdownMenuRadioItem>
-				<DropdownMenuRadioItem value="long_term">
+				<DropdownMenuRadioItem
+					value="long_term"
+					disabled={value === "long_term"}
+				>
 					Long term
 				</DropdownMenuRadioItem>
 			</DropdownMenuRadioGroup>
