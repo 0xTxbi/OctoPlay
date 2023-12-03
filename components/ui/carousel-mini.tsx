@@ -61,7 +61,7 @@ const CarouselMini: React.FC<CarouselMiniProps> = ({ children }) => {
 	};
 
 	return (
-		<div className="w-[330px] justify-center text-center">
+		<div className="">
 			<Slider
 				ref={sliderRef}
 				{...settings}

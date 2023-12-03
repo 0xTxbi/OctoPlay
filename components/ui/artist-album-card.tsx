@@ -23,7 +23,7 @@ export function ArtistAlbumCard({
 	return (
 		<>
 			<Card
-				className={cn("max-w-[70%]", className)}
+				className={cn("", className)}
 				{...props}
 			>
 				<CardHeader className="p-0">

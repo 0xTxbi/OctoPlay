@@ -47,7 +47,7 @@ export function ArtistSheet({
 					Info
 				</Button>
 			</SheetTrigger>
-			<SheetContent className="flex flex-col">
+			<SheetContent className="flex flex-col p-4">
 				<SheetHeader>
 					<SheetTitle>Artist Info</SheetTitle>
 					<SheetDescription>
@@ -55,9 +55,9 @@ export function ArtistSheet({
 					</SheetDescription>
 				</SheetHeader>
 				<ScrollArea>
-					<div className="grid gap-4 py-4">
+					<div className="grid py-4 mx-1">
 						<div className="space-y-4">
-							{/* track basic info */}
+							{/* artist basic info */}
 							<Image
 								alt={`album cover of ${name} `}
 								src={image}
@@ -127,7 +127,7 @@ export function ArtistSheet({
 								</h3>
 							</span>
 
-							<div className="max-w-[250px]">
+							<div className="max-w-[250px] mx-auto">
 								<CarouselMini>
 									{albums.map(
 										(
@@ -167,7 +167,7 @@ export function ArtistSheet({
 									</span>
 								</h3>
 							</span>
-							<div>
+							<div className="max-w-[250px] mx-auto">
 								<CarouselMini>
 									{relatedArtists.map(
 										(

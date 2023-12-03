@@ -23,7 +23,7 @@ export function RelatedArtistsCard({
 		<>
 			<Card
 				className={cn(
-					"w-[150px] border-none shadow-none justify-center",
+					"border-none shadow-none",
 					className
 				)}
 				{...props}
@@ -37,7 +37,7 @@ export function RelatedArtistsCard({
 						height={150}
 					/>
 				</CardHeader>
-				<CardContent className="grid p-0">
+				<CardContent className="p-0 flex mb-0 justify-center items-center">
 					<h2 className="scroll-m-20 text-xs font-semibold tracking-normal">
 						{name}
 					</h2>
