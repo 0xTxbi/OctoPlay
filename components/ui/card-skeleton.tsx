@@ -11,7 +11,6 @@ const CardSkeleton: React.FC<CardSkeletonProps> = ({ mode }) => {
 			<Skeleton className="mr-5 h-[496px] w-[320px]" />
 			<Skeleton className="mr-5 h-[496px] w-[320px]" />
 			<Skeleton className="mr-5 h-[496px] w-[320px]" />
-			<Skeleton className="mr-5 h-[496px] w-[320px]" />
 		</Carousel>
 	) : (
 		<Carousel>

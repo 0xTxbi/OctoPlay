@@ -19,12 +19,12 @@ export function UserPlaylistsCard({
 	return (
 		<>
 			<Card
-				className={cn("max-w-[250px]")}
+				className={cn("max-w-[250px] mx-auto")}
 				{...props}
 			>
 				<CardHeader className="p-0">
 					<Image
-						className="rounded-t-md max-h-[250px] object-cover"
+						className="rounded-t-md max-h-[250px] object-cover "
 						src={images[0]?.url}
 						alt="Picture of the author"
 						width={250}

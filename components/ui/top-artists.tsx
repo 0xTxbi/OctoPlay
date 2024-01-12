@@ -28,7 +28,7 @@ export function TopArtists({ className, ...props }: TopArtistsProps) {
 
 	return (
 		<>
-			<div className="flex justify-end">
+			<div className="flex justify-end mb-5">
 				<RangeFilter
 					value={time_range}
 					onValueChange={handleTimeRangeChange}
