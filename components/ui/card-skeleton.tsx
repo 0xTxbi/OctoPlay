@@ -1,4 +1,4 @@
-import Carousel from "./carousel";
+import Carousel from "./custom-carousel";
 import { Skeleton } from "./skeleton";
 
 interface CardSkeletonProps {

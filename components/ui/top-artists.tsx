@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import Carousel from "./carousel";
+import Carousel from "./custom-carousel";
 import React from "react";
 import { RangeFilter } from "./range-filter-dropdown";
 import CardSkeleton from "./card-skeleton";

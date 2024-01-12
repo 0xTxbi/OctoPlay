@@ -1,7 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Image from "next/image";
-import { DiscIcon } from "@radix-ui/react-icons";
 
 type RelatedArtistsCardProps = React.ComponentProps<typeof Card>;
 
@@ -30,7 +29,7 @@ export function RelatedArtistsCard({
 			>
 				<CardHeader className="p-0 flex justify-center items-center">
 					<Image
-						className="rounded-full p-[24px] max-h-[150px] object-cover"
+						className="rounded-full p-[24px] max-h-[160px] object-cover"
 						src={image}
 						alt={`Picture of ${name}`}
 						width={150}
