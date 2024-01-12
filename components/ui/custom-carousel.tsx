@@ -4,8 +4,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./carousel.css";
-import ArrowRightIcon from "./icons/arrow-right-icon";
-import ArrowLeftIcon from "./icons/arrow-left-icon";
 
 interface CarouselProps {
 	children: ReactNode;
@@ -67,11 +65,6 @@ const Carousel: React.FC<CarouselProps> = ({ children }) => {
 			>
 				{children}
 			</Slider>
-			<div className="flex space-x-5 items-center justify-center mt-10">
-				<ArrowLeftIcon onClick={prevSlide} />
-
-				<ArrowRightIcon onClick={nextSlide} />
-			</div>
 		</div>
 	);
 };

@@ -12,6 +12,9 @@ export default function Header() {
 				<Link href="/">
 					<h3 className="text-xl font-medium tracking-tight lg:text-3xl">
 						OctoPlay
+						<span className="text-green-400">
+							.
+						</span>
 					</h3>
 				</Link>
 

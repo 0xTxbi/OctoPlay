@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { TopTrackCard } from "./top-track-card";
 import useTopTracks from "@/lib/hooks/useTopTracks";
 import React from "react";
@@ -20,8 +20,6 @@ export function TopTracks({ className, ...props }: TopTracksProps) {
 	const { topTracks, loading, error } = useTopTracks({
 		time_range: time_range,
 	});
-
-	console.log(topTracks);
 
 	const handleTimeRangeChange = (value: string) => {
 		setTime_range(value);
@@ -64,7 +62,7 @@ export function TopTracks({ className, ...props }: TopTracksProps) {
 										key={
 											track.id
 										}
-										className="md:basis-1/3 lg:basis-1/4"
+										className="md:basis-1/3 lg:basis-1/3"
 									>
 										<div className="p-1">
 											<TopTrackCard

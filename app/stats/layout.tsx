@@ -1,10 +1,4 @@
-import Header from "@/app/stats/header";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-	title: "Stats | OctoPlay",
-	description: "your music listening stats",
-};
+import Header from "./header";
 
 export default function StatsLayout({
 	children,
@@ -12,10 +6,9 @@ export default function StatsLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<section className="container mt-5">
+		<section className="container mt-5 ">
 			<Header />
-
-			{children}
+			<div>{children}</div>
 		</section>
 	);
 }

@@ -43,7 +43,7 @@ export function TopTrackCard({
 		<>
 			<Card
 				className={cn(
-					"lg:max-w-[300px] max-w-[250px]",
+					"lg:max-w-[300px] max-w-[250px] mx-auto",
 					className
 				)}
 				{...props}

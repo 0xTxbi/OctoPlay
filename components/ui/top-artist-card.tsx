@@ -48,7 +48,7 @@ export function TopArtistCard({
 	return (
 		<>
 			<Card
-				className={cn("mr-5", className)}
+				className={cn(" mx-auto", className)}
 				{...props}
 			>
 				<CardHeader className="flex p-0">
